@@ -1,0 +1,26 @@
+# ARCUS Editorial
+
+> Sello editorial independiente fundado por el autor Ulises R. Cruz García, especializado en no ficción sobre liderazgo, poder y desarrollo humano.
+
+## Descripción
+ARCUS Editorial publica obras de no ficción con enfoque en psicología del poder, liderazgo personal y transformación humana. Su catálogo está disponible en plataformas digitales y físicas a nivel mundial.
+
+## Autor principal
+Ulises R. Cruz García es autor puertorriqueño residente en España. Escribe sobre las estructuras del poder, la tentación del liderazgo y los mecanismos reales del éxito personal y organizacional.
+
+## Libros publicados
+
+### Las tres tentaciones
+Primer libro de la trilogía *Anatomía del Poder*. Explora las tres fuerzas que corrompen o fortalecen a quienes ejercen el liderazgo: el poder, el reconocimiento y la comodidad. Una obra de no ficción para líderes, emprendedores y personas en posiciones de influencia.
+
+### Lo que realmente funciona
+Obra de no ficción práctica sobre los principios fundamentales que distinguen a las personas y organizaciones que logran resultados sostenibles de las que fracasan. Un análisis directo y sin rodeos de lo que produce éxito real.
+
+## Editorial
+ARCUS Editorial — arcus-editorial.vercel.app
+
+## Plataformas de venta
+Amazon KDP, Draft2Digital, Google Play Books, Gumroad
+
+## URL
+https://arcus-editorial.vercel.app

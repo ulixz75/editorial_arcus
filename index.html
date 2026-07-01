@@ -1,0 +1,2310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name="google-site-verification" content="w0qyfBd7gQI31mSq1hZSS7qB3h8xjLP6YSUiZDkfiHo" />
+    <!-- Meta tags mejorados para SEO -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ARCUS Editorial: libros de no ficción del autor Ulises R. Cruz García. Las tres tentaciones (Anatomía del Poder) y Lo que realmente funciona. Disponibles en Amazon, Google Play Books y Gumroad.">
+    <meta name="keywords" content="Ulises R. Cruz García, Las tres tentaciones, Lo que realmente funciona, Anatomía del Poder, libros no ficción, liderazgo, poder, ARCUS Editorial">
+    <meta name="author" content="Ulises R. Cruz García">
+    <meta name="robots" content="index, follow, max-snippet:-1">
+    
+    <!-- Open Graph para redes sociales -->
+    <meta property="og:title" content="Editorial Arcus — Ulises R. Cruz García">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="assets/icons/NuevaPortada.png">
+    <meta property="og:description" content="Descubre la colección de Editorial Arcus: libros que descifran lo que otros no quieren que sepas.">
+    
+    <title>ARCUS Editorial — Libros de Ulises R. Cruz García</title>
+    <meta property="og:title" content="ARCUS Editorial — Libros de Ulises R. Cruz García">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://arcus-editorial.vercel.app">
+    <meta property="og:image" content="assets/icons/NuevaPortada.png">
+    <meta property="og:description" content="Libros de no ficción sobre liderazgo y poder. Las tres tentaciones y Lo que realmente funciona, disponibles a nivel mundial.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/icons/Arcus_icon.png">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary':   '#F5A623',
+                        'primary-dark': '#C8841A',
+                        'teal':      '#00D4AA',
+                        'teal-soft': '#00B894',
+                        'base':      '#080C14',
+                        'surface':   '#0F1623',
+                        'elevated':  '#161E2E',
+                        'border-dim':'rgba(255,255,255,0.07)',
+                        'text-main': '#F0F4FF',
+                        'text-muted':'#6B7A99',
+                        'dark': '#080C14',
+                        'light': '#F0F4FF'
+                    },
+                    fontFamily: {
+                        'sans':  ['Inter', 'system-ui', 'sans-serif'],
+                        'serif': ['DM Serif Display', 'serif'],
+                        'head':  ['Syne', 'sans-serif']
+                    },
+                    backgroundImage: {
+                        'gold-gradient': 'linear-gradient(135deg, #F5A623 0%, #E8940F 100%)',
+                        'teal-gradient': 'linear-gradient(135deg, #00D4AA 0%, #00B894 100%)'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Intro.js CSS (NUEVO) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.2.0/introjs.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    
+    <!-- Estilos premium dark-mode -->
+    <style>
+        /* ═══════════════════════════════════════
+           DESIGN SYSTEM — TOKENS
+        ═══════════════════════════════════════ */
+        :root {
+            --bg-base:      #080C14;
+            --bg-surface:   #0F1623;
+            --bg-elevated:  #161E2E;
+            --bg-card:      #111827;
+            --accent-gold:  #F5A623;
+            --accent-gold2: #E8940F;
+            --accent-teal:  #00D4AA;
+            --accent-teal2: #00B894;
+            --text-primary: #F0F4FF;
+            --text-muted:   #6B7A99;
+            --text-dim:     #3D4A63;
+            --border:       rgba(255,255,255,0.07);
+            --border-gold:  rgba(245,166,35,0.25);
+            --border-teal:  rgba(0,212,170,0.25);
+            --glow-gold:    rgba(245,166,35,0.18);
+            --glow-teal:    rgba(0,212,170,0.18);
+        }
+
+        /* ═══════════════════════════════════════
+           BASE
+        ═══════════════════════════════════════ */
+        *, *::before, *::after { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* ═══════════════════════════════════════
+           SCROLLBAR
+        ═══════════════════════════════════════ */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-surface); }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--accent-gold), var(--accent-teal));
+            border-radius: 999px;
+        }
+
+        /* ═══════════════════════════════════════
+           NOISE TEXTURE OVERLAY
+        ═══════════════════════════════════════ */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.35;
+        }
+
+        /* ═══════════════════════════════════════
+           TYPOGRAPHY
+        ═══════════════════════════════════════ */
+        .font-head  { font-family: 'Syne', sans-serif; }
+        .font-serif { font-family: 'DM Serif Display', serif; }
+
+        /* ═══════════════════════════════════════
+           NAVBAR GLASS
+        ═══════════════════════════════════════ */
+        .nav-glass {
+            background: rgba(15,22,35,0.80);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--border);
+            box-shadow: 0 8px 40px rgba(0,0,0,0.45);
+        }
+
+        .nav-link {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.25s;
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1.5px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-teal));
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover { color: var(--text-primary); }
+        .nav-link:hover::after { width: 100%; }
+
+        /* ═══════════════════════════════════════
+           BUTTONS
+        ═══════════════════════════════════════ */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-gold2) 100%);
+            color: #0A0A0A;
+            font-weight: 700;
+            font-family: 'Syne', sans-serif;
+            border-radius: 999px;
+            padding: 0.875rem 2rem;
+            transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+            box-shadow: 0 4px 24px var(--glow-gold);
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(245,166,35,0.35);
+        }
+        .btn-primary:active { transform: translateY(0); }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            font-weight: 600;
+            font-family: 'Syne', sans-serif;
+            border-radius: 999px;
+            padding: 0.875rem 2rem;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .btn-secondary:hover {
+            border-color: var(--accent-teal);
+            color: var(--accent-teal);
+            box-shadow: 0 0 20px var(--glow-teal);
+        }
+
+        /* Legacy btn-gradient alias */
+        .btn-gradient {
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold2));
+            color: #0A0A0A;
+            font-weight: 700;
+            border-radius: 0.75rem;
+            transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+            border: none;
+            cursor: pointer;
+        }
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(245,166,35,0.3);
+        }
+
+        /* ═══════════════════════════════════════
+           HERO — GRADIENT MESH ORBS
+        ═══════════════════════════════════════ */
+        .hero-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            padding-top: 7rem;
+            padding-bottom: 5rem;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+        }
+        .orb-gold {
+            width: 520px;
+            height: 520px;
+            background: radial-gradient(circle, rgba(245,166,35,0.18) 0%, transparent 70%);
+            top: -120px;
+            right: -80px;
+            animation: orbFloat 8s ease-in-out infinite;
+        }
+        .orb-teal {
+            width: 640px;
+            height: 640px;
+            background: radial-gradient(circle, rgba(0,212,170,0.12) 0%, transparent 70%);
+            bottom: -160px;
+            left: -120px;
+            animation: orbFloat 10s ease-in-out infinite reverse;
+        }
+        .orb-blue {
+            width: 360px;
+            height: 360px;
+            background: radial-gradient(circle, rgba(99,102,241,0.1) 0%, transparent 70%);
+            top: 40%;
+            right: 30%;
+            animation: orbFloat 12s ease-in-out infinite 2s;
+        }
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33%       { transform: translate(30px, -20px) scale(1.05); }
+            66%       { transform: translate(-20px, 20px) scale(0.97); }
+        }
+
+        /* Grid lines background */
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+        }
+
+        /* ═══════════════════════════════════════
+           BOOK CARDS
+        ═══════════════════════════════════════ */
+        .book-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 1.25rem;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+            position: relative;
+        }
+        .book-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 1.25rem;
+            background: linear-gradient(135deg, var(--glow-gold) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+        .book-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--border-gold);
+            box-shadow:
+                0 24px 64px rgba(0,0,0,0.5),
+                0 0 0 1px var(--border-gold),
+                0 0 40px var(--glow-gold);
+        }
+        .book-card:hover::before { opacity: 1; }
+
+        /* Book cover shine */
+        .book-cover {
+            position: relative;
+            overflow: hidden;
+        }
+        .book-cover::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 40%;
+            height: 200%;
+            background: linear-gradient(
+                to right,
+                transparent 0%,
+                rgba(255,255,255,0.08) 50%,
+                transparent 100%
+            );
+            transform: skewX(-15deg);
+            transition: left 0.6s ease;
+        }
+        .book-cover:hover::after { left: 130%; }
+
+        /* Price chip */
+        .price-chip {
+            color: var(--accent-gold);
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        /* ═══════════════════════════════════════
+           FILTER PILLS
+        ═══════════════════════════════════════ */
+        .filter-btn {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            border-radius: 999px;
+            padding: 0.5rem 1.25rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.25s ease;
+            cursor: pointer;
+        }
+        .filter-btn:hover,
+        .filter-btn[data-active="true"],
+        .filter-btn.active {
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold2));
+            color: #0A0A0A;
+            border-color: transparent;
+            box-shadow: 0 4px 15px var(--glow-gold);
+            font-weight: 700;
+        }
+
+        /* ═══════════════════════════════════════
+           SECTION HEADERS
+        ═══════════════════════════════════════ */
+        .section-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, rgba(245,166,35,0.12), rgba(0,212,170,0.12));
+            border: 1px solid rgba(245,166,35,0.2);
+            border-radius: 999px;
+            padding: 0.35rem 1rem;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            margin-bottom: 1.25rem;
+        }
+        .section-eyebrow span.dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent-teal);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50%       { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            color: var(--text-primary);
+            line-height: 1.1;
+        }
+        .section-subtitle {
+            color: var(--text-muted);
+            font-weight: 400;
+            max-width: 36rem;
+        }
+
+        /* Gold gradient text */
+        .text-gold-gradient {
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #FFC96B 50%, var(--accent-teal) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ═══════════════════════════════════════
+           STAT CARDS
+        ═══════════════════════════════════════ */
+        .stat-card {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .stat-number {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ═══ AUTHOR SECTION ═══════════════════ */
+        .author-card {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 1.5rem;
+            overflow: hidden;
+        }
+        .author-photo-ring {
+            padding: 4px;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-teal));
+            border-radius: 50%;
+            display: inline-flex;
+        }
+        .credential-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 0.875rem;
+            padding: 1.25rem;
+        }
+
+        /* ═══ TESTIMONIALS ══════════════════════ */
+        .testimonial-card {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 1.25rem;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .testimonial-card:hover {
+            border-color: var(--border-teal);
+            box-shadow: 0 8px 32px var(--glow-teal);
+        }
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 1.25rem;
+            right: 1.5rem;
+            font-size: 5rem;
+            font-family: 'DM Serif Display', serif;
+            color: var(--accent-gold);
+            opacity: 0.12;
+            line-height: 1;
+        }
+        .avatar-gradient {
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-teal));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #080C14;
+            font-family: 'Syne', sans-serif;
+        }
+
+        /* ═══ RATING STARS ══════════════════════ */
+        .rating-stars { color: var(--accent-gold); }
+
+        /* ═══ MODAL GLASS ════════════════════ */
+        .modal-backdrop {
+            background: rgba(4,6,11,0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        .modal-glass {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04);
+        }
+        .modal-header-grad {
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-teal2));
+            color: #080C14;
+        }
+        .modal-scrollable {
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        /* ═══ CART SIDEBAR ══════════════════════ */
+        .cart-sidebar {
+            background: var(--bg-elevated);
+            border-left: 1px solid var(--border);
+        }
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold2));
+            color: #080C14;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ═══ FORM STYLES ═══════════════════════ */
+        .form-group { margin-bottom: 1.25rem; }
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 0.625rem;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            transition: all 0.25s;
+        }
+        .form-input::placeholder { color: var(--text-dim); }
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent-teal);
+            box-shadow: 0 0 0 3px var(--glow-teal);
+        }
+        .form-textarea { min-height: 120px; resize: vertical; }
+        .form-submit {
+            width: 100%;
+            padding: 0.875rem;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold2));
+            color: #080C14;
+            border: none;
+            border-radius: 0.625rem;
+            font-weight: 700;
+            font-family: 'Syne', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .form-submit:hover {
+            box-shadow: 0 8px 24px var(--glow-gold);
+            transform: translateY(-1px);
+        }
+        .form-submit:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .success-message {
+            display: none;
+            background: rgba(0,212,170,0.1);
+            border: 1px solid var(--border-teal);
+            color: var(--accent-teal);
+            padding: 1rem;
+            border-radius: 0.625rem;
+            margin-bottom: 1rem;
+        }
+        .error-message {
+            display: none;
+            background: rgba(239,68,68,0.1);
+            border: 1px solid rgba(239,68,68,0.3);
+            color: #FCA5A5;
+            padding: 1rem;
+            border-radius: 0.625rem;
+            margin-bottom: 1rem;
+        }
+
+        /* ═══ AUTH MODAL TABS ═══════════════════ */
+        .auth-tab {
+            color: var(--text-muted);
+            font-weight: 600;
+            padding: 1rem;
+            border-bottom: 2px solid transparent;
+            transition: all 0.25s;
+            background: transparent;
+            cursor: pointer;
+        }
+        .auth-tab.active-tab,
+        #login-tab.border-b-2:not(.border-transparent) {
+            border-bottom-color: var(--accent-gold);
+            color: var(--accent-gold);
+        }
+
+        /* ═══ READING MODE ══════════════════════ */
+        .reading-mode {
+            background: var(--bg-surface);
+            line-height: 1.9;
+        }
+        .reading-mode .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            color: var(--text-primary);
+        }
+
+        /* ═══ LOADING SKELETON ══════════════════ */
+        .skeleton {
+            background: linear-gradient(90deg,
+                var(--bg-elevated) 25%,
+                var(--bg-card) 50%,
+                var(--bg-elevated) 75%);
+            background-size: 200% 100%;
+            animation: skeleton-load 1.5s infinite;
+            border-radius: 0.5rem;
+        }
+        @keyframes skeleton-load {
+            0%   { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* ═══ CATEGORY BADGE ════════════════════ */
+        .category-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: rgba(245,166,35,0.1);
+            color: var(--accent-gold);
+            border: 1px solid rgba(245,166,35,0.2);
+        }
+
+        /* ═══ FOOTER ════════════════════════════ */
+        .footer-dark {
+            background: #050810;
+            border-top: 1px solid var(--border);
+        }
+        .footer-link {
+            color: var(--text-dim);
+            transition: color 0.25s;
+            font-size: 0.9rem;
+        }
+        .footer-link:hover { color: var(--accent-gold); }
+
+        /* ═══ ANIMATIONS ════════════════════════ */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to   { transform: translateX(0); }
+        }
+        @keyframes cartBounce {
+            0%, 100% { transform: scale(1); }
+            50%       { transform: scale(1.25); }
+        }
+        .animate-fadeIn  { animation: fadeIn 0.5s ease forwards; }
+        .animate-slideIn { animation: slideIn 0.35s cubic-bezier(0.4,0,0.2,1) forwards; }
+        .cart-btn-active { animation: cartBounce 0.35s ease; }
+
+        /* ═══ HERO LOGO GRANDE ══════════════════ */
+        .hero-logo-wrap {
+            display: inline-block;
+            animation: heroLogoIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+        .hero-logo {
+            height: 120px;
+            width: auto;
+            object-fit: contain;
+            filter:
+                drop-shadow(0 0 18px rgba(245,166,35,0.55))
+                drop-shadow(0 0 40px rgba(0,212,170,0.25));
+            transition: filter 0.4s ease, transform 0.4s ease;
+        }
+        .hero-logo:hover {
+            filter:
+                drop-shadow(0 0 28px rgba(245,166,35,0.85))
+                drop-shadow(0 0 60px rgba(0,212,170,0.4));
+            transform: scale(1.04);
+        }
+        @keyframes heroLogoIn {
+            from { opacity: 0; transform: translateY(-20px) scale(0.92); }
+            to   { opacity: 1; transform: translateY(0)     scale(1); }
+        }
+
+        /* Hero book 3D tilt */
+        .book-hero {
+            transition: transform 0.7s cubic-bezier(0.4,0,0.2,1);
+            transform: perspective(900px) rotateY(-10deg) rotateX(3deg);
+        }
+        .book-hero:hover {
+            transform: perspective(900px) rotateY(0deg) rotateX(0deg);
+        }
+
+        /* Bestseller badge */
+        .bestseller-badge {
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold2));
+            color: #080C14;
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 0.68rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        /* Divider gold line */
+        .divider-gold {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+            opacity: 0.3;
+        }
+
+        /* Lang toggle */
+        .lang-active {
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold2));
+            color: #080C14;
+            font-weight: 700;
+        }
+
+        /* Hidden */
+        .hidden { display: none !important; }
+
+        /* Lazy load */
+        .lazy-load { opacity: 0; transition: opacity 0.4s; }
+        .lazy-load.loaded { opacity: 1; }
+
+        /* Sort select dark */
+        #sort-select {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.875rem;
+        }
+        #sort-select:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+        }
+        #sort-select option {
+            background: var(--bg-elevated);
+            color: var(--text-primary);
+        }
+
+        /* ═══ FLOATING WHATSAPP ═════════════════ */
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #25D366;
+            color: #fff;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            z-index: 9999;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .floating-whatsapp:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+            color: #fff;
+        }
+        
+        @media (max-width: 768px) {
+            .floating-whatsapp {
+                bottom: 1.5rem;
+                right: 1.5rem;
+                width: 55px;
+                height: 55px;
+                font-size: 28px;
+            }
+        }
+
+        /* ═══════════════════════════════════════
+           SPLASH SCREEN
+        ═══════════════════════════════════════ */
+        #splash-screen {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            background: #080C14;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        #splash-screen.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+        #splash-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        body.splash-active {
+            overflow: hidden;
+        }
+
+        /* Tap-to-play overlay (shown only when autoplay with audio is blocked) */
+        #splash-tap {
+            position: absolute;
+            inset: 0;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            background: rgba(8, 12, 20, 0.72);
+            backdrop-filter: blur(6px);
+            cursor: pointer;
+            z-index: 1;
+        }
+        #splash-tap.visible { display: flex; }
+        #splash-tap-btn {
+            width: 88px;
+            height: 88px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold2));
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 40px rgba(245,166,35,0.5), 0 0 80px rgba(245,166,35,0.2);
+            animation: pulseBtn 1.8s ease-in-out infinite;
+            cursor: pointer;
+        }
+        #splash-tap-btn svg { width: 36px; height: 36px; fill: #080C14; margin-left: 4px; }
+        #splash-tap-label {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-primary);
+        }
+        @keyframes pulseBtn {
+            0%, 100% { box-shadow: 0 0 40px rgba(245,166,35,0.5), 0 0 80px rgba(245,166,35,0.2); transform: scale(1); }
+            50%       { box-shadow: 0 0 60px rgba(245,166,35,0.8), 0 0 120px rgba(245,166,35,0.35); transform: scale(1.07); }
+        }
+
+        /* ═══════════════════════════════════════
+           LIGHT THEME — VARIABLES & OVERRIDES
+        ═══════════════════════════════════════ */
+        [data-theme="light"] {
+            --bg-base:      #F0F3FA;
+            --bg-surface:   #FFFFFF;
+            --bg-elevated:  #E8EDF7;
+            --bg-card:      #FFFFFF;
+            --accent-gold:  #C97A08;
+            --accent-gold2: #A86308;
+            --accent-teal:  #008F6D;
+            --accent-teal2: #007558;
+            --text-primary: #0D1421;
+            --text-muted:   #4A5568;
+            --text-dim:     #9AA5B4;
+            --border:       rgba(0,0,0,0.09);
+            --border-gold:  rgba(201,122,8,0.28);
+            --border-teal:  rgba(0,143,109,0.28);
+            --glow-gold:    rgba(201,122,8,0.12);
+            --glow-teal:    rgba(0,143,109,0.12);
+        }
+
+        [data-theme="light"] body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+        }
+        [data-theme="light"] body::before { opacity: 0.08; }
+
+        /* Navbar */
+        [data-theme="light"] .nav-glass {
+            background: rgba(240,243,250,0.92);
+            border-color: rgba(0,0,0,0.08);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+        }
+        [data-theme="light"] .nav-link { color: var(--text-muted); }
+        [data-theme="light"] .nav-link:hover { color: var(--text-primary); }
+
+        /* Book cards */
+        [data-theme="light"] .book-card {
+            background: #FFFFFF;
+            border-color: rgba(0,0,0,0.08);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        [data-theme="light"] .book-card:hover {
+            box-shadow: 0 24px 64px rgba(0,0,0,0.12), 0 0 0 1px var(--border-gold), 0 0 40px var(--glow-gold);
+        }
+
+        /* Filter pills */
+        [data-theme="light"] .filter-btn {
+            background: #E8EDF7;
+            border-color: rgba(0,0,0,0.08);
+            color: var(--text-muted);
+        }
+
+        /* Cards */
+        [data-theme="light"] .testimonial-card {
+            background: #F5F7FC;
+            border-color: rgba(0,0,0,0.08);
+        }
+        [data-theme="light"] .stat-card {
+            background: #F0F3FA;
+            border-color: rgba(0,0,0,0.08);
+        }
+        [data-theme="light"] .author-card {
+            background: #F5F7FC;
+            border-color: rgba(0,0,0,0.08);
+        }
+        [data-theme="light"] .credential-card {
+            background: #FFFFFF;
+            border-color: rgba(0,0,0,0.08);
+        }
+
+        /* Modals */
+        [data-theme="light"] .modal-glass {
+            background: #FFFFFF;
+            border-color: rgba(0,0,0,0.10);
+            box-shadow: 0 32px 80px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.04);
+        }
+        [data-theme="light"] .modal-backdrop {
+            background: rgba(160,175,210,0.80);
+        }
+        [data-theme="light"] .cart-sidebar {
+            background: #FFFFFF;
+            border-left-color: rgba(0,0,0,0.09);
+        }
+
+        /* Form */
+        [data-theme="light"] .form-input {
+            background: #F5F7FC;
+            border-color: rgba(0,0,0,0.12);
+            color: var(--text-primary);
+        }
+        [data-theme="light"] .form-input::placeholder { color: var(--text-dim); }
+        [data-theme="light"] #sort-select {
+            background: #F5F7FC;
+            border-color: rgba(0,0,0,0.12);
+            color: var(--text-muted);
+        }
+        [data-theme="light"] #sort-select option { background: #FFFFFF; color: var(--text-primary); }
+
+        /* Footer */
+        [data-theme="light"] .footer-dark {
+            background: #E2E7F5;
+            border-top-color: rgba(0,0,0,0.09);
+        }
+        [data-theme="light"] .footer-link { color: #6B7A99; }
+        [data-theme="light"] .footer-link:hover { color: var(--accent-gold); }
+
+        /* Skeleton */
+        [data-theme="light"] .skeleton {
+            background: linear-gradient(90deg, #E8EDF7 25%, #F5F7FC 50%, #E8EDF7 75%);
+        }
+
+        /* Reading mode */
+        [data-theme="light"] .reading-mode { background: #FFFFFF; }
+
+        /* Hero */
+        [data-theme="light"] .hero-grid {
+            background-image:
+                linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
+        }
+        [data-theme="light"] .orb-gold { background: radial-gradient(circle, rgba(201,122,8,0.14) 0%, transparent 70%); }
+        [data-theme="light"] .orb-teal { background: radial-gradient(circle, rgba(0,143,109,0.10) 0%, transparent 70%); }
+        [data-theme="light"] .orb-blue { background: radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%); }
+
+        /* Mobile menu */
+        [data-theme="light"] #mobile-menu {
+            background: rgba(240,243,250,0.98);
+            border: 1px solid rgba(0,0,0,0.08);
+            box-shadow: 0 16px 48px rgba(0,0,0,0.12);
+        }
+
+        /* Tailwind utility overrides */
+        [data-theme="light"] .bg-white\/5  { background-color: rgba(0,0,0,0.04) !important; }
+        [data-theme="light"] .bg-white\/10 { background-color: rgba(0,0,0,0.06) !important; }
+        [data-theme="light"] .border-white\/10 { border-color: rgba(0,0,0,0.08) !important; }
+        [data-theme="light"] .text-white\/80 { color: rgba(13,20,33,0.75) !important; }
+        [data-theme="light"] .text-white { color: var(--text-primary) !important; }
+        [data-theme="light"] .hover\:text-white:hover { color: var(--text-primary) !important; }
+        [data-theme="light"] .hover\:bg-white\/5:hover { background-color: rgba(0,0,0,0.04) !important; }
+        [data-theme="light"] .border-b { border-color: rgba(0,0,0,0.08); }
+
+        /* Theme toggle button */
+        #theme-toggle-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-muted);
+            font-size: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        #theme-toggle-btn:hover {
+            background: rgba(245,166,35,0.12);
+            border-color: var(--border-gold);
+            color: var(--accent-gold);
+            transform: rotate(20deg);
+        }
+        [data-theme="light"] #theme-toggle-btn {
+            background: rgba(0,0,0,0.05);
+            border-color: rgba(0,0,0,0.12);
+        }
+        [data-theme="light"] #theme-toggle-btn:hover {
+            background: rgba(201,122,8,0.10);
+            border-color: var(--border-gold);
+        }
+        /* Coach Mark - Intro.js Canva-like style */
+        .custom-tooltip {
+            background-color: #8c52ff !important;
+            color: #ffffff !important;
+            border-radius: 12px !important;
+            padding: 1.5rem !important;
+            font-family: 'Inter', sans-serif !important;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3) !important;
+            border: none !important;
+        }
+
+        .custom-tooltip .introjs-tooltiptext {
+            font-size: 1rem;
+            line-height: 1.5;
+            padding-bottom: 20px;
+        }
+
+        .custom-tooltip .introjs-tooltipbuttons {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 1.5rem !important;
+            border: none !important;
+        }
+
+        .custom-tooltip .introjs-button {
+            background: transparent !important;
+            color: #ffffff !important;
+            text-shadow: none !important;
+            border: none !important;
+            font-weight: 600 !important;
+            font-size: 1rem !important;
+            box-shadow: none !important;
+            padding: 0 !important;
+        }
+        
+        .custom-tooltip .introjs-button:hover {
+            color: rgba(255, 255, 255, 0.8) !important;
+        }
+
+        .custom-tooltip .introjs-disabled {
+            display: none !important;
+        }
+
+        .custom-tooltip .introjs-skipbutton {
+            color: #ffffff !important;
+            font-size: 1.2rem;
+            opacity: 0.7;
+        }
+
+        .custom-tooltip .introjs-skipbutton:hover {
+            opacity: 1;
+        }
+
+        .custom-tooltip .introjs-bullets {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            text-align: left;
+            margin: 0;
+            padding: 0;
+        }
+
+        .custom-tooltip .introjs-bullets ul li a {
+            background: rgba(255, 255, 255, 0.3) !important;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .custom-tooltip .introjs-bullets ul li a.active {
+            background: #ffffff !important;
+        }
+
+        .custom-highlight {
+            box-shadow: 0 0 0 4px #8c52ff, 0 0 40px rgba(140, 82, 255, 0.5) !important;
+            border-radius: 0.75rem;
+            transition: box-shadow 0.3s ease;
+        }
+    </style>
+    
+    <!-- Schema markup para SEO -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "ARCUS Editorial",
+  "url": "https://arcus-editorial.vercel.app",
+  "description": "Sello editorial independiente especializado en no ficción sobre liderazgo, poder y desarrollo humano.",
+  "founder": {
+    "@type": "Person",
+    "name": "Ulises R. Cruz García",
+    "jobTitle": "Autor",
+    "url": "https://arcus-editorial.vercel.app"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Ulises R. Cruz García",
+  "url": "https://arcus-editorial.vercel.app",
+  "jobTitle": "Autor",
+  "nationality": "Puerto Rico",
+  "description": "Autor puertorriqueño de no ficción especializado en liderazgo, psicología del poder y desarrollo humano. Fundador de ARCUS Editorial.",
+  "sameAs": ["https://arcus-editorial.vercel.app"]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Book",
+  "name": "Las tres tentaciones",
+  "author": { "@type": "Person", "name": "Ulises R. Cruz García" },
+  "publisher": { "@type": "Organization", "name": "ARCUS Editorial" },
+  "inLanguage": "es",
+  "genre": "No ficción, Liderazgo, Psicología del poder",
+  "isPartOf": { "@type": "BookSeries", "name": "Anatomía del Poder" },
+  "url": "https://arcus-editorial.vercel.app",
+  "description": "Primer libro de la trilogía Anatomía del Poder. Explora las tres fuerzas que corrompen o fortalecen a quienes ejercen el liderazgo.",
+  "bookFormat": "https://schema.org/EBook"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Book",
+  "name": "Lo que realmente funciona",
+  "author": { "@type": "Person", "name": "Ulises R. Cruz García" },
+  "publisher": { "@type": "Organization", "name": "ARCUS Editorial" },
+  "inLanguage": "es",
+  "genre": "No ficción, Desarrollo personal, Liderazgo",
+  "url": "https://arcus-editorial.vercel.app",
+  "description": "Principios que distinguen a las personas y organizaciones que logran resultados sostenibles de las que fracasan.",
+  "bookFormat": "https://schema.org/EBook"
+}
+</script>
+</head>
+<body class="font-sans splash-active">
+
+    <!-- ==================== SPLASH SCREEN ==================== -->
+    <div id="splash-screen" role="presentation" aria-hidden="true">
+        <video
+            id="splash-video"
+            src="assets/media/splash_screen.mp4"
+            playsinline
+            preload="auto"
+        ></video>
+
+        <!-- Shown only when browser blocks autoplay with audio -->
+        <div id="splash-tap" role="button" tabindex="0" aria-label="Toca para continuar">
+            <button id="splash-tap-btn">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 5v14l11-7z"/>
+                </svg>
+            </button>
+            <span id="splash-tap-label">Toca para continuar</span>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            var splash   = document.getElementById('splash-screen');
+            var video    = document.getElementById('splash-video');
+            var tapLayer = document.getElementById('splash-tap');
+            var fallback;
+
+            function hideSplash() {
+                clearTimeout(fallback);
+                splash.classList.add('fade-out');
+                document.body.classList.remove('splash-active');
+                setTimeout(function () { splash.style.display = 'none'; }, 850);
+            }
+
+            function startFallback() {
+                fallback = setTimeout(hideSplash, 11000);
+            }
+
+            video.addEventListener('ended', hideSplash);
+            video.addEventListener('error', hideSplash);
+
+            // Try autoplay WITH sound
+            var playPromise = video.play();
+
+            if (playPromise !== undefined) {
+                playPromise.then(function () {
+                    // Autoplay with sound allowed — hide tap overlay
+                    tapLayer.classList.remove('visible');
+                    startFallback();
+                }).catch(function () {
+                    // Browser blocked autoplay with audio — show tap overlay
+                    video.pause();
+                    tapLayer.classList.add('visible');
+
+                    function onTap() {
+                        tapLayer.classList.remove('visible');
+                        video.currentTime = 0;
+                        video.play();
+                        startFallback();
+                        tapLayer.removeEventListener('click', onTap);
+                        tapLayer.removeEventListener('keydown', onKeyTap);
+                    }
+                    function onKeyTap(e) {
+                        if (e.key === 'Enter' || e.key === ' ') onTap();
+                    }
+                    tapLayer.addEventListener('click', onTap);
+                    tapLayer.addEventListener('keydown', onKeyTap);
+                });
+            } else {
+                // Older browsers without promise-based play()
+                startFallback();
+            }
+        })();
+    </script>
+
+    <!-- ==================== NAVEGACIÓN (Floating Glass) ==================== -->
+    <header class="fixed top-5 left-0 right-0 z-50 flex justify-center pointer-events-none">
+        <nav class="nav-glass pointer-events-auto rounded-full px-6 py-3 flex items-center gap-8 max-w-4xl mx-auto w-[95%]">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-2 pr-4 border-r border-white/10 shrink-0">
+                <img src="assets/icons/Logo Arcus.png" 
+                     alt="Editorial Arcus" 
+                     class="h-10 w-auto object-contain"
+                     style="filter: drop-shadow(0 0 8px rgba(245,166,35,0.4));">
+            </a>
+
+            <!-- Menu Center -->
+            <div class="hidden md:flex items-center gap-6 flex-1">
+                <a href="#catalogo" class="nav-link" 
+   data-intro="Explora el catálogo, filtra por categorías y ordena los libros." 
+   data-step="2" data-position="bottom">Libros</a>
+                <a href="#sobre-autor" class="nav-link">Autor</a>
+                <a href="#testimonios" class="nav-link">Historias</a>
+            </div>
+
+            <!-- Actions Right -->
+            <div class="flex items-center gap-3 pl-4 border-l border-white/10 ml-auto">
+                <!-- Lang Toggle -->
+                <div class="flex items-center gap-1 bg-white/5 rounded-full p-1"
+     data-intro="Cambia entre español e inglés en cualquier momento."
+     data-step="6" data-position="bottom">
+   <button id="lang-es" class="px-2.5 py-1 text-[10px] font-bold rounded-full transition-all lang-active">ES</button>
+   <button id="lang-en" class="px-2.5 py-1 text-[10px] font-bold rounded-full transition-all text-text-muted hover:text-white">EN</button>
+</div>
+                <!-- Theme Toggle -->
+                <button id="theme-toggle-btn" onclick="toggleTheme()" aria-label="Cambiar tema" title="Cambiar tema"
+                data-intro="Alterna entre modo oscuro y claro según tu preferencia."
+                data-step="7" data-position="bottom">
+           <i id="theme-icon" class="fas fa-moon"></i>
+        </button>
+
+                <!-- Cart -->
+                <div class="relative">
+                    <button id="cart-btn" class="w-10 h-10 rounded-full flex items-center justify-center transition-all relative"
+        style="background:rgba(245,166,35,0.12);border:1px solid rgba(245,166,35,0.25)" aria-label="Carrito"
+        data-intro="Aquí se guardan los libros que elijas. Puedes revisar tu carrito y proceder al pago."
+        data-step="5" data-position="left">
+   <i class="fas fa-shopping-bag text-sm" style="color:var(--accent-gold)"></i>
+   <span id="cart-count" class="cart-badge">0</span>
+</button>
+                </div>
+                <!-- Login -->
+                <button id="login-btn" class="w-10 h-10 rounded-full flex items-center justify-center transition-all"
+                        style="background:rgba(255,255,255,0.06);border:1px solid var(--border)" onclick="openAuthModal()" aria-label="Iniciar sesión">
+                    <i class="far fa-user text-sm text-text-muted"></i>
+                </button>
+                <!-- User Menu -->
+                <div id="user-menu" class="hidden absolute top-16 right-4 modal-glass rounded-xl w-48 py-2 z-50">
+                    <button id="user-menu-btn" class="w-full text-left px-4 py-2 hover:bg-white/5 flex items-center gap-2">
+                        <span id="user-name" class="truncate font-head text-sm text-text-main">Usuario</span>
+                    </button>
+                    <div class="divider-gold mx-4 my-1"></div>
+                    <button onclick="showPurchaseHistory()" class="w-full text-left px-4 py-2 hover:bg-white/5 text-sm text-text-muted hover:text-white transition-colors">Mis Compras</button>
+                    <button onclick="handleLogout()" class="w-full text-left px-4 py-2 hover:bg-white/5 text-sm transition-colors" style="color:#FCA5A5">Salir</button>
+                </div>
+            </div>
+            
+            <!-- Menú móvil trigger -->
+            <button id="mobile-menu-btn" class="md:hidden ml-2" style="color:var(--text-muted)">
+                <i class="fas fa-bars text-lg"></i>
+            </button>
+        </nav>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden absolute top-20 left-4 right-4 modal-glass rounded-2xl p-6 pointer-events-auto">
+            <div class="flex flex-col gap-5 text-center">
+                <a href="#catalogo" onclick="toggleMobileMenu()" class="font-head text-lg text-white/80 hover:text-white transition-colors">Colección</a>
+                <a href="#sobre-autor" onclick="toggleMobileMenu()" class="font-head text-lg text-white/80 hover:text-white transition-colors">Autor</a>
+                <a href="#contacto" onclick="toggleMobileMenu()" class="font-head text-lg text-white/80 hover:text-white transition-colors">Contacto</a>
+                <div class="pt-4 border-t border-white/10 flex justify-center gap-3">
+                    <button id="mobile-lang-es" class="btn-primary text-sm px-5 py-2">Español</button>
+                    <button id="mobile-lang-en" class="btn-secondary text-sm px-5 py-2">English</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== HERO SECTION (Premium Dark) ==================== -->
+    <section class="hero-section">
+        <!-- Ambient background -->
+        <div class="hero-grid"></div>
+        <div class="orb orb-gold"></div>
+        <div class="orb orb-teal"></div>
+        <div class="orb orb-blue"></div>
+
+        <div class="container mx-auto px-6 md:px-12 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                
+                <!-- Left Content -->
+                <div class="animate-fadeIn space-y-8">
+                    <!-- Logo grande con colores -->
+                    <div class="hero-logo-wrap">
+                        <img src="assets/icons/Logo Arcus.png"
+                             alt="Editorial Arcus"
+                             class="hero-logo"
+                             id="hero-logo-img">
+                    </div>
+
+                    <!-- Eyebrow 
+                    <div class="section-eyebrow">
+                        <span class="dot"></span>
+                        Colección 2026
+                    </div>-->
+                    <h1 class="section-title text-5xl md:text-6xl lg:text-7xl">
+                       
+                        <span class="text-gold-gradient font-serif italic">Editorial ARCUS</span>
+                    
+                    </h1>
+
+                    <!-- Headline -->
+                    <h1 id="hero-headline" class="section-title text-5xl md:text-6xl lg:text-7xl">
+                        Descifra lo que<br>
+                        <span class="text-gold-gradient font-serif italic">otros no quieren</span><br>
+                        que sepas.
+                    </h1>
+
+                    <!-- Subtitle -->
+                    <p id="hero-subtitle" class="text-lg md:text-xl leading-relaxed section-subtitle">
+                        Libros que despiertan preguntas incómodas y revelan nuevas perspectivas.
+                    </p>
+
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-wrap gap-4 pt-2">
+                        <a href="#catalogo" class="btn-primary text-sm" 
+   data-intro="Aquí puedes ver la colección completa de libros digitales." 
+   data-step="1" data-position="bottom">
+   <i class="fas fa-book-open"></i>
+   Ver Colección
+</a>
+                        <a href="#sobre-autor" class="btn-secondary text-sm">
+                            Conocer al Autor <i class="fas fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+
+                    <!-- Stats -->
+                    <div class="flex gap-6 pt-6">
+                        <div class="stat-card flex-1">
+                            <div class="stat-number">50k+</div>
+                            <div class="text-xs uppercase tracking-widest mt-1" style="color:var(--text-dim)">Lectores</div>
+                        </div>
+                        <div class="stat-card flex-1">
+                            <div class="stat-number">4.9</div>
+                            <div class="text-xs uppercase tracking-widest mt-1" style="color:var(--text-dim)">Rating</div>
+                        </div>
+                        <div class="stat-card flex-1">
+                            <div class="stat-number">4+</div>
+                            <div class="text-xs uppercase tracking-widest mt-1" style="color:var(--text-dim)">Libros</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Content — Imagen Promocional -->
+                <div class="relative flex items-center justify-center py-8">
+                    <div class="relative w-full max-w-lg">
+                        <!-- Glow aura -->
+                        <div class="absolute inset-0 rounded-2xl"
+                             style="background:radial-gradient(ellipse at center, rgba(245,166,35,0.3) 0%, transparent 70%); filter:blur(40px); transform:scale(0.95) translateY(15px)"></div>
+                        
+                        <!-- Promo Image -->
+                        <div class="book-hero relative z-10">
+                            <img src="assets/icons/promo.png" 
+                                 alt="Las Tres Tentaciones — Editorial Arcus" 
+                                 class="w-full rounded-2xl shadow-2xl">
+                        </div>
+
+                        <!-- Bestseller Badge -->
+                        <div class="bestseller-badge absolute -bottom-4 -left-4 z-20 px-4 py-2 rounded-full shadow-xl">
+                            <i class="fas fa-award mr-1"></i>BEST SELLER
+                        </div>
+
+                        <!-- Rating tag -->
+                        <div class="absolute -top-4 -right-4 z-20 modal-glass rounded-xl px-3 py-2 text-center">
+                            <div class="rating-stars text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <div class="font-head text-xs font-bold mt-0.5" style="color:var(--text-muted)">4.9 / 5</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CATÁLOGO DE LIBROS ==================== -->
+    <section id="catalogo" class="py-24" style="background:var(--bg-surface)">
+        <div class="container mx-auto px-4 md:px-8">
+            <!-- Header -->
+            <div class="text-center mb-14">
+                <div class="section-eyebrow inline-flex"><span class="dot"></span>Biblioteca Digital</div>
+                <h2 class="section-title text-4xl md:text-5xl mb-4">Colección de Libros</h2>
+                <p class="section-subtitle mx-auto text-center">
+                    Descubre nuestra selección de libros digitales diseñados para guiarte en tu camino de transformación personal
+                </p>
+            </div>
+            
+            <!-- Filtros y controles -->
+            <div class="flex flex-col md:flex-row justify-between items-center mb-10 gap-4">
+                <!-- Filtros por categoría -->
+                <div class="flex flex-wrap gap-2" role="group" aria-label="Filtros de categoría"
+     data-intro="Usa estos botones para filtrar libros por temas como Mindfulness, Sistemas, Comunicación..." 
+     data-step="3" data-position="top">
+                    <button class="filter-btn" data-category="all" aria-pressed="true">Todos</button>
+                    <button class="filter-btn" data-category="mindfulness" aria-pressed="false">Mindfulness</button>
+                    <button class="filter-btn" data-category="sistemas" aria-pressed="false">Sistemas</button>
+                    <button class="filter-btn" data-category="comunicación" aria-pressed="false">Comunicación</button>
+                    <button class="filter-btn" data-category="rendimiento" aria-pressed="false">Rendimiento</button>
+                </div>
+                
+                <!-- Ordenar y contador -->
+                <div class="flex items-center gap-4">
+                    <span id="book-counter" class="text-sm" style="color:var(--text-muted)">
+                        Mostrando <span class="font-bold" style="color:var(--accent-gold)">4</span> libros
+                    </span>
+                    <select id="sort-select" aria-label="Ordenar libros">
+                        <option value="featured">Destacados</option>
+                        <option value="newest">Más recientes</option>
+                        <option value="rating">Mejor valorados</option>
+                        <option value="title">Orden A-Z</option>
+                    </select>
+                </div>
+            </div>
+            
+            <!-- Grid de libros -->
+            <div id="books-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+     data-intro="Haz clic en 'Ver Detalles' para ver la sinopsis, precio y leer una muestra gratis."
+     data-step="4" data-position="top"></div>
+            
+            <!-- Mensaje sin resultados -->
+            <div id="no-results" class="hidden text-center py-16">
+                <i class="fas fa-book-open text-6xl mb-4" style="color:var(--text-dim)"></i>
+                <h3 class="text-xl font-bold mb-2" style="color:var(--text-muted)">No se encontraron libros</h3>
+                <p style="color:var(--text-dim)">Intenta con otros filtros o términos de búsqueda</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== MODAL DETALLE LIBRO ==================== -->
+    <div id="book-modal" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-backdrop fixed inset-0" onclick="closeBookModal()"></div>
+        <div class="fixed inset-0 flex items-center justify-center p-4">
+            <div class="modal-glass rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden animate-slideIn">
+                <div class="p-6 modal-scrollable">
+                    <!-- Encabezado del modal -->
+                    <div class="flex justify-between items-start mb-6">
+                        <div>
+                            <h3 id="modal-title" class="text-2xl font-head font-bold text-white"></h3>
+                            <p id="modal-subtitle" style="color:var(--text-muted)"></p>
+                        </div>
+                        <button onclick="closeBookModal()" class="w-8 h-8 flex items-center justify-center rounded-full transition-colors" style="color:var(--text-muted);background:rgba(255,255,255,0.05)" aria-label="Cerrar modal">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="flex flex-col lg:flex-row gap-8">
+                        <!-- Columna izquierda: Portada y acciones -->
+                        <div class="lg:w-2/5">
+                            <div class="book-cover mb-6 rounded-xl overflow-hidden">
+                                <img id="modal-cover" src="" alt="" class="w-full rounded-xl shadow-lg">
+                            </div>
+                            
+                            <!-- Precio y rating -->
+                            <div class="p-5 rounded-xl mb-5" style="background:var(--bg-surface);border:1px solid var(--border)">
+                                <div class="flex justify-between items-center mb-4">
+                                    <div>
+                                        <span id="modal-price" class="price-chip"></span>
+                                        <span class="text-xs ml-1" style="color:var(--text-muted)">USD</span>
+                                    </div>
+                                    <div class="rating-stars">
+                                        <i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i><i class="fas fa-star-half-alt text-sm"></i>
+                                        <span id="modal-rating" class="ml-1 text-sm" style="color:var(--text-muted)"></span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Botones de acción -->
+                                <div class="space-y-2.5">
+                                    <button id="modal-buy" class="btn-gradient text-[#0A0A0A] font-bold py-3 w-full rounded-xl" aria-label="Comprar ahora">
+                                        <i class="fas fa-shopping-cart mr-2"></i>Comprar Ahora
+                                    </button>
+                                    <button id="modal-add-to-cart" class="font-bold py-3 w-full rounded-xl transition-all" style="border:1px solid var(--border-gold);color:var(--accent-gold)" onmouseover="this.style.background='rgba(245,166,35,0.1)'" onmouseout="this.style.background='transparent'" aria-label="Añadir al carrito">
+                                        <i class="fas fa-plus mr-2"></i>Añadir al Carrito
+                                    </button>
+                                    <button id="modal-sample" class="font-bold py-3 w-full rounded-xl transition-all" style="border:1px solid var(--border);color:var(--text-muted)" onmouseover="this.style.background='rgba(255,255,255,0.04)'" onmouseout="this.style.background='transparent'" aria-label="Leer muestra gratis">
+                                        <i class="fas fa-book-open mr-2"></i>Leer Muestra Gratis
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Detalles rápidos -->
+                            <div class="space-y-2.5" style="color:var(--text-muted);font-size:0.875rem">
+                                <div class="flex items-center gap-2">
+                                    <i class="fas fa-file-alt w-4" style="color:var(--accent-teal)"></i>
+                                    <span id="modal-pages"></span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i class="fas fa-language w-4" style="color:var(--accent-teal)"></i>
+                                    <span id="modal-languages"></span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i class="fas fa-calendar w-4" style="color:var(--accent-teal)"></i>
+                                    <span id="modal-date"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Columna derecha: Detalles -->
+                        <div class="lg:w-3/5">
+                            <!-- Descripción -->
+                            <div class="mb-6">
+                                <h4 class="font-head font-bold mb-3 text-white">Descripción</h4>
+                                <p id="modal-description" class="leading-relaxed" style="color:var(--text-muted)"></p>
+                            </div>
+                            
+                            <!-- Lo que aprenderás -->
+                            <div class="mb-6">
+                                <h4 class="font-head font-bold mb-3 text-white">Lo que aprenderás</h4>
+                                <ul id="modal-benefits" class="space-y-2"></ul>
+                            </div>
+                            
+                            <!-- Categorías -->
+                            <div class="mb-6">
+                                <h4 class="font-head font-bold mb-3 text-white">Categorías</h4>
+                                <div id="modal-categories" class="flex flex-wrap gap-2"></div>
+                            </div>
+                            
+                            <!-- Formatos disponibles -->
+                            <div>
+                                <h4 class="font-head font-bold mb-3 text-white">Formatos disponibles</h4>
+                                <div class="flex flex-wrap gap-3">
+                                    <div class="flex items-center px-3 py-1.5 rounded-lg text-sm" style="background:rgba(0,212,170,0.1);color:var(--accent-teal);border:1px solid var(--border-teal)">
+                                        <i class="fas fa-tablet-alt mr-2"></i>EPUB
+                                    </div>
+                                    <!--<div class="flex items-center px-3 py-1.5 rounded-lg text-sm" style="background:rgba(245,166,35,0.1);color:var(--accent-gold);border:1px solid var(--border-gold)">
+                                        <i class="fab fa-amazon mr-2"></i>MOBI
+                                    </div>-->
+                                    <div class="flex items-center px-3 py-1.5 rounded-lg text-sm"
+                                     style="background:rgba(245,166,35,0.1);color:var(--accent-gold);border:1px solid var(--border-gold)">
+                                        <i class="fas fa-headphones mr-2"></i>AUDIOBOOK
+                                   </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== MODO LECTURA ==================== -->
+    <div id="reading-modal" class="fixed inset-0 z-50 hidden reading-mode" role="dialog" aria-modal="true" aria-labelledby="reading-title">
+        <div class="absolute inset-0 modal-backdrop" onclick="closeReadingMode()"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-4">
+            <div class="modal-glass rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden">
+                <!-- Header del modo lectura -->
+                <div class="px-6 py-4 flex justify-between items-center" style="background:var(--bg-elevated);border-bottom:1px solid var(--border)">
+                    <div>
+                        <h3 id="reading-title" class="font-head font-bold text-white"></h3>
+                        <p class="text-xs" style="color:var(--accent-gold)">Muestra gratuita</p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <button onclick="changeReadingFontSize(-1)" class="w-8 h-8 rounded-full flex items-center justify-center transition-all" style="border:1px solid var(--border);color:var(--text-muted)" aria-label="Reducir tamaño de fuente">
+                            <i class="fas fa-minus text-xs"></i>
+                        </button>
+                        <span id="font-size-display" class="text-sm font-medium" style="color:var(--text-muted)">100%</span>
+                        <button onclick="changeReadingFontSize(1)" class="w-8 h-8 rounded-full flex items-center justify-center transition-all" style="border:1px solid var(--border);color:var(--text-muted)" aria-label="Aumentar tamaño de fuente">
+                            <i class="fas fa-plus text-xs"></i>
+                        </button>
+                        <button onclick="closeReadingMode()" class="w-8 h-8 rounded-full flex items-center justify-center ml-2 transition-all" style="background:rgba(255,255,255,0.05);color:var(--text-muted)" aria-label="Cerrar modo lectura">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Contenido del libro -->
+                <div class="p-6 overflow-y-auto max-h-[70vh]">
+                    <div id="reading-content" class="content prose prose-lg max-w-none" style="color:var(--text-primary)"></div>
+                </div>
+                
+                <!-- Footer del modo lectura -->
+                <div class="px-6 py-4" style="background:var(--bg-elevated);border-top:1px solid var(--border)">
+                    <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <p class="text-sm text-center sm:text-left" style="color:var(--text-muted)">
+                            ¿Te gustó esta muestra? <br class="sm:hidden">Obtén el libro completo para continuar leyendo.
+                        </p>
+                        <div class="flex gap-3">
+                            <button onclick="closeReadingMode()" class="btn-secondary text-sm px-5 py-2">Cerrar</button>
+                            <button id="reading-buy-btn" class="btn-primary text-sm px-5 py-2">
+                                Comprar Completo &mdash; <span id="reading-price"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== CARRITO DE COMPRAS ==================== -->
+    <div id="cart-modal" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+        <div class="modal-backdrop fixed inset-0" onclick="closeCart()"></div>
+        <div class="fixed inset-0 flex justify-end">
+            <div class="cart-sidebar w-full max-w-md h-full shadow-2xl animate-slideIn flex flex-col">
+                <!-- Header del carrito -->
+                <div class="p-6" style="border-bottom:1px solid var(--border)">
+                    <div class="flex justify-between items-center">
+                        <h3 id="cart-title" class="text-xl font-head font-bold text-white">Tu Carrito</h3>
+                        <button onclick="closeCart()" class="w-8 h-8 flex items-center justify-center rounded-full transition-all" style="background:rgba(255,255,255,0.05);color:var(--text-muted)" aria-label="Cerrar carrito">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <p class="text-sm mt-1" id="cart-summary" style="color:var(--text-dim)">0 items</p>
+                </div>
+                
+                <!-- Items del carrito -->
+                <div id="cart-items" class="flex-1 overflow-y-auto p-6">
+                    <div class="text-center py-12" id="empty-cart" style="color:var(--text-dim)">
+                        <i class="fas fa-shopping-cart text-4xl mb-4"></i>
+                        <p>Tu carrito está vacío</p>
+                    </div>
+                </div>
+                
+                <!-- Resumen y checkout -->
+                <div class="p-6" style="border-top:1px solid var(--border);background:var(--bg-surface)">
+                    <div class="space-y-2.5 mb-5">
+                        <div class="flex justify-between text-sm">
+                            <span style="color:var(--text-muted)">Subtotal</span>
+                            <span id="cart-subtotal" class="text-white">$0.00</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span style="color:var(--text-muted)">Impuestos</span>
+                            <span id="cart-tax" class="text-white">$0.00</span>
+                        </div>
+                        <div class="divider-gold my-2"></div>
+                        <div class="flex justify-between font-bold">
+                            <span class="text-white">Total</span>
+                            <span id="cart-total" style="color:var(--accent-gold)">$0.00</span>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-2.5">
+                        <button id="checkout-btn" class="btn-gradient font-bold py-3 w-full rounded-xl disabled:opacity-40 disabled:cursor-not-allowed" disabled aria-label="Proceder al pago">
+                            Proceder al Pago
+                        </button>
+                        <button onclick="closeCart()" class="w-full py-3 rounded-xl text-sm font-medium transition-all" style="border:1px solid var(--border);color:var(--text-muted)" onmouseover="this.style.background='rgba(255,255,255,0.04)'" onmouseout="this.style.background='transparent'">
+                            Seguir Comprando
+                        </button>
+                    </div>
+                    
+                    <!-- Métodos de pago -->
+                    <div class="mt-5 pt-5" style="border-top:1px solid var(--border)">
+                        <p class="text-xs mb-3" style="color:var(--text-dim)">Métodos de pago aceptados:</p>
+                        <div class="flex gap-3" style="color:var(--text-muted);font-size:1.4rem">
+                            <i class="fab fa-cc-visa" style="color:#4B6CF7"></i>
+                            <i class="fab fa-cc-mastercard" style="color:#EB5757"></i>
+                            <i class="fab fa-cc-amex" style="color:#60B8FA"></i>
+                            <i class="fab fa-cc-stripe" style="color:#A78BFA"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL DE CONTACTO (FORMSPREE) ==================== -->
+    <div id="contact-modal" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true" aria-labelledby="contact-title">
+        <div class="modal-backdrop fixed inset-0" onclick="closeContactModal()"></div>
+        <div class="fixed inset-0 flex items-center justify-center p-4">
+            <div class="modal-glass rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden animate-slideIn">
+                <div class="p-6">
+                    <!-- Encabezado -->
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 id="contact-title" class="text-xl font-head font-bold text-white">Contáctanos</h3>
+                        <button onclick="closeContactModal()" class="w-8 h-8 flex items-center justify-center rounded-full transition-all" style="background:rgba(255,255,255,0.05);color:var(--text-muted)" aria-label="Cerrar">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Mensajes de éxito/error -->
+                    <div id="contact-success" class="success-message hidden" role="alert">
+                        <i class="fas fa-check-circle mr-2"></i>
+                        <span>¡Mensaje enviado con éxito! Te responderemos pronto.</span>
+                    </div>
+                    
+                    <div id="contact-error" class="error-message hidden" role="alert">
+                        <i class="fas fa-exclamation-circle mr-2"></i>
+                        <span>Ha ocurrido un error al enviar el mensaje. Inténtalo de nuevo.</span>
+                    </div>
+                    
+                    <!-- Formulario de contacto -->
+                    <form id="contact-form" action="https://formspree.io/f/xpwyknab" method="POST">
+                        <div class="form-group">
+                            <label for="contact-name" class="form-label">Nombre completo</label>
+                            <input type="text" 
+                                   id="contact-name" 
+                                   name="name" 
+                                   class="form-input" 
+                                   placeholder="Tu nombre completo" 
+                                   required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contact-email" class="form-label">Correo electrónico</label>
+                            <input type="email" 
+                                   id="contact-email" 
+                                   name="email" 
+                                   class="form-input" 
+                                   placeholder="tu@email.com" 
+                                   required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contact-subject" class="form-label">Asunto</label>
+                            <input type="text" 
+                                   id="contact-subject" 
+                                   name="subject" 
+                                   class="form-input" 
+                                   placeholder="Asunto de tu mensaje" 
+                                   required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contact-message" class="form-label">Mensaje</label>
+                            <textarea id="contact-message" 
+                                      name="message" 
+                                      class="form-input form-textarea" 
+                                      placeholder="Escribe tu mensaje aquí..." 
+                                      required></textarea>
+                        </div>
+                        
+                        <button type="submit" id="contact-submit" class="form-submit">
+                            <span id="contact-submit-text">Enviar Mensaje</span>
+                            <span id="contact-submit-loading" class="hidden">
+                                <i class="fas fa-spinner fa-spin mr-2"></i>Enviando...
+                            </span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== SECCIÓN DEL AUTOR ==================== -->
+    <section id="sobre-autor" class="py-24" style="background:var(--bg-base)">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="text-center mb-14">
+                <div class="section-eyebrow inline-flex"><span class="dot"></span>El Autor</div>
+                <h2 class="section-title text-4xl md:text-5xl">Ulises R. Cruz García</h2>
+            </div>
+            <div class="author-card">
+                <div class="flex flex-col lg:flex-row">
+                    <!-- Foto del autor -->
+                    <div class="lg:w-1/3 flex justify-center items-start p-10 lg:p-14">
+                        <div class="relative">
+                            <div class="author-photo-ring">
+                                <img src="https://static.wixstatic.com/media/af3a4a_1e83490b7701425a904b4f33085a2d72~mv2.png" 
+                                     alt="Ulises R. Cruz García - Autor" 
+                                     class="w-56 h-56 object-cover rounded-full">
+                            </div>
+                            <div class="bestseller-badge absolute -bottom-2 -right-2 px-4 py-2 rounded-full shadow-xl">
+                                <i class="fas fa-medal mr-1"></i>Autor <br>[nonfiction]
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Biografía -->
+                    <div class="lg:w-2/3 p-8 lg:p-14">
+                        <div class="divider-gold mb-8"></div>
+                        
+                        <p class="leading-relaxed mb-8 text-lg" style="color:var(--text-muted)">
+                            Pensador en la convergencia entre ciencia, sistemas y bienestar integral. Integra ingeniería biomecánica, análisis cognitivo y enfoque consciente para comprender y optimizar sistemas humanos.
+                        </p>
+                        
+                        <!-- Credenciales -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                            <div class="credential-card">
+                                <h4 class="font-head font-bold mb-3 text-sm uppercase tracking-wider" style="color:var(--accent-gold)">Formación Académica</h4>
+                                <ul class="space-y-2">
+                                    <li class="flex items-start gap-2 text-sm" style="color:var(--text-muted)">
+                                        <i class="fas fa-graduation-cap mt-0.5 shrink-0" style="color:var(--accent-teal)"></i>
+                                        <span>Ingeniería Biomecánica - Universidad Estatal de California</span>
+                                    </li>
+                                    <li class="flex items-start gap-2 text-sm" style="color:var(--text-muted)">
+                                        <i class="fas fa-graduation-cap mt-0.5 shrink-0" style="color:var(--accent-teal)"></i>
+                                        <span>Sistemas de Información - Universidad Metropolitana de Puerto Rico</span>
+                                    </li>
+                                    <li class="flex items-start gap-2 text-sm" style="color:var(--text-muted)">
+                                        <i class="fas fa-graduation-cap mt-0.5 shrink-0" style="color:var(--accent-teal)"></i>
+                                        <span>Minor en Cognitive Science - Northwestern University</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div class="credential-card">
+                                <h4 class="font-head font-bold mb-3 text-sm uppercase tracking-wider" style="color:var(--accent-gold)">Certificaciones</h4>
+                                <ul class="space-y-2">
+                                    <li class="flex items-start gap-2 text-sm" style="color:var(--text-muted)">
+                                        <i class="fas fa-certificate mt-0.5 shrink-0" style="color:var(--accent-gold)"></i>
+                                        <span>Certificate in Cognitive Science</span>
+                                    </li>
+                                    <li class="flex items-start gap-2 text-sm" style="color:var(--text-muted)">
+                                        <i class="fas fa-certificate mt-0.5 shrink-0" style="color:var(--accent-gold)"></i>
+                                        <span>Nutrición y Dietética - Stanford University</span>
+                                    </li>
+                                    <li class="flex items-start gap-2 text-sm" style="color:var(--text-muted)">
+                                        <i class="fas fa-certificate mt-0.5 shrink-0" style="color:var(--accent-gold)"></i>
+                                        <span>Mindfulness - International Mindfulness Alliance</span>
+                                    </li>
+                                    <li class="flex items-start gap-2 text-sm" style="color:var(--text-muted)">
+                                        <i class="fas fa-certificate mt-0.5 shrink-0" style="color:var(--accent-gold)"></i>
+                                        <span>Entrenador Personal - NASM</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Filosofía -->
+                        <div class="p-6 rounded-xl" style="background:rgba(245,166,35,0.06);border:1px solid var(--border-gold)">
+                            <div class="font-serif text-2xl italic mb-3" style="color:var(--accent-gold)">“”</div>
+                            <p class="font-serif italic text-lg leading-relaxed" style="color:var(--text-muted)">
+                                La verdadera transformación nace de la integración armoniosa entre salud física, equilibrio mental y bienestar emocional. No es solo un concepto teórico, sino un compromiso vivido.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== TESTIMONIOS ==================== -->
+    <section id="testimonios" class="py-24" style="background:var(--bg-surface)">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="text-center mb-14">
+                <div class="section-eyebrow inline-flex"><span class="dot"></span>Testimonios</div>
+                <h2 class="section-title text-4xl md:text-5xl mb-4">Lo que dicen nuestros lectores</h2>
+                <p class="section-subtitle mx-auto text-center">
+                    Descubre las experiencias de transformación de quienes ya han leído nuestros libros
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Testimonio 1 -->
+                <div class="testimonial-card">
+                    <div class="flex items-center mb-5 gap-3">
+                        <div class="avatar-gradient w-12 h-12 text-xl">M</div>
+                        <div>
+                            <div class="font-head font-bold">María G.</div>
+                            <div class="rating-stars text-xs mt-0.5">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="font-serif italic leading-relaxed" style="color:var(--text-muted)">
+                        &ldquo;Por primera vez en mi vida, entiendo por qué las dietas nunca funcionaron para mí. Este libro me enseñó a escuchar a mi cuerpo.&rdquo;
+                    </p>
+                </div>
+                
+                <!-- Testimonio 2 -->
+                <div class="testimonial-card">
+                    <div class="flex items-center mb-5 gap-3">
+                        <div class="avatar-gradient w-12 h-12 text-xl">J</div>
+                        <div>
+                            <div class="font-head font-bold">Javier R.</div>
+                            <div class="rating-stars text-xs mt-0.5">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="font-serif italic leading-relaxed" style="color:var(--text-muted)">
+                        &ldquo;Un libro que te confronta más de lo que te consuela. Me hizo reflexionar sobre decisiones que daba por inofensivas y cómo influyen en mi vida diaria. Directo, incómodo y necesario.&rdquo;
+                    </p>
+                </div>
+                
+                <!-- Testimonio 3 -->
+                <div class="testimonial-card">
+                    <div class="flex items-center mb-5 gap-3">
+                        <div class="avatar-gradient w-12 h-12 text-xl">A</div>
+                        <div>
+                            <div class="font-head font-bold">Ana L.</div>
+                            <div class="rating-stars text-xs mt-0.5">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="font-serif italic leading-relaxed" style="color:var(--text-muted)">
+                        &ldquo;Me sorprendió lo actual que se siente el mensaje. No es moralista, sino más bien introspectivo. Terminé cuestionando muchas cosas que antes daba por hechas.&rdquo;
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== MODAL DE AUTENTICACIÓN ==================== -->
+    <div id="auth-modal" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true" aria-labelledby="auth-title">
+            <div class="modal-glass rounded-3xl w-full max-w-md overflow-hidden animate-slideIn">
+                <!-- Header -->
+                <div class="modal-header-grad p-6">
+                    <div class="flex justify-between items-center">
+                        <h2 id="auth-title" class="text-2xl font-head font-bold">Bienvenido</h2>
+                        <button onclick="closeAuthModal()" class="w-8 h-8 flex items-center justify-center rounded-full bg-black/10 hover:bg-black/20 transition-colors" aria-label="Cerrar">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <p class="text-sm mt-1 opacity-70">Inicia sesión para continuar</p>
+                </div>
+
+                <!-- Tabs -->
+                <div class="flex" style="border-bottom:1px solid var(--border)">
+                    <button id="login-tab" class="auth-tab flex-1" onclick="switchAuthTab('login')" style="border-bottom-color:var(--accent-gold);color:var(--accent-gold)">
+                        Iniciar Sesión
+                    </button>
+                    <button id="register-tab" class="auth-tab flex-1" onclick="switchAuthTab('register')">
+                        Registrarse
+                    </button>
+                </div>
+
+                <div class="p-6">
+                    <!-- Login Form -->
+                    <form id="login-form" class="space-y-4">
+                        <div>
+                            <label for="login-email" class="form-label">
+                                <i class="fas fa-envelope mr-2" style="color:var(--accent-gold)"></i>Correo electrónico
+                            </label>
+                            <input type="email" id="login-email" class="form-input" placeholder="tu@email.com" required>
+                        </div>
+                        <div>
+                            <label for="login-password" class="form-label">
+                                <i class="fas fa-lock mr-2" style="color:var(--accent-gold)"></i>Contraseña
+                            </label>
+                            <input type="password" id="login-password" class="form-input" placeholder="••••••••" required>
+                        </div>
+                        <button type="submit" class="btn-primary w-full justify-center">
+                            <i class="fas fa-sign-in-alt"></i>Iniciar Sesión
+                        </button>
+                    </form>
+
+                    <!-- Register Form -->
+                    <form id="register-form" class="space-y-4 hidden">
+                        <div>
+                            <label for="register-name" class="form-label">
+                                <i class="fas fa-user mr-2" style="color:var(--accent-gold)"></i>Nombre completo
+                            </label>
+                            <input type="text" id="register-name" class="form-input" placeholder="Tu nombre" required>
+                        </div>
+                        <div>
+                            <label for="register-email" class="form-label">
+                                <i class="fas fa-envelope mr-2" style="color:var(--accent-gold)"></i>Correo electrónico
+                            </label>
+                            <input type="email" id="register-email" class="form-input" placeholder="tu@email.com" required>
+                        </div>
+                        <div>
+                            <label for="register-password" class="form-label">
+                                <i class="fas fa-lock mr-2" style="color:var(--accent-gold)"></i>Contraseña
+                            </label>
+                            <input type="password" id="register-password" class="form-input" placeholder="Mínimo 6 caracteres" required>
+                        </div>
+                        <button type="submit" class="btn-primary w-full justify-center">
+                            <i class="fas fa-user-plus"></i>Crear Cuenta
+                        </button>
+                    </form>
+
+                    <!-- Divider -->
+                    <div class="relative my-5">
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="w-full" style="border-top:1px solid var(--border)"></div>
+                        </div>
+                        <div class="relative flex justify-center text-xs">
+                            <span class="px-3" style="background:var(--bg-elevated);color:var(--text-dim)">O continúa con</span>
+                        </div>
+                    </div>
+
+                    <!-- Google Sign In -->
+                    <button id="google-signin-btn" class="w-full py-3 rounded-xl font-medium transition-all flex items-center justify-center gap-3" style="background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--text-muted)" onmouseover="this.style.borderColor='var(--accent-teal)'" onmouseout="this.style.borderColor='var(--border)'">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24">
+                            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                        </svg>
+                        Continuar con Google
+                    </button>
+
+                    <!-- Messages -->
+                    <div id="auth-message" class="hidden mt-4 p-3 rounded-lg text-sm"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL PRE-CHECKOUT ==================== -->
+    <div id="pre-checkout-modal" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true">
+        <div class="modal-backdrop fixed inset-0" onclick="closePreCheckoutModal()"></div>
+        <div class="fixed inset-0 flex items-center justify-center p-4">
+            <div class="glass-modal bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl w-full max-w-lg overflow-hidden animate-slideIn border border-white/20">
+                <!-- Header -->
+                <div class="bg-gradient-to-r from-primary to-purple-600 p-6 text-white text-center">
+                    <i class="fas fa-shopping-cart text-4xl mb-3"></i>
+                    <h2 class="text-2xl font-bold">¡Casi listo!</h2>
+                    <p class="text-white/80 text-sm mt-2">Completa tu compra</p>
+                </div>
+
+                <div class="p-8">
+                    <!-- Beneficios de registrarse -->
+                    <div class="mb-6">
+                        <h3 class="text-lg font-bold text-gray-800 mb-4 text-center">
+                            ¿Quieres guardar tu compra?
+                        </h3>
+                        
+                        <div class="space-y-3 mb-6">
+                            <div class="flex items-start space-x-3">
+                                <i class="fas fa-check-circle text-green-500 text-xl mt-1"></i>
+                                <div>
+                                    <p class="font-medium text-gray-800">Historial de compras</p>
+                                    <p class="text-sm text-gray-600">Accede a tus libros desde cualquier dispositivo</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3">
+                                <i class="fas fa-heart text-red-500 text-xl mt-1"></i>
+                                <div>
+                                    <p class="font-medium text-gray-800">Favoritos sincronizados</p>
+                                    <p class="text-sm text-gray-600">Guarda tus libros favoritos en la nube</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3">
+                                <i class="fas fa-download text-blue-500 text-xl mt-1"></i>
+                                <div>
+                                    <p class="font-medium text-gray-800">Descargas ilimitadas</p>
+                                    <p class="text-sm text-gray-600">Descarga tus libros cuando quieras</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botones de acción -->
+                    <div class="space-y-3">
+                        <!-- Registrarse / Login -->
+                        <button onclick="openAuthModalFromCheckout()" 
+                                class="w-full bg-gradient-to-r from-primary to-purple-600 text-white py-4 rounded-lg font-medium hover:shadow-xl hover:scale-105 transition-all flex items-center justify-center">
+                            <i class="fas fa-user-plus mr-2"></i>
+                            Crear Cuenta o Iniciar Sesión
+                        </button>
+
+                        <!-- Continuar como invitado -->
+                        <button onclick="continueAsGuest()" 
+                                class="w-full bg-gray-100 text-gray-700 py-4 rounded-lg font-medium hover:bg-gray-200 transition-all flex items-center justify-center">
+                            <i class="fas fa-arrow-right mr-2"></i>
+                            Continuar como Invitado
+                        </button>
+
+                        <p class="text-xs text-gray-500 text-center mt-4">
+                            Como invitado no podrás acceder al historial de compras después
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL HISTORIAL DE COMPRAS ==================== -->
+    <div id="history-modal" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true">
+        <div class="modal-backdrop fixed inset-0" onclick="closeHistoryModal()"></div>
+        <div class="fixed inset-0 flex items-center justify-center p-4">
+            <div class="glass-modal bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl w-full max-w-2xl h-[80vh] flex flex-col overflow-hidden animate-slideIn border border-white/20">
+                <!-- Header -->
+                <div class="bg-gradient-to-r from-primary to-purple-600 p-6 text-white flex justify-between items-center shrink-0">
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-history text-2xl"></i>
+                        <h2 class="text-xl font-bold">Historial de Compras</h2>
+                    </div>
+                    <button onclick="closeHistoryModal()" class="text-white hover:text-gray-200 transition-colors">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+
+                <!-- Content -->
+                <div class="p-6 overflow-y-auto flex-1 custom-scrollbar">
+                    <div id="history-list" class="space-y-4">
+                        <!-- Loading State -->
+                        <div class="text-center py-10 text-gray-500">
+                            <i class="fas fa-spinner fa-spin text-3xl mb-3 text-primary"></i>
+                            <p>Cargando tus compras...</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Empty State Template (Hidden) -->
+                    <template id="history-empty-template">
+                        <div class="text-center py-12 text-gray-500">
+                            <i class="fas fa-shopping-bag text-5xl mb-4 text-gray-300"></i>
+                            <h3 class="text-lg font-bold text-gray-700">Aún no tienes compras</h3>
+                            <p class="mb-6 text-sm">Tus libros comprados aparecerán aquí.</p>
+                            <button onclick="closeHistoryModal()" class="bg-primary text-white px-6 py-2 rounded-full text-sm hover:opacity-90 transition-opacity">
+                                Explorar Catálogo
+                            </button>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL DE VIDEO ==================== -->
+    <div id="video-modal" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true">
+        <div class="modal-backdrop fixed inset-0 bg-black/80 backdrop-blur-sm" onclick="closeVideoModal()"></div>
+        <div class="fixed inset-0 flex items-center justify-center p-4">
+            <div class="relative w-full max-w-4xl aspect-video bg-black rounded-2xl shadow-2xl overflow-hidden animate-slideIn">
+                <button onclick="closeVideoModal()" class="absolute top-4 right-4 z-10 text-white hover:text-gray-300 bg-black/50 rounded-full w-10 h-10 flex items-center justify-center transition-colors">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+                <iframe id="video-frame" 
+                        class="w-full h-full" 
+                        src="" 
+                        title="Video Promocional" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer id="contacto" class="footer-dark py-16">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
+                <!-- Información del autor -->
+                <div>
+                    <div class="mb-4">
+                        <img src="assets/icons/Logo Arcus.png" 
+                             alt="Editorial Arcus" 
+                             class="h-14 w-auto object-contain"
+                             style="filter:brightness(0) invert(1);">
+                    </div>
+                        <p class="mb-6 text-sm leading-relaxed" style="color:var(--text-dim)">
+                        Publicamos obras que desafían la narrativa oficial, revelan los mecanismos del poder y despiertan la consciencia del lector.
+                    </p>
+                    <div class="flex space-x-3">
+                        <a href="#" class="w-9 h-9 rounded-full flex items-center justify-center hover:border-accent-gold transition-all footer-link" style="border:1px solid var(--border)" aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 rounded-full flex items-center justify-center hover:border-accent-gold transition-all footer-link" style="border:1px solid var(--border)" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 rounded-full flex items-center justify-center hover:border-accent-gold transition-all footer-link" style="border:1px solid var(--border)" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <button onclick="openContactModal()" class="w-9 h-9 rounded-full flex items-center justify-center transition-all footer-link" style="border:1px solid var(--border)" aria-label="Email">
+                            <i class="fas fa-envelope"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Enlaces rápidos -->
+                <ul class="space-y-2.5">
+                    <li><a href="#catalogo" class="footer-link">Catálogo de Libros</a></li>
+                    <li><a href="#sobre-autor" class="footer-link">Sobre el Autor</a></li>
+                    <li><a href="#testimonios" class="footer-link">Testimonios</a></li>
+                    <li><button onclick="openContactModal()" class="footer-link">Contacto</button></li>
+                    <!-- NUEVO -->
+                    <li><button onclick="replayCoachMark()" class="footer-link"><i class="fas fa-question-circle"></i> Guía rápida</button></li>
+                 </ul>
+                
+                <!-- Contacto -->
+                <div>
+                    <h4 class="font-head font-bold text-white text-sm uppercase tracking-wider mb-5">Contacto</h4>
+                    <p class="mb-5 text-sm leading-relaxed" style="color:var(--text-dim)">
+                        ¿Tienes preguntas sobre los libros o necesitas asistencia? No dudes en contactarnos.
+                    </p>
+                    <button onclick="openContactModal()" class="btn-primary text-sm">
+                        <i class="fas fa-envelope"></i>Enviar Mensaje
+                    </button>
+                </div>
+            </div>
+            
+            <div class="divider-gold mb-8"></div>
+            
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-4 text-sm" style="color:var(--text-dim)">
+                <p>&copy; 2026 Editorial Arcus &mdash; Ulises R. Cruz García. Todos los derechos reservados.</p>
+                <p class="flex gap-4">
+                    <a href="#" class="footer-link">Términos y Condiciones</a>
+                    <a href="#" class="footer-link">Privacidad</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== WHATSAPP FLOTANTE ==================== -->
+    <a href="https://wa.me/34642528931" class="floating-whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp"
+   data-intro="Si tienes dudas, contáctanos directamente por WhatsApp."
+   data-step="8" data-position="left">
+   <i class="fab fa-whatsapp"></i>
+</a>
+
+    <!-- ==================== JAVASCRIPT ==================== -->
+    <script src="js/app.js"></script>
+    
+    <!-- ==================== FIREBASE BACKEND ==================== -->
+    <script type="module" src="js/firebase-config.js"></script>
+
+    </div>
+</div>
+<!-- Script de Jotform Lightbox -->
+<script src="https://cdn.jotfor.ms/s/static/latest/static/feedback2.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var JFL_261214323221036 = new JotformFeedback({
+        formId: '261214323221036',
+        base: 'https://form.jotform.com/',
+        windowTitle: 'Free Ebook contact form',
+        backgroundColor: '#FFA500',
+        fontColor: '#FFFFFF',
+        type: 'false',
+        height: 500,
+        width: 700,
+        openOnLoad: false
+    });
+</script>
+<script src='https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js'></script>
+<script>window.jotformEmbedHandler("iframe[id='261214323221036']", "https://form.jotform.com/")</script>
+
+<!-- Botón oculto para disparar Jotform Lightbox desde app.js -->
+<a id="jotform-trigger" class="lightbox-261214323221036" style="display:none;" aria-hidden="true"></a>
+
+<!-- Intro.js y Coach Mark -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.2.0/intro.min.js"></script>
+<script src="js/coachmark.js"></script>
+<script src="js/analytics-tracker.js" defer></script>
+
+</body>
+</html>
