@@ -1,9 +1,3 @@
 {
-  "version": 2,
-  "buildCommand": null,
-  "outputDirectory": ".",
-  "rewrites": [
-    { "source": "/api/track-visit", "destination": "/api/track-visit.js" },
-    { "source": "/api/track-visit-end", "destination": "/api/track-visit-end.js" }
-  ]
+  "version": 2
 }
