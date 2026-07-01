@@ -1,7 +1,6 @@
 /**
  * ARCUS Editorial — Analytics Tracker
  * Captura datos de tráfico y los envía a /api/track-visit (Telegram).
- * Colocar en: js/analytics-tracker.js
  * Incluir en index.html justo antes de </body>:
  *   <script src="js/analytics-tracker.js" defer></script>
  */
@@ -10,20 +9,25 @@
 
   const VISITOR_KEY = "arcus_visitor_id";
   const VISITS_COUNT_KEY = "arcus_visits_count";
-  const SESSION_TRACKED_KEY = "arcus_session_tracked"; // sessionStorage: evita doble conteo en la misma pestaña
+  const SESSION_TRACKED_KEY = "arcus_session_tracked";
 
   // --- 1. Identificar visitante (nuevo vs. recurrente) ---
   function getOrCreateVisitorId() {
-    let id = localStorage.getItem(VISITOR_KEY);
-    let isReturning = true;
-    if (!id) {
-      id = crypto.randomUUID();
-      localStorage.setItem(VISITOR_KEY, id);
-      isReturning = false;
+    try {
+      let id = localStorage.getItem(VISITOR_KEY);
+      let isReturning = true;
+      if (!id) {
+        id = crypto.randomUUID();
+        localStorage.setItem(VISITOR_KEY, id);
+        isReturning = false;
+      }
+      const prevCount = parseInt(localStorage.getItem(VISITS_COUNT_KEY) || "0", 10);
+      localStorage.setItem(VISITS_COUNT_KEY, String(prevCount + 1));
+      return { id, isReturning, visitCount: prevCount + 1 };
+    } catch (e) {
+      // localStorage puede fallar en incógnito (Safari antiguo) o con storage lleno
+      return { id: "anonymous-" + Date.now(), isReturning: false, visitCount: 1 };
     }
-    const prevCount = parseInt(localStorage.getItem(VISITS_COUNT_KEY) || "0", 10);
-    localStorage.setItem(VISITS_COUNT_KEY, String(prevCount + 1));
-    return { id, isReturning, visitCount: prevCount + 1 };
   }
 
   // --- 2. Detectar fuente de tráfico (UTM o referrer) ---
@@ -60,7 +64,7 @@
     return `${device} · ${browser}`;
   }
 
-  // --- 4. Geolocalización aproximada por IP (gratis, sin key, ~1000 req/día) ---
+  // --- 4. Geolocalización aproximada por IP (gratis, sin key) ---
   async function getGeoData() {
     try {
       const res = await fetch("https://ipapi.co/json/");
@@ -79,8 +83,12 @@
 
   // --- 5. Enviar evento de ENTRADA ---
   async function trackVisitStart() {
-    // Evita doble tracking si el usuario navega entre páginas del mismo sitio en la misma sesión
-    if (sessionStorage.getItem(SESSION_TRACKED_KEY)) return;
+    // Solo evita doble tracking dentro de la MISMA pestaña (no entre pestañas)
+    try {
+      if (sessionStorage.getItem(SESSION_TRACKED_KEY)) return;
+    } catch (e) {
+      // sessionStorage puede fallar — continuar de todas formas
+    }
 
     const visitor = getOrCreateVisitorId();
     const geo = await getGeoData();
@@ -105,32 +113,39 @@
       });
       const data = await res.json();
       if (data.messageId) {
-        sessionStorage.setItem(SESSION_TRACKED_KEY, "1");
-        sessionStorage.setItem("arcus_telegram_msg_id", String(data.messageId));
-        sessionStorage.setItem("arcus_visit_start", String(Date.now()));
+        try {
+          sessionStorage.setItem(SESSION_TRACKED_KEY, "1");
+          sessionStorage.setItem("arcus_telegram_msg_id", String(data.messageId));
+          sessionStorage.setItem("arcus_visit_start", String(Date.now()));
+        } catch (e) {
+          // sessionStorage puede fallar en incógnito — no es crítico
+        }
       }
     } catch (e) {
-      // Falla silenciosa: no debe afectar la experiencia del visitante
-      console.warn("Analytics tracker: no se pudo registrar la visita.");
+      console.warn("Analytics tracker: no se pudo registrar la visita.", e);
     }
   }
 
   // --- 6. Enviar evento de SALIDA (duración de la visita) ---
   function trackVisitEnd() {
-    const messageId = sessionStorage.getItem("arcus_telegram_msg_id");
-    const startTime = sessionStorage.getItem("arcus_visit_start");
-    if (!messageId || !startTime) return;
+    try {
+      const messageId = sessionStorage.getItem("arcus_telegram_msg_id");
+      const startTime = sessionStorage.getItem("arcus_visit_start");
+      if (!messageId || !startTime) return;
 
-    const durationSeconds = Math.round((Date.now() - parseInt(startTime, 10)) / 1000);
+      const durationSeconds = Math.round((Date.now() - parseInt(startTime, 10)) / 1000);
 
-    const payload = JSON.stringify({
-      messageId: parseInt(messageId, 10),
-      durationSeconds,
-    });
+      const payload = JSON.stringify({
+        messageId: parseInt(messageId, 10),
+        durationSeconds,
+      });
 
-    // sendBeacon garantiza el envío aunque la pestaña se esté cerrando
-    const blob = new Blob([payload], { type: "application/json" });
-    navigator.sendBeacon("/api/track-visit-end", blob);
+      // sendBeacon garantiza el envío aunque la pestaña se esté cerrando
+      const blob = new Blob([payload], { type: "application/json" });
+      navigator.sendBeacon("/api/track-visit-end", blob);
+    } catch (e) {
+      // Falla silenciosa
+    }
   }
 
   // --- Inicialización ---
