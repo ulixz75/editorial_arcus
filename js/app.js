@@ -2023,3 +2023,39 @@ window.showPurchaseHistory = function() {
     openHistoryModal();
 };
 
+// ================ THEME TOGGLE ================
+window.toggleTheme = function() {
+    const html = document.documentElement;
+    const icon = document.getElementById('theme-icon');
+    const currentTheme = html.getAttribute('data-theme');
+
+    if (currentTheme === 'light') {
+        html.removeAttribute('data-theme');
+        localStorage.setItem('arcus-theme', 'dark');
+        if (icon) {
+            icon.classList.remove('fa-sun');
+            icon.classList.add('fa-moon');
+        }
+    } else {
+        html.setAttribute('data-theme', 'light');
+        localStorage.setItem('arcus-theme', 'light');
+        if (icon) {
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        }
+    }
+};
+
+// Apply saved theme on load
+(function() {
+    const savedTheme = localStorage.getItem('arcus-theme');
+    if (savedTheme === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+        const icon = document.getElementById('theme-icon');
+        if (icon) {
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        }
+    }
+})();
+
