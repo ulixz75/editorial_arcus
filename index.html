@@ -821,7 +821,7 @@
             position: fixed;
             inset: 0;
             z-index: 99999;
-            background: #080C14;
+            background: #121E2F;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1206,7 +1206,6 @@
     <div id="splash-screen" role="presentation" aria-hidden="true">
         <video
             id="splash-video"
-            src="assets/media/splash_screen.mp4"
             playsinline
             preload="auto"
         ></video>
@@ -1228,6 +1227,12 @@
             var video    = document.getElementById('splash-video');
             var tapLayer = document.getElementById('splash-tap');
             var fallback;
+
+            // ── Select video based on screen orientation ──
+            var isPortrait = window.innerHeight > window.innerWidth;
+            video.src = isPortrait
+                ? 'assets/media/splash_screen_portrait.mp4'
+                : 'assets/media/splash_screen.mp4';
 
             function hideSplash() {
                 clearTimeout(fallback);
