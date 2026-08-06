@@ -290,7 +290,7 @@ const booksCatalog = {
             description_en: 'Systems do not collapse due to obvious errors, but due to decisions that seem correct.',
             cover_es: 'assets/icons/NuevaPortada.png',
             cover_en: 'assets/icons/L3t_portada_en.png',
-            price: 7.99,
+            price: 4.99,
             pages: 112,
             publish_date: '2026-05-10',
             rating: 4.9,
