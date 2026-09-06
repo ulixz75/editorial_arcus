@@ -7,8 +7,19 @@ const translations = {
         nav_author: 'Autor',
         nav_testimonials: 'Testimonios',
         nav_contact: 'Contacto',
+        nav_terms: 'Términos',
+        nav_privacy: 'Privacidad',
+        nav_reader: 'Lector',
+        nav_stores: 'Tiendas',
+        nav_my_purchases: 'Mis compras',
+        nav_logout: 'Cerrar sesión',
+        nav_user_default: 'Usuario',
         search_placeholder: 'Buscar libros...',
-        
+        aria_toggle_theme: 'Cambiar tema',
+        aria_cart: 'Carrito',
+        aria_login: 'Iniciar sesión',
+        aria_open_menu: 'Abrir menú',
+
         // Hero
         hero_title: 'Descubre tu <span class="text-accent">transformación</span> personal',
         hero_subtitle: 'Explora la colección completa de libros sobre mindfulness, nutrición y bienestar integral',
@@ -18,7 +29,7 @@ const translations = {
         hero_languages: 'Idiomas',
         hero_cta_catalog: 'Explorar Catálogo',
         hero_cta_video: 'Ver Video',
-        
+
         // Catálogo
         catalog_title: 'Colección de Libros',
         catalog_subtitle: 'Descubre nuestra selección de libros digitales diseñados para guiarte en tu camino de transformación personal',
@@ -35,13 +46,13 @@ const translations = {
         sort_title: 'Orden A-Z',
         no_results_title: 'No se encontraron libros',
         no_results_text: 'Intenta con otros filtros o términos de búsqueda',
-        
+
         // Tarjetas de libro
         badge_bestseller: '⭐ Top',
         badge_featured: 'Destacado',
         btn_view_details: 'Ver Detalles',
         reviews: 'reseñas',
-        
+
         // Modal de libro
         modal_description: 'Descripción',
         modal_what_learn: 'Lo que aprenderás',
@@ -53,14 +64,14 @@ const translations = {
         btn_add_cart: 'Añadir al Carrito',
         btn_read_sample: 'Leer Muestra Gratis',
 
-        
+
         // Modo lectura
         reading_free_sample: 'Muestra gratuita',
         reading_like_sample: '¿Te gustó esta muestra?',
         reading_get_full: 'Obtén el libro completo para continuar leyendo.',
         btn_close: 'Cerrar',
         btn_buy_full: 'Comprar Libro Completo',
-        
+
         // Carrito
         cart_title: 'Tu Carrito',
         cart_empty: 'Tu carrito está vacío',
@@ -72,7 +83,7 @@ const translations = {
         btn_checkout: 'Proceder al Pago',
         btn_continue_shopping: 'Seguir Comprando',
         payment_methods: 'Métodos de pago aceptados:',
-        
+
         // Contacto
         contact_title: 'Contáctame',
         contact_subtitle: 'Tienes alguna pregunta? Escríbeme y te responderé lo antes posible',
@@ -83,18 +94,18 @@ const translations = {
         btn_sending: 'Enviando...',
         contact_success: '¡Mensaje enviado! Te responderé pronto.',
         contact_error: 'Error al enviar. Inténtalo de nuevo.',
-        
+
         // Autor
         author_title: 'Sobre el Autor',
         author_subtitle: 'Especialista en Mindfulness y Bienestar Integral',
-        
+
         // Testimonios
         testimonials_title: 'Lo que dicen los lectores',
-        
+
         // Footer
         footer_rights: 'Todos los derechos reservados',
         footer_follow: 'Sígueme',
-        
+
         // Notificaciones
         notif_added_cart: 'Libro añadido al carrito',
         notif_removed_cart: 'Libro removido del carrito',
@@ -114,8 +125,19 @@ const translations = {
         nav_author: 'Author',
         nav_testimonials: 'Testimonials',
         nav_contact: 'Contact',
+        nav_terms: 'Terms',
+        nav_privacy: 'Privacy',
+        nav_reader: 'Reader',
+        nav_stores: 'Stores',
+        nav_my_purchases: 'My purchases',
+        nav_logout: 'Log out',
+        nav_user_default: 'User',
         search_placeholder: 'Search books...',
-        
+        aria_toggle_theme: 'Toggle theme',
+        aria_cart: 'Cart',
+        aria_login: 'Sign in',
+        aria_open_menu: 'Open menu',
+
         // Hero
         hero_title: 'Discover your personal <span class="text-accent">transformation</span>',
         hero_subtitle: 'Explore the complete collection of books on mindfulness, nutrition and holistic wellness',
@@ -125,7 +147,7 @@ const translations = {
         hero_languages: 'Languages',
         hero_cta_catalog: 'Explore Catalog',
         hero_cta_video: 'Watch Video',
-        
+
         // Catalog
         catalog_title: 'Book Collection',
         catalog_subtitle: 'Discover our selection of digital books designed to guide you on your personal transformation journey',
@@ -142,13 +164,13 @@ const translations = {
         sort_title: 'A-Z Order',
         no_results_title: 'No books found',
         no_results_text: 'Try other filters or search terms',
-        
+
         // Book cards
         badge_bestseller: '⭐ Top',
         badge_featured: 'Featured',
         btn_view_details: 'View Details',
         reviews: 'reviews',
-        
+
         // Book modal
         modal_description: 'Description',
         modal_what_learn: 'What you\'ll learn',
@@ -160,14 +182,14 @@ const translations = {
         btn_add_cart: 'Add to Cart',
         btn_read_sample: 'Read Free Sample',
 
-        
+
         // Reading mode
         reading_free_sample: 'Free sample',
         reading_like_sample: 'Did you like this sample?',
         reading_get_full: 'Get the full book to continue reading.',
         btn_close: 'Close',
         btn_buy_full: 'Buy Full Book',
-        
+
         // Cart
         cart_title: 'Your Cart',
         cart_empty: 'Your cart is empty',
@@ -179,7 +201,7 @@ const translations = {
         btn_checkout: 'Proceed to Checkout',
         btn_continue_shopping: 'Continue Shopping',
         payment_methods: 'Accepted payment methods:',
-        
+
         // Contact
         contact_title: 'Contact Me',
         contact_subtitle: 'Have a question? Write to me and I\'ll respond as soon as possible',
@@ -190,18 +212,18 @@ const translations = {
         btn_sending: 'Sending...',
         contact_success: 'Message sent! I\'ll respond soon.',
         contact_error: 'Error sending. Please try again.',
-        
+
         // Author
         author_title: 'About the Author',
         author_subtitle: 'Mindfulness and Holistic Wellness Specialist',
-        
+
         // Testimonials
         testimonials_title: 'What readers say',
-        
+
         // Footer
         footer_rights: 'All rights reserved',
         footer_follow: 'Follow me',
-        
+
         // Notifications
         notif_added_cart: 'Book added to cart',
         notif_removed_cart: 'Book removed from cart',
@@ -257,23 +279,23 @@ const booksCatalog = {
             sample_content_es: `
                 <h2>Capítulo 1: El Comienzo del Camino</h2>
                 <p>Durante años, busqué respuestas en dietas milagrosas y rutinas de ejercicio extenuantes. Siempre terminaba en el mismo lugar: frustrado, sin resultados y con una relación cada vez más complicada con mi cuerpo.</p>
-                
+
                 <p>Fue entonces cuando descubrí que el problema no estaba en mi fuerza de voluntad, sino en mi enfoque. Estaba luchando contra mi cuerpo en lugar de trabajar con él.</p>
-                
+
                 <h3>El Punto de Inflexión</h3>
                 <p>Recuerdo claramente el día que cambié mi perspectiva. Después de otra dieta fallida, me senté en silencio y por primera vez en mucho tiempo, simplemente escuché. Escuché lo que mi cuerpo realmente necesitaba, no lo que las revistas decían que debía necesitar.</p>
-                
+
                 <p>Ese momento de quietud fue el comienzo de un viaje que transformaría no solo mi cuerpo, sino mi relación completa con la comida y el movimiento.</p>
             `,
             sample_content_en: `
                 <h2>Chapter 1: The Beginning of the Journey</h2>
                 <p>For years, I searched for answers in miracle diets and strenuous exercise routines. I always ended up in the same place: frustrated, without results, and with an increasingly complicated relationship with my body.</p>
-                
+
                 <p>It was then that I discovered the problem wasn't my willpower, but my approach. I was fighting against my body instead of working with it.</p>
-                
+
                 <h3>The Turning Point</h3>
                 <p>I remember clearly the day I changed my perspective. After another failed diet, I sat in silence and for the first time in a long time, I simply listened. I listened to what my body really needed, not what magazines said I should need.</p>
-                
+
                 <p>That moment of stillness was the beginning of a journey that would transform not only my body, but my entire relationship with food and movement.</p>
             `,
             featured: true,
@@ -314,12 +336,12 @@ benefits_en: [
 sample_content_es: `
     <h2>Capítulo 1: La Ilusión del Control</h2>
     <p>Ninguna civilización colapsa el día en que cree haber cometido un error. Colapsa mucho antes, cuando empieza a llamar virtud a lo que en realidad es una distorsión de su propio instinto de supervivencia.</p>
-    
+
     <p>El problema no es la falta de información. Tampoco la ausencia de inteligencia. A lo largo de la historia, los imperios han estado dirigidos por personas capaces, educadas y convencidas de que actuaban de forma racional. Y, sin embargo, los resultados se repiten con una consistencia inquietante.</p>
-    
+
     <h3>La Arquitectura Invisible</h3>
     <p>Roma no cayó por ignorancia. Durante siglos, supo adaptarse, reorganizarse y resistir. Lo que la hizo insostenible no fue un evento aislado, sino una acumulación de decisiones que, vistas individualmente, parecían correctas.</p>
-    
+
     <p>Eso es lo que este libro intenta señalar: no los eventos, ni las fechas, ni los nombres, sino la arquitectura invisible que hace que ciertos errores no solo sean probables, sino inevitables.</p>
 
     <p>A esa arquitectura la llamaremos tentación. No en un sentido moral, sino estructural: soluciones que funcionan a corto plazo, pero que introducen distorsiones profundas en el sistema.</p>
@@ -328,12 +350,12 @@ sample_content_es: `
 sample_content_en: `
     <h2>Chapter 1: The Illusion of Control</h2>
     <p>No civilization collapses on the day it believes it has made a mistake. It collapses much earlier, when it begins to call virtue what is actually a distortion of its own survival instinct.</p>
-    
+
     <p>The problem is not a lack of information. Nor is it a lack of intelligence. Throughout history, empires have been led by capable, educated individuals who were convinced they were acting rationally. And yet, the outcomes repeat with unsettling consistency.</p>
-    
+
     <h3>The Invisible Architecture</h3>
     <p>Rome did not fall because of ignorance. For centuries, it adapted, reorganized, and endured. What made it unsustainable was not a single event, but a series of decisions that, when viewed in isolation, seemed reasonable.</p>
-    
+
     <p>This is what the book aims to reveal: not events, dates, or names, but the invisible architecture that makes certain errors not only possible, but inevitable.</p>
 
     <p>We will call that architecture temptation. Not in a moral sense, but a structural one: solutions that work in the short term while quietly distorting the system beneath them.</p>
@@ -376,14 +398,14 @@ benefits_en: [
 sample_content_es: `
     <h2>Capítulo 1: El cuerpo como sistema inteligente</h2>
     <p>El error moderno no es la falta de ejercicio, sino la desconexión del cuerpo. SUPER HUMAN plantea que el movimiento no es una tarea, sino un lenguaje biológico.</p>
-    
+
     <p>Cuando aprendes a escuchar señales internas —fatiga, energía, tensión— el entrenamiento deja de ser forzado y se convierte en una estrategia de optimización humana.</p>
 `,
 
 sample_content_en: `
     <h2>Chapter 1: The body as an intelligent system</h2>
     <p>The modern mistake is not lack of exercise, but disconnection from the body. SUPER HUMAN proposes that movement is not a task, but a biological language.</p>
-    
+
     <p>When you learn to listen to internal signals—fatigue, energy, tension—training stops being forced and becomes a strategy for human optimization.</p>
 `,
             featured: true,
@@ -424,7 +446,7 @@ benefits_en: [
 sample_content_es: `
     <h2>Capítulo 1: La Comunicación como Puente, no como Barrera</h2>
     <p>La mayoría de los conflictos en la vida no provienen de lo que decimos, sino de cómo lo decimos y cómo es percibido por los demás. Comunicar no es solo transmitir información, sino crear entendimiento.</p>
-    
+
     <p>En este viaje de 21 días, aprenderás a transformar tu forma de expresarte para que tus palabras construyan puentes en lugar de muros, generando conexiones más profundas y auténticas.</p>
 `,
             featured: true,
@@ -441,37 +463,39 @@ let shoppingCart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
 let currentReadingBook = null;
 let readingFontSize = 100;
 
-// Stripe Payment Link
+// Stripe Payment Link — canal propio ARCUS
 const STRIPE_PAYMENT_LINK = 'https://buy.stripe.com/28E6oI8YW2C03yW4ZPfQI00';
+const READING_APP_URL = 'https://arcus-reading.vercel.app/';
+const BOOKS2READ_URL = 'https://books2read.com/editorialarcus';
 
 // ================ INICIALIZACIÓN ================
 document.addEventListener('DOMContentLoaded', function() {
     try {
         // Cargar catálogo
         renderBooks();
-        
+
         // Actualizar contadores
         updateCartCount();
 
-        
+
         // Configurar event listeners
         setupEventListeners();
-        
+
         // Configurar idioma
         setupLanguage();
-        
+
         // Inicializar búsqueda
         setupSearch();
-        
+
         // Configurar formulario de contacto (función eliminada/no definida)
         // setupContactForm();
-        
+
         // Implementar lazy loading de imágenes
         setupLazyLoading();
-        
+
         // Verificar si hay compra pendiente (regreso de Stripe)
         checkPendingPurchase();
-        
+
     } catch (error) {
         console.error('Error durante la inicialización:', error);
         showNotification('Error al cargar la aplicación', 'error');
@@ -492,7 +516,7 @@ function setupLazyLoading() {
             }
         });
     });
-    
+
     // Observar todas las imágenes lazy-load
     document.querySelectorAll('.lazy-load').forEach(img => {
         imageObserver.observe(img);
@@ -502,18 +526,18 @@ function setupLazyLoading() {
 // ================ VERIFICAR COMPRA PENDIENTE ================
 function checkPendingPurchase() {
     const pendingPurchase = sessionStorage.getItem('pendingPurchase');
-    
+
     if (pendingPurchase) {
         try {
             const purchase = JSON.parse(pendingPurchase);
             const timeDiff = Date.now() - purchase.timestamp;
-            
+
             // Si han pasado menos de 30 minutos
             if (timeDiff < 30 * 60 * 1000) {
                 // Mostrar mensaje de bienvenida
                 showNotification('¡Bienvenido de vuelta! Si completaste tu compra, recibirás un email pronto.', 'info');
             }
-            
+
             // Limpiar compra pendiente
             sessionStorage.removeItem('pendingPurchase');
         } catch (error) {
@@ -526,19 +550,19 @@ function checkPendingPurchase() {
 function renderBooks(filterCategory = 'all', sortBy = 'featured') {
     const container = document.getElementById('books-grid');
     const noResults = document.getElementById('no-results');
-    
+
     if (!container) return;
-    
+
     try {
         // Filtrar libros
         let filteredBooks = booksCatalog.books;
-        
+
         if (filterCategory !== 'all') {
-            filteredBooks = filteredBooks.filter(book => 
+            filteredBooks = filteredBooks.filter(book =>
                 book.categories.includes(filterCategory)
             );
         }
-        
+
         // Ordenar libros
         filteredBooks.sort((a, b) => {
             switch(sortBy) {
@@ -557,31 +581,31 @@ function renderBooks(filterCategory = 'all', sortBy = 'featured') {
                     return b.rating - a.rating;
             }
         });
-        
+
         // Limpiar contenedor
         container.innerHTML = '';
-        
+
         // Mostrar mensaje si no hay resultados
         if (filteredBooks.length === 0) {
             if (noResults) noResults.classList.remove('hidden');
             return;
         }
-        
+
         if (noResults) noResults.classList.add('hidden');
-        
+
         // Renderizar cada libro
         filteredBooks.forEach(book => {
             const bookElement = createBookCard(book);
             container.appendChild(bookElement);
         });
-        
+
         // Actualizar contador
         const bookCounter = document.getElementById('book-counter');
         if (bookCounter) {
-            bookCounter.innerHTML = 
+            bookCounter.innerHTML =
                 `Mostrando <span class="font-bold" style="color:var(--accent-gold)">${filteredBooks.length}</span> libros`;
         }
-        
+
     } catch (error) {
         console.error('Error al renderizar libros:', error);
         showNotification('Error al cargar los libros', 'error');
@@ -594,25 +618,25 @@ function createBookCard(book) {
     div.className = 'book-card';
     div.innerHTML = `
         <div class="book-cover relative">
-            <img src="${currentLanguage === 'es' ? book.cover_es : book.cover_en}" 
-                 alt="${currentLanguage === 'es' ? book.title_es : book.title_en}" 
+            <img src="${currentLanguage === 'es' ? book.cover_es : book.cover_en}"
+                 alt="${currentLanguage === 'es' ? book.title_es : book.title_en}"
                  class="w-full h-64 object-contain">
-            
+
             <!-- Badges -->
             <div class="absolute top-2 left-2 flex flex-col items-start gap-1">
-                ${book.bestseller ? 
-                    `<span class="bestseller-badge px-2 py-0.5 text-[0.6rem] rounded-full shadow-lg"><i class="fas fa-fire mr-1"></i>${t('badge_bestseller')}</span>` : 
+                ${book.bestseller ?
+                    `<span class="bestseller-badge px-2 py-0.5 text-[0.6rem] rounded-full shadow-lg"><i class="fas fa-fire mr-1"></i>${t('badge_bestseller')}</span>` :
                     ''}
-                ${book.featured ? 
-                    `<span style="background:rgba(0,212,170,0.2);color:var(--accent-teal);border:1px solid var(--border-teal);font-size:0.6rem;font-weight:700;padding:0.15rem 0.5rem;border-radius:999px">${t('badge_featured')}</span>` : 
+                ${book.featured ?
+                    `<span style="background:rgba(0,212,170,0.2);color:var(--accent-teal);border:1px solid var(--border-teal);font-size:0.6rem;font-weight:700;padding:0.15rem 0.5rem;border-radius:999px">${t('badge_featured')}</span>` :
                     ''}
             </div>
         </div>
-        
+
         <div class="p-5">
             <!-- Título y precio -->
             <div class="flex justify-between items-start mb-3 gap-2">
-                <h3 class="font-head font-bold text-base cursor-pointer line-clamp-2 transition-colors flex-1" 
+                <h3 class="font-head font-bold text-base cursor-pointer line-clamp-2 transition-colors flex-1"
                     style="color: var(--text-primary);"
                     onmouseover="this.style.color='var(--accent-gold)'"
                     onmouseout="this.style.color='var(--text-primary)'"
@@ -624,12 +648,12 @@ function createBookCard(book) {
                     <div class="text-xs" style="color:var(--text-dim)">USD</div>
                 </div>
             </div>
-            
+
             <!-- Subtítulo -->
             <p class="text-sm line-clamp-2 mb-4" style="color:var(--text-muted)">
                 ${currentLanguage === 'es' ? book.subtitle_es : book.subtitle_en}
             </p>
-            
+
             <!-- Rating -->
             <div class="flex items-center mb-4">
                 <div class="rating-stars mr-2 text-sm">
@@ -637,14 +661,23 @@ function createBookCard(book) {
                 </div>
                 <span class="text-xs" style="color:var(--text-dim)">${book.review_count} ${t('reviews')}</span>
             </div>
-            
+
             <!-- Categorías -->
-            <div class="flex flex-wrap gap-1.5 mb-5">
-                ${book.categories.map(cat => 
+            <div class="flex flex-wrap gap-1.5 mb-3">
+                ${book.categories.map(cat =>
                     `<span class="category-badge">${cat}</span>`
                 ).join('')}
             </div>
-            
+            <!-- Formato / externa según precio -->
+            ${book.price === 0 ?
+                `<div class="mb-4 inline-flex items-center gap-1.5 text-[11px] px-2.5 py-1 rounded-full" style="background:rgba(245,166,35,0.08);border:1px solid var(--border-gold);color:var(--accent-gold)"><i class="fas fa-download text-xs"></i> ${currentLanguage==='es' ? 'Descarga gratuita' : 'Free download'}</div>`
+                :
+                `<div class="mb-4 flex flex-col gap-1.5">
+                    <div class="inline-flex items-center gap-1.5 text-[11px] px-2.5 py-1 rounded-full w-fit" style="background:rgba(0,212,170,0.08);border:1px solid var(--border-teal);color:var(--accent-teal)"><i class="fas fa-book-open text-xs"></i> ${currentLanguage==='es' ? 'Solo eBook en ARCUS Reader' : 'eBook only on ARCUS Reader'}</div>
+                    <a href="${BOOKS2READ_URL}" target="_blank" rel="noopener noreferrer" class="text-[11px] hover:underline flex items-center gap-1" style="color:var(--text-dim)"><i class="fas fa-external-link-alt text-[10px]"></i> ${currentLanguage==='es' ? 'También en Amazon, Apple y más (externo)' : 'Also on Amazon, Apple & more (external)'}</a>
+                </div>`
+            }
+
             <!-- Botones -->
             <div class="flex gap-2">
                 <button class="view-btn flex-1 btn-gradient font-bold py-2.5 rounded-xl text-sm"
@@ -652,14 +685,14 @@ function createBookCard(book) {
                         aria-label="Ver detalles de ${currentLanguage === 'es' ? book.title_es : book.title_en}">
                     <i class="fas fa-eye mr-1.5"></i>${t('btn_view_details')}
                 </button>
-                ${book.price === 0 ? 
+                ${book.price === 0 ?
                     `<button class="cart-btn w-10 h-10 flex items-center justify-center rounded-xl transition-all"
                             style="background:rgba(0,212,170,0.1);color:var(--accent-teal);border:1px solid var(--accent-teal)"
                             onclick="abrirModalGratis()"
                             aria-label="Obtener Gratis">
                         <i class="fas fa-gift text-sm"></i>
-                    </button>` 
-                : 
+                    </button>`
+                :
                     `<button class="cart-btn w-10 h-10 flex items-center justify-center rounded-xl transition-all"
                             style="background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--text-muted)"
                             onmouseover="this.style.borderColor='var(--accent-teal)';this.style.color='var(--accent-teal)'"
@@ -673,7 +706,7 @@ function createBookCard(book) {
             </div>
         </div>
     `;
-    
+
     return div;
 }
 
@@ -682,20 +715,20 @@ function generateStars(rating) {
     let stars = '';
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 >= 0.5;
-    
+
     for (let i = 0; i < fullStars; i++) {
         stars += '<i class="fas fa-star"></i>';
     }
-    
+
     if (hasHalfStar) {
         stars += '<i class="fas fa-star-half-alt"></i>';
     }
-    
+
     const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
     for (let i = 0; i < emptyStars; i++) {
         stars += '<i class="far fa-star"></i>';
     }
-    
+
     return stars;
 }
 
@@ -703,12 +736,12 @@ function generateStars(rating) {
 function updateBookCounter() {
     const container = document.getElementById('books-grid');
     if (!container) return;
-    
+
     const bookCount = container.children.length;
     const bookCounter = document.getElementById('book-counter');
-    
+
     if (bookCounter) {
-        bookCounter.innerHTML = 
+        bookCounter.innerHTML =
             `${t('showing_books')} <span class="font-bold">${bookCount}</span> ${t('books_text')}`;
     }
 }
@@ -717,28 +750,28 @@ function updateBookCounter() {
 function openBookModal(bookId) {
     const book = booksCatalog.books.find(b => b.id === bookId);
     if (!book) return;
-    
+
     try {
         // Actualizar contenido del modal
-        document.getElementById('modal-title').textContent = 
+        document.getElementById('modal-title').textContent =
             currentLanguage === 'es' ? book.title_es : book.title_en;
-        document.getElementById('modal-subtitle').textContent = 
+        document.getElementById('modal-subtitle').textContent =
             currentLanguage === 'es' ? book.subtitle_es : book.subtitle_en;
-        document.getElementById('modal-description').textContent = 
+        document.getElementById('modal-description').textContent =
             currentLanguage === 'es' ? book.description_es : book.description_en;
-        document.getElementById('modal-cover').src = 
+        document.getElementById('modal-cover').src =
             currentLanguage === 'es' ? book.cover_es : book.cover_en;
         document.getElementById('modal-price').textContent = `$${book.price}`;
         document.getElementById('modal-rating').textContent = book.rating;
         document.getElementById('modal-pages').textContent = `${book.pages} páginas`;
         document.getElementById('modal-languages').textContent = 'Disponible en español o inglés, según la naturaleza de cada obra';
-        document.getElementById('modal-date').textContent = 
-            new Date(book.publish_date).toLocaleDateString('es-ES', { 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
+        document.getElementById('modal-date').textContent =
+            new Date(book.publish_date).toLocaleDateString('es-ES', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
             });
-        
+
         // Actualizar beneficios
         const benefitsList = document.getElementById('modal-benefits');
         benefitsList.innerHTML = '';
@@ -753,7 +786,7 @@ function openBookModal(bookId) {
             `;
             benefitsList.appendChild(li);
         });
-        
+
         // Actualizar categorías
         const categoriesContainer = document.getElementById('modal-categories');
         categoriesContainer.innerHTML = '';
@@ -763,11 +796,11 @@ function openBookModal(bookId) {
             span.textContent = cat;
             categoriesContainer.appendChild(span);
         });
-        
+
         // Configurar botones del modal
         const modalBuyBtn = document.getElementById('modal-buy');
         const modalAddCartBtn = document.getElementById('modal-add-to-cart');
-        
+
         if (book.price === 0) {
             modalBuyBtn.innerHTML = `<i class="fas fa-gift mr-2"></i>Obtener Gratis`;
             modalBuyBtn.onclick = () => {
@@ -788,17 +821,36 @@ function openBookModal(bookId) {
                 showNotification('Libro añadido al carrito', 'success');
             };
         }
-        
+
         document.getElementById('modal-sample').onclick = () => {
             openReadingMode(bookId);
         };
-        
 
-        
+        // === Formatos dual + externa (Books2Read) — solo pago vs gratis descargable ===
+        const paidBox = document.getElementById('modal-format-paid');
+        const freeBox = document.getElementById('modal-format-free');
+        const externalBox = document.getElementById('external-stores-block');
+        // Actualizar enlaces dinámicos por si cambian constantes
+        if (externalBox) {
+            const extLink = externalBox.querySelector('a[href*="books2read"]');
+            if (extLink) extLink.href = BOOKS2READ_URL;
+        }
+        const readerLinks = document.querySelectorAll('#modal-format-paid a[href*="arcus-reading"]');
+        readerLinks.forEach(a => a.href = READING_APP_URL);
+        if (book.price === 0) {
+            if (paidBox) paidBox.classList.add('hidden');
+            if (freeBox) freeBox.classList.remove('hidden');
+            if (externalBox) externalBox.classList.add('hidden');
+        } else {
+            if (paidBox) paidBox.classList.remove('hidden');
+            if (freeBox) freeBox.classList.add('hidden');
+            if (externalBox) externalBox.classList.remove('hidden');
+        }
+
         // Mostrar modal
         document.getElementById('book-modal').classList.remove('hidden');
         document.body.style.overflow = 'hidden';
-        
+
     } catch (error) {
         console.error('Error al abrir modal de libro:', error);
         showNotification('Error al mostrar detalles del libro', 'error');
@@ -815,17 +867,17 @@ function closeBookModal() {
 function openReadingMode(bookId) {
     const book = booksCatalog.books.find(b => b.id === bookId);
     if (!book) return;
-    
+
     try {
         currentReadingBook = bookId;
-        
+
         // Actualizar contenido
-        document.getElementById('reading-title').textContent = 
+        document.getElementById('reading-title').textContent =
             currentLanguage === 'es' ? book.title_es : book.title_en;
-        document.getElementById('reading-content').innerHTML = 
+        document.getElementById('reading-content').innerHTML =
             currentLanguage === 'es' ? book.sample_content_es : book.sample_content_en;
         document.getElementById('reading-price').textContent = `$${book.price}`;
-        
+
         // Configurar botón de compra
         const readingBuyBtn = document.getElementById('reading-buy-btn');
         if (book.price === 0) {
@@ -842,15 +894,15 @@ function openReadingMode(bookId) {
                 proceedToCheckout();
             };
         }
-        
+
         // Mostrar modal
         document.getElementById('reading-modal').classList.remove('hidden');
         document.body.style.overflow = 'hidden';
-        
+
         // Resetear tamaño de fuente
         readingFontSize = 100;
         updateReadingFontSize();
-        
+
     } catch (error) {
         console.error('Error al abrir modo lectura:', error);
         showNotification('Error al abrir muestra del libro', 'error');
@@ -883,10 +935,10 @@ function addToCart(bookId) {
         if (!book) {
             throw new Error('Libro no encontrado');
         }
-        
+
         // Verificar si el libro ya está en el carrito
         const existingItem = shoppingCart.find(item => item.id === bookId);
-        
+
         if (existingItem) {
             existingItem.quantity += 1;
         } else {
@@ -899,26 +951,26 @@ function addToCart(bookId) {
                 cover: currentLanguage === 'es' ? book.cover_es : book.cover_en
             });
         }
-        
+
         // Guardar en localStorage
         localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));
-        
+
         // Actualizar UI
         updateCartCount();
         showNotification('Libro añadido al carrito', 'success');
-        
+
         // Animación del botón de carrito
         const cartBtn = document.getElementById('cart-btn');
         if (cartBtn) {
             cartBtn.classList.add('cart-btn-active');
             setTimeout(() => cartBtn.classList.remove('cart-btn-active'), 300);
         }
-        
+
         // Si el carrito está abierto, actualizarlo
         if (!document.getElementById('cart-modal').classList.contains('hidden')) {
             renderCartItems();
         }
-        
+
     } catch (error) {
         console.error('Error al añadir al carrito:', error);
         showNotification('Error al añadir el libro al carrito', 'error');
@@ -939,7 +991,7 @@ function updateCartCount() {
     if (cartCount) {
         cartCount.textContent = totalItems;
     }
-    
+
     // Actualizar resumen
     const itemText = totalItems === 1 ? 'item' : 'items';
     const cartSummary = document.getElementById('cart-summary');
@@ -952,9 +1004,9 @@ function renderCartItems() {
     const container = document.getElementById('cart-items');
     const emptyCart = document.getElementById('empty-cart');
     const checkoutBtn = document.getElementById('checkout-btn');
-    
+
     if (!container) return;
-    
+
     if (shoppingCart.length === 0) {
         container.innerHTML = '';
         if (emptyCart) emptyCart.classList.remove('hidden');
@@ -962,27 +1014,27 @@ function renderCartItems() {
         updateCartSummary();
         return;
     }
-    
+
     if (emptyCart) emptyCart.classList.add('hidden');
     if (checkoutBtn) checkoutBtn.disabled = false;
-    
+
     let html = '';
     let subtotal = 0;
-    
+
     shoppingCart.forEach(item => {
         const itemTotal = item.price * item.quantity;
         subtotal += itemTotal;
-        
+
         html += `
             <div class="cart-item flex items-center py-4 gap-3" data-book-id="${item.id}" style="border-bottom:1px solid var(--border)">
-                <img src="${item.cover}" 
-                     alt="${currentLanguage === 'es' ? item.title_es : item.title_en}" 
+                <img src="${item.cover}"
+                     alt="${currentLanguage === 'es' ? item.title_es : item.title_en}"
                      class="w-14 h-18 object-cover rounded-lg shrink-0" style="height:4.5rem">
                 <div class="flex-1 min-w-0">
                     <h4 class="font-head font-bold text-sm text-white line-clamp-2">${currentLanguage === 'es' ? item.title_es : item.title_en}</h4>
                     <div class="flex justify-between items-center mt-2">
                         <div class="flex items-center gap-2">
-                            <button class="w-6 h-6 rounded flex items-center justify-center transition-all" 
+                            <button class="w-6 h-6 rounded flex items-center justify-center transition-all"
                                     style="background:rgba(255,255,255,0.07);color:var(--text-muted)"
                                     onclick="updateQuantity(${item.id}, -1)"
                                     aria-label="Reducir cantidad">
@@ -1010,7 +1062,7 @@ function renderCartItems() {
             </div>
         `;
     });
-    
+
     container.innerHTML = html;
     updateCartSummary(subtotal);
 }
@@ -1018,9 +1070,9 @@ function renderCartItems() {
 function updateQuantity(bookId, delta) {
     const item = shoppingCart.find(item => item.id === bookId);
     if (!item) return;
-    
+
     item.quantity += delta;
-    
+
     if (item.quantity <= 0) {
         removeFromCart(bookId);
     } else {
@@ -1033,11 +1085,11 @@ function updateQuantity(bookId, delta) {
 function updateCartSummary(subtotal = 0) {
     const tax = subtotal * 0.08; // 8% de impuesto
     const total = subtotal + tax;
-    
+
     const cartSubtotal = document.getElementById('cart-subtotal');
     const cartTax = document.getElementById('cart-tax');
     const cartTotal = document.getElementById('cart-total');
-    
+
     if (cartSubtotal) cartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
     if (cartTax) cartTax.textContent = `$${tax.toFixed(2)}`;
     if (cartTotal) cartTotal.textContent = `$${total.toFixed(2)}`;
@@ -1062,13 +1114,13 @@ function proceedToCheckout() {
         showNotification(t('cart_empty'), 'info');
         return;
     }
-    
+
     // Si el usuario ya está logueado, vamos directo a Stripe (con registro de compra)
     if (currentUser) {
         proceedToStripe();
         return;
     }
-    
+
     // Si NO está logueado, mostrar el modal de registro/invitado
     closeCart(); // Cerrar modal del carrito
     openPreCheckoutModal(); // Mostrar modal "¿Quieres registrarte?"
@@ -1086,7 +1138,7 @@ async function proceedToStripe() {
 
         // Mostrar loading
         showNotification(t('redirecting_stripe'), 'info');
-        
+
         // Si está autenticado, ESPERAR a que se guarde en Firestore
         if (currentUser) {
             try {
@@ -1096,10 +1148,10 @@ async function proceedToStripe() {
                 console.error('⚠️ Error guardando compra, pero procediendo:', e);
             }
         }
-        
+
         // Redirigir a Stripe
         window.location.href = STRIPE_PAYMENT_LINK;
-        
+
     } catch (error) {
         console.error('Error al proceder al checkout:', error);
         showNotification('Error al procesar el checkout', 'error');
@@ -1122,29 +1174,29 @@ function setupLanguage() {
     const langEnBtn = document.getElementById('lang-en');
     const mobileLangEsBtn = document.getElementById('mobile-lang-es');
     const mobileLangEnBtn = document.getElementById('mobile-lang-en');
-    
+
     if (langEsBtn) langEsBtn.onclick = () => changeLanguage('es');
     if (langEnBtn) langEnBtn.onclick = () => changeLanguage('en');
-    if (mobileLangEsBtn) mobileLangEsBtn.onclick = () => changeLanguage('es');
-    if (mobileLangEnBtn) mobileLangEnBtn.onclick = () => changeLanguage('en');
-    
+    if (mobileLangEsBtn) mobileLangEsBtn.onclick = () => { changeLanguage('es'); closeMobileMenu(); };
+    if (mobileLangEnBtn) mobileLangEnBtn.onclick = () => { changeLanguage('en'); closeMobileMenu(); };
+
     // Establecer idioma inicial
     changeLanguage('es');
 }
 
 function changeLanguage(lang) {
     currentLanguage = lang;
-    
+
     // Actualizar botones de idioma (Desktop)
     const langEsBtn = document.getElementById('lang-es');
     const langEnBtn = document.getElementById('lang-en');
-    
+
     if (langEsBtn) {
-        langEsBtn.className = 
+        langEsBtn.className =
             `px-2 py-1 text-[10px] font-bold rounded-full transition-all ${lang === 'es' ? 'bg-primary text-white shadow-sm' : 'text-gray-400 hover:text-primary'}`;
     }
     if (langEnBtn) {
-        langEnBtn.className = 
+        langEnBtn.className =
             `px-2 py-1 text-[10px] font-bold rounded-full transition-all ${lang === 'en' ? 'bg-primary text-white shadow-sm' : 'text-gray-400 hover:text-primary'}`;
     }
 
@@ -1153,35 +1205,56 @@ function changeLanguage(lang) {
     const mobileLangEnBtn = document.getElementById('mobile-lang-en');
 
     if (mobileLangEsBtn) {
-        mobileLangEsBtn.className = 
+        mobileLangEsBtn.className =
             `px-6 py-2 rounded-full font-bold transition-all ${lang === 'es' ? 'bg-primary text-white shadow-lg' : 'bg-gray-100 text-gray-500'}`;
     }
     if (mobileLangEnBtn) {
-        mobileLangEnBtn.className = 
+        mobileLangEnBtn.className =
             `px-6 py-2 rounded-full font-bold transition-all ${lang === 'en' ? 'bg-primary text-white shadow-lg' : 'bg-gray-100 text-gray-500'}`;
     }
-    
-    // ===== TRADUCIR NAVEGACIÓN =====
-    const navLinks = {
-        'nav-catalog': 'nav_catalog',
 
-        'nav-author': 'nav_author',
-        'nav-testimonials': 'nav_testimonials',
-        'nav-contact': 'nav_contact'
-    };
-    
-    Object.entries(navLinks).forEach(([id, key]) => {
-        const elem = document.querySelector(`a[href="#${id.replace('nav-', '')}"]`);
-        if (elem) elem.textContent = t(key);
+    // ===== TRADUCIR NAVEGACIÓN =====
+    document.querySelectorAll('[data-nav-key]').forEach((elem) => {
+        const key = elem.dataset.navKey;
+        const label = elem.querySelector('.nav-label');
+        const translated = t(key);
+
+        if (label) {
+            label.textContent = translated;
+        } else {
+            elem.textContent = translated;
+        }
     });
-    
+
+    document.querySelectorAll('[data-ui-key]').forEach((elem) => {
+        const key = elem.dataset.uiKey;
+        const label = elem.querySelector('.nav-label');
+        const translated = t(key);
+
+        if (label) {
+            label.textContent = translated;
+        } else {
+            elem.textContent = translated;
+        }
+    });
+
+    document.querySelectorAll('[data-aria-key]').forEach((elem) => {
+        const key = elem.dataset.ariaKey;
+        elem.setAttribute('aria-label', t(key));
+    });
+
+    const userName = document.getElementById('user-name');
+    if (userName && (userName.textContent === 'Usuario' || userName.textContent === 'User')) {
+        userName.textContent = t('nav_user_default');
+    }
+
     // Traducir placeholders de búsqueda
     const searchInputs = ['search-input', 'mobile-search', 'mobile-search-hero'];
     searchInputs.forEach(id => {
         const elem = document.getElementById(id);
         if (elem) elem.placeholder = t('search_placeholder');
     });
-    
+
     // ===== TRADUCIR HERO SECTION =====
     const heroSection = document.querySelector('.hero-section');
     if (heroSection) {
@@ -1193,7 +1266,7 @@ function changeLanguage(lang) {
                 headline.innerHTML = `Decode what<br>\n                        <span class="text-gold-gradient font-serif italic">others don't want</span><br>\n                        you to know.`;
             }
         }
-        
+
         const heroSubtitle = document.getElementById('hero-subtitle');
         if (heroSubtitle) {
             if (lang === 'es') {
@@ -1202,10 +1275,10 @@ function changeLanguage(lang) {
                 heroSubtitle.textContent = 'Books that awaken uncomfortable questions and reveal new perspectives.';
             }
         }
-        
+
         const heroCatalogBtn = heroSection.querySelector('a[href="#catalogo"]');
         if (heroCatalogBtn) heroCatalogBtn.textContent = t('hero_cta_catalog');
-        
+
         const heroAuthorBtn = document.getElementById('video-btn');
         if (heroAuthorBtn) {
              heroAuthorBtn.innerHTML = `${lang === 'es' ? 'Conocer al Autor' : 'Meet the Author'} <i class="fas fa-arrow-down transform -rotate-45"></i>`;
@@ -1217,26 +1290,26 @@ function changeLanguage(lang) {
             statsLabels[0].textContent = t('hero_readers');
             statsLabels[1].textContent = 'Rating';
         }
-        
+
         // Badge
         const badge = heroSection.querySelector('.uppercase');
         if (badge) badge.textContent = lang === 'es' ? 'Nueva Colección 2026' : 'New Collection 2026';
     }
-    
+
     // ===== TRADUCIR CATÁLOGO =====
     const catalogTitle = document.querySelector('#catalogo h2');
     if (catalogTitle) catalogTitle.textContent = t('catalog_title');
-    
+
     const catalogSubtitle = document.querySelector('#catalogo p.text-gray-600');
     if (catalogSubtitle) catalogSubtitle.textContent = t('catalog_subtitle');
-    
+
     // Traducir filtros
     const filterButtons = document.querySelectorAll('.filter-btn');
     const filterKeys = ['filter_all', 'filter_mindfulness', 'filter_nutrition', 'filter_exercise', 'filter_wellness'];
     filterButtons.forEach((btn, index) => {
         if (filterKeys[index]) btn.textContent = t(filterKeys[index]);
     });
-    
+
     // Traducir select de ordenamiento
     const sortSelect = document.getElementById('sort-select');
     if (sortSelect) {
@@ -1245,98 +1318,98 @@ function changeLanguage(lang) {
         sortSelect.options[2].text = t('sort_rating');
         sortSelect.options[3].text = t('sort_title');
     }
-    
+
     // Traducir mensaje sin resultados
     const noResultsTitle = document.querySelector('#no-results h3');
     const noResultsText = document.querySelector('#no-results p');
     if (noResultsTitle) noResultsTitle.textContent = t('no_results_title');
     if (noResultsText) noResultsText.textContent = t('no_results_text');
-    
+
     // ===== TRADUCIR MODAL DE LIBRO =====
     const modalDescTitle = document.querySelector('#book-modal h4');
     if (modalDescTitle && modalDescTitle.textContent.includes('Descripción') || modalDescTitle.textContent.includes('Description')) {
         modalDescTitle.textContent = t('modal_description');
     }
-    
+
     const modalBenefitsTitle = document.querySelectorAll('#book-modal h4')[1];
     if (modalBenefitsTitle) modalBenefitsTitle.textContent = t('modal_what_learn');
-    
+
     const modalCategoriesTitle = document.querySelectorAll('#book-modal h4')[2];
     if (modalCategoriesTitle) modalCategoriesTitle.textContent = t('modal_categories');
-    
+
     const modalFormatsTitle = document.querySelectorAll('#book-modal h4')[3];
     if (modalFormatsTitle) modalFormatsTitle.textContent = t('modal_formats');
-    
+
     // Traducir botones del modal
     const modalBuyBtn = document.getElementById('modal-buy');
     if (modalBuyBtn) modalBuyBtn.innerHTML = `<i class="fas fa-shopping-cart mr-2"></i>${t('btn_buy_now')}`;
-    
+
     const modalAddCartBtn = document.getElementById('modal-add-to-cart');
     if (modalAddCartBtn) modalAddCartBtn.innerHTML = `<i class="fas fa-plus mr-2"></i>${t('btn_add_cart')}`;
-    
+
     const modalSampleBtn = document.getElementById('modal-sample');
     if (modalSampleBtn) modalSampleBtn.innerHTML = `<i class="fas fa-book-open mr-2"></i>${t('btn_read_sample')}`;
-    
+
     // ===== TRADUCIR MODO LECTURA =====
     const readingSample = document.querySelector('#reading-modal .text-gray-600.text-sm');
     if (readingSample) readingSample.textContent = t('reading_free_sample');
-    
+
     const readingLikeText = document.querySelector('#reading-modal p.text-gray-600');
     if (readingLikeText && readingLikeText.textContent.includes('gustó')) {
         readingLikeText.innerHTML = `${t('reading_like_sample')} <br class="sm:hidden">${t('reading_get_full')}`;
     }
-    
+
     const readingCloseBtn = document.querySelector('#reading-modal button:not(#reading-buy-btn)');
     if (readingCloseBtn && readingCloseBtn.textContent === 'Cerrar') {
         readingCloseBtn.textContent = t('btn_close');
     }
-    
+
     // ===== TRADUCIR CARRITO =====
     const cartTitle = document.getElementById('cart-title');
     if (cartTitle) cartTitle.textContent = t('cart_title');
-    
+
     const emptyCartText = document.querySelector('#empty-cart p');
     if (emptyCartText) emptyCartText.textContent = t('cart_empty');
-    
+
     // Traducir labels del carrito
     const cartLabels = document.querySelectorAll('#cart-modal .text-gray-600');
     cartLabels.forEach(label => {
         if (label.textContent === 'Subtotal') label.textContent = t('cart_subtotal');
         if (label.textContent === 'Impuestos' || label.textContent === 'Taxes') label.textContent = t('cart_taxes');
     });
-    
+
     const cartTotalLabel = document.querySelector('#cart-modal .text-lg.font-bold span');
     if (cartTotalLabel && (cartTotalLabel.textContent === 'Total')) {
         cartTotalLabel.textContent = t('cart_total');
     }
-    
+
     // Traducir botones del carrito
     const checkoutBtn = document.getElementById('checkout-btn');
     if (checkoutBtn) checkoutBtn.textContent = t('btn_checkout');
-    
+
     const continueShoppingBtns = document.querySelectorAll('#cart-modal button');
     continueShoppingBtns.forEach(btn => {
         if (btn.textContent.includes('Seguir Comprando') || btn.textContent.includes('Continue Shopping')) {
             btn.textContent = t('btn_continue_shopping');
         }
     });
-    
+
     const paymentMethodsText = document.querySelector('#cart-modal p.text-gray-600.text-sm.mb-3');
     if (paymentMethodsText) paymentMethodsText.textContent = t('payment_methods');
-    
+
     // ===== RE-RENDERIZAR CONTENIDO DINÁMICO =====
     renderBooks();
-    
+
     // Actualizar carrito si está abierto
     if (!document.getElementById('cart-modal').classList.contains('hidden')) {
         renderCartItems();
     }
-    
+
     // Actualizar modo lectura si está abierto
     if (currentReadingBook) {
         openReadingMode(currentReadingBook);
     }
-    
+
     // Actualizar contador de libros
     updateBookCounter();
 }
@@ -1346,68 +1419,68 @@ function setupSearch() {
     const searchInput = document.getElementById('search-input');
     const mobileSearch = document.getElementById('mobile-search');
     const mobileSearchHero = document.getElementById('mobile-search-hero');
-    
+
     const performSearch = (query) => {
         if (query.length < 2) {
             renderBooks();
             return;
         }
-        
+
         const filtered = booksCatalog.books.filter(book => {
             const title = currentLanguage === 'es' ? book.title_es : book.title_en;
             const subtitle = currentLanguage === 'es' ? book.subtitle_es : book.subtitle_en;
             const description = currentLanguage === 'es' ? book.description_es : book.description_en;
-            
+
             return title.toLowerCase().includes(query.toLowerCase()) ||
                    subtitle.toLowerCase().includes(query.toLowerCase()) ||
                    description.toLowerCase().includes(query.toLowerCase()) ||
                    book.categories.some(cat => cat.toLowerCase().includes(query.toLowerCase()));
         });
-        
+
         // Mostrar resultados filtrados
         const container = document.getElementById('books-grid');
         const noResults = document.getElementById('no-results');
-        
+
         if (filtered.length === 0) {
             container.innerHTML = '';
             noResults.classList.remove('hidden');
             return;
         }
-        
+
         noResults.classList.add('hidden');
         container.innerHTML = '';
-        
+
         filtered.forEach(book => {
             const bookElement = createBookCard(book);
             container.appendChild(bookElement);
         });
-        
+
         const bookCounter = document.getElementById('book-counter');
         if (bookCounter) {
-            bookCounter.innerHTML = 
+            bookCounter.innerHTML =
                 `Mostrando <span class="font-bold">${filtered.length}</span> de ${booksCatalog.books.length} libros`;
         }
     };
-    
+
     // Debounce para búsqueda
     let searchTimeout;
     const debouncedSearch = (query) => {
         clearTimeout(searchTimeout);
         searchTimeout = setTimeout(() => performSearch(query), 300);
     };
-    
+
     if (searchInput) {
         searchInput.addEventListener('input', (e) => {
             debouncedSearch(e.target.value);
         });
     }
-    
+
     if (mobileSearch) {
         mobileSearch.addEventListener('input', (e) => {
             debouncedSearch(e.target.value);
         });
     }
-    
+
     if (mobileSearchHero) {
         mobileSearchHero.addEventListener('input', (e) => {
             debouncedSearch(e.target.value);
@@ -1423,24 +1496,24 @@ function setupEventListeners() {
     document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             const category = this.dataset.category;
-            
+
             // Actualizar botón activo
             document.querySelectorAll('.filter-btn').forEach(b => {
                 b.classList.remove('bg-primary', 'text-white');
                 b.classList.add('bg-gray-100', 'text-gray-700', 'hover:bg-gray-200');
                 b.setAttribute('aria-pressed', 'false');
             });
-            
+
             this.classList.remove('bg-gray-100', 'text-gray-700', 'hover:bg-gray-200');
             this.classList.add('bg-primary', 'text-white');
             this.setAttribute('aria-pressed', 'true');
-            
+
             // Aplicar filtro
             const sortBy = document.getElementById('sort-select').value;
             renderBooks(category, sortBy);
         });
     });
-    
+
     // Ordenar
     const sortSelect = document.getElementById('sort-select');
     if (sortSelect) {
@@ -1450,38 +1523,69 @@ function setupEventListeners() {
             renderBooks(category, this.value);
         });
     }
-    
+
     // Carrito
     const cartBtn = document.getElementById('cart-btn');
     if (cartBtn) {
         cartBtn.addEventListener('click', openCart);
     }
-    
 
-    
-    // Menú móvil
+
+
+    // Menú móvil / colapsable — profesional, funciona en móvil y desktop
     window.toggleMobileMenu = function() {
         const menu = document.getElementById('mobile-menu');
-        if (menu) menu.classList.toggle('hidden');
-    }
-
+        const btn = document.getElementById('mobile-menu-btn');
+        const icon = document.getElementById('mobile-menu-icon');
+        if (!menu) return;
+        const isHidden = menu.classList.contains('hidden');
+        menu.classList.toggle('hidden');
+        if (btn) btn.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+        if (icon) {
+            icon.classList.toggle('fa-bars', !isHidden);
+            icon.classList.toggle('fa-times', isHidden);
+        }
+    };
+    window.closeMobileMenu = function() {
+        const menu = document.getElementById('mobile-menu');
+        const btn = document.getElementById('mobile-menu-btn');
+        const icon = document.getElementById('mobile-menu-icon');
+        if (menu) menu.classList.add('hidden');
+        if (btn) btn.setAttribute('aria-expanded', 'false');
+        if (icon) { icon.classList.remove('fa-times'); icon.classList.add('fa-bars'); }
+    };
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     if (mobileMenuBtn) {
-        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+        // evitar doble listener inline + addEventListener
+        mobileMenuBtn.addEventListener('click', function(e){ e.stopPropagation(); toggleMobileMenu(); });
     }
-    
+    // Compatibilidad con antiguo main-menu
+    window.toggleMainMenu = window.toggleMobileMenu;
+    window.closeMainMenu = window.closeMobileMenu;
+    const mainMenuBtn = document.getElementById('main-menu-btn');
+    if (mainMenuBtn) mainMenuBtn.addEventListener('click', function(e){ e.stopPropagation(); toggleMobileMenu(); });
+    // Cerrar al click fuera del header
+    document.addEventListener('click', function(e){
+        const menu = document.getElementById('mobile-menu');
+        const btn = document.getElementById('mobile-menu-btn') || document.getElementById('main-menu-btn');
+        const header = document.querySelector('header');
+        if (!menu || menu.classList.contains('hidden')) return;
+        if (header && header.contains(e.target)) return;
+        closeMobileMenu();
+    });
+
     // Video
     const videoBtn = document.getElementById('video-btn');
     if (videoBtn) {
         videoBtn.addEventListener('click', openVideoModal);
     }
-    
+
     // Checkout
     const checkoutBtn = document.getElementById('checkout-btn');
     if (checkoutBtn) {
         checkoutBtn.addEventListener('click', proceedToCheckout);
     }
-    
+
     // Cerrar modales al hacer clic fuera
     document.querySelectorAll('.modal-backdrop').forEach(backdrop => {
         backdrop.addEventListener('click', function() {
@@ -1501,7 +1605,7 @@ function setupEventListeners() {
             }
         });
     });
-    
+
     // Cerrar con Escape
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
@@ -1511,6 +1615,7 @@ function setupEventListeners() {
             closeContactModal();
             closeAuthModal();
             closePreCheckoutModal();
+            if (typeof closeMainMenu==='function') closeMainMenu();
         }
     });
 }
@@ -1535,9 +1640,9 @@ function showNotification(message, type = 'info') {
             <span>${message}</span>
         </div>
     `;
-    
+
     document.body.appendChild(notification);
-    
+
     // Remover después de 3 segundos
     setTimeout(() => {
         notification.remove();
@@ -1557,7 +1662,7 @@ async function initializeFirebase() {
         const firebaseModule = await import('./firebase-config.js');
         firebaseAuth = firebaseModule.auth;
         firebaseDB = firebaseModule.db;
-        
+
         // Setup Auth Observer
         firebaseModule.setupAuthObserver(handleAuthStateChange);
         console.log('✅ Firebase initialized');
@@ -1569,7 +1674,7 @@ async function initializeFirebase() {
 // Handle Auth State Changes
 function handleAuthStateChange(authState) {
     currentUser = authState.user;
-    
+
     if (authState.authenticated) {
         showUserMenu(authState.user);
 
@@ -1582,7 +1687,7 @@ function handleAuthStateChange(authState) {
 function showLoginButton() {
     const loginBtn = document.getElementById('login-btn');
     if (loginBtn) loginBtn.classList.remove('hidden');
-    
+
     const userMenu = document.getElementById('user-menu');
     if (userMenu) userMenu.classList.add('hidden');
 }
@@ -1590,13 +1695,13 @@ function showLoginButton() {
 function showUserMenu(user) {
     const loginBtn = document.getElementById('login-btn');
     if (loginBtn) loginBtn.classList.add('hidden');
-    
+
     const userMenu = document.getElementById('user-menu');
     if (userMenu) userMenu.classList.remove('hidden');
-    
+
     const userName = document.getElementById('user-name');
     if (userName) userName.textContent = user.displayName || user.email.split('@')[0];
-    
+
     const userAvatar = document.getElementById('user-avatar');
     if (userAvatar && user.photoURL) {
         userAvatar.src = user.photoURL;
@@ -1629,7 +1734,7 @@ function openAuthModal() {
     // TEMPORAL: Desactivado para probar WhatsApp
     alert("Login desactivado temporalmente para pruebas.");
     return;
-    
+
     const modal = document.getElementById('auth-modal');
     if (modal) {
         modal.classList.remove('hidden');
@@ -1671,7 +1776,7 @@ function openAuthModalFromCheckout() {
 // Guest Checkout
 function continueAsGuest() {
     closePreCheckoutModal();
-    proceedToStripe(); 
+    proceedToStripe();
 }
 
 // ================ AUTH HANDLERS ================
@@ -1680,7 +1785,7 @@ async function handleLogin(e) {
     e.preventDefault();
     const email = document.getElementById('login-email').value;
     const password = document.getElementById('login-password').value;
-    
+
     try {
         const firebaseModule = await import('./firebase-config.js');
         const result = await firebaseModule.loginUser(email, password);
@@ -1701,7 +1806,7 @@ async function handleRegister(e) {
     const name = document.getElementById('register-name').value;
     const email = document.getElementById('register-email').value;
     const password = document.getElementById('register-password').value;
-    
+
     try {
         const firebaseModule = await import('./firebase-config.js');
         const result = await firebaseModule.registerUser(email, password, name);
@@ -1744,30 +1849,30 @@ function handleLogout() {
     import('./firebase-config.js').then(module => {
         module.logoutUser().then(() => {
             showNotification('Sesión cerrada correctamente', 'info');
-            
+
             // 1. Limpiar usuario
             currentUser = null;
-            
+
             // 2. Limpiar datos locales
 
             shoppingCart = [];
 
             // localStorage.removeItem('shoppingCart'); // Si lo guardas
-            
+
             // 3. Actualizar UI
             updateCartCount();
 
-            
+
             // Quitar corazones rojos y resetear vista
-            renderBooks(); 
-            
+            renderBooks();
+
             // 4. Resetear Menú Usuario
             const userMenu = document.getElementById('user-menu');
             if(userMenu) userMenu.classList.add('hidden');
-            
+
             const loginBtn = document.getElementById('login-btn');
             if(loginBtn) loginBtn.classList.remove('hidden');
-            
+
             // Cerrar dropdown si estaba abierto
             const dropdown = document.getElementById('user-dropdown');
             if(dropdown) dropdown.classList.add('hidden');
@@ -1780,7 +1885,7 @@ function handleLogout() {
 async function savePurchaseIntent(userId, cart) {
     try {
         const firebaseModule = await import('./firebase-config.js');
-        
+
         // Calcular desglosede precios
         const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
         const tax = subtotal * 0.08; // 8% tax (ejemplo)
@@ -1814,7 +1919,7 @@ function switchAuthTab(tab) {
     const registerForm = document.getElementById('register-form');
     const loginTab = document.getElementById('login-tab');
     const registerTab = document.getElementById('register-tab');
-    
+
     if (tab === 'login') {
         loginForm.classList.remove('hidden');
         registerForm.classList.add('hidden');
@@ -1835,16 +1940,16 @@ function switchAuthTab(tab) {
 // Initialize on Load
 document.addEventListener('DOMContentLoaded', () => {
     initializeFirebase();
-    
+
     const loginForm = document.getElementById('login-form');
     if (loginForm) loginForm.addEventListener('submit', handleLogin);
-    
+
     const registerForm = document.getElementById('register-form');
     if (registerForm) registerForm.addEventListener('submit', handleRegister);
-    
+
     const googleBtn = document.getElementById('google-signin-btn');
     if (googleBtn) googleBtn.addEventListener('click', handleGoogleSignIn);
-    
+
     const userMenuBtn = document.getElementById('user-menu-btn');
     if (userMenuBtn) {
         userMenuBtn.addEventListener('click', () => {
@@ -1861,7 +1966,7 @@ function openHistoryModal() {
     if (modal) {
         modal.classList.remove('hidden');
         document.body.style.overflow = 'hidden';
-        
+
         // Load data immediately
         loadPurchaseHistory();
     }
@@ -1887,7 +1992,7 @@ function closeHistoryModal() {
 async function loadPurchaseHistory() {
     const listContainer = document.getElementById('history-list');
     if (!currentUser || !listContainer) return;
-    
+
     // Spinner
     listContainer.innerHTML = `
         <div class="text-center py-10 text-gray-500">
@@ -1895,11 +2000,11 @@ async function loadPurchaseHistory() {
             <p>Cargando tus compras...</p>
         </div>
     `;
-    
+
     try {
         const firebaseModule = await import('./firebase-config.js');
         const result = await firebaseModule.getUserPurchases(currentUser.uid);
-        
+
         if (result.success && result.purchases.length > 0) {
             renderHistoryList(result.purchases);
         } else {
@@ -1952,31 +2057,31 @@ window.closeVideoModal = function() {
 function renderHistoryList(purchases) {
     const listContainer = document.getElementById('history-list');
     listContainer.innerHTML = '';
-    
+
     // Sort logic
     purchases.sort((a, b) => {
         const dateA = a.purchaseDate ? (a.purchaseDate.seconds || 0) : 0;
         const dateB = b.purchaseDate ? (b.purchaseDate.seconds || 0) : 0;
         return dateB - dateA;
     });
-    
+
     purchases.forEach(purchase => {
         let dateStr = 'Fecha desconocida';
         if (purchase.purchaseDate) {
             try {
                 const dateObj = purchase.purchaseDate.toDate ? purchase.purchaseDate.toDate() : new Date(purchase.purchaseDate);
-                dateStr = dateObj.toLocaleDateString(currentLanguage === 'es' ? 'es-ES' : 'en-US', { 
-                    year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute:'2-digit' 
+                dateStr = dateObj.toLocaleDateString(currentLanguage === 'es' ? 'es-ES' : 'en-US', {
+                    year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute:'2-digit'
                 });
             } catch(e) {}
         }
-        
+
         let statusText = purchase.paymentStatus || 'Desconocido';
         let statusClass = 'bg-gray-100 text-gray-700';
-        
+
         if (statusText === 'completed') { statusText = 'Completado'; statusClass = 'bg-green-100 text-green-700'; }
         else if (statusText === 'pending_stripe_redirect') { statusText = 'Pago Pendiente'; statusClass = 'bg-orange-100 text-orange-700'; }
-        
+
         let itemsHtml = '';
         if (purchase.items) {
             itemsHtml = purchase.items.map(item => `
@@ -2046,12 +2151,19 @@ window.toggleTheme = function() {
     }
 };
 
-// Apply saved theme on load
+// Apply saved theme on load — default now LIGHT as requested
 (function() {
     const savedTheme = localStorage.getItem('arcus-theme');
-    if (savedTheme === 'light') {
+    const icon = document.getElementById('theme-icon');
+    if (savedTheme === 'dark') {
+        document.documentElement.removeAttribute('data-theme');
+        if (icon) {
+            icon.classList.remove('fa-sun');
+            icon.classList.add('fa-moon');
+        }
+    } else {
+        // default light
         document.documentElement.setAttribute('data-theme', 'light');
-        const icon = document.getElementById('theme-icon');
         if (icon) {
             icon.classList.remove('fa-moon');
             icon.classList.add('fa-sun');

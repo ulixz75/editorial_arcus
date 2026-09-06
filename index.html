@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="light">
 <head>
     <meta name="google-site-verification" content="w0qyfBd7gQI31mSq1hZSS7qB3h8xjLP6YSUiZDkfiHo" />
     <!-- Meta tags mejorados para SEO -->
@@ -127,7 +127,7 @@
             inset: 0;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
             pointer-events: none;
-            z-index: 9999;
+            z-index: 0;
             opacity: 0.35;
         }
 
@@ -753,9 +753,6 @@
             font-weight: 700;
         }
 
-        /* Hidden */
-        .hidden { display: none !important; }
-
         /* Lazy load */
         .lazy-load { opacity: 0; transition: opacity 0.4s; }
         .lazy-load.loaded { opacity: 1; }
@@ -812,76 +809,6 @@
                 height: 55px;
                 font-size: 28px;
             }
-        }
-
-        /* ═══════════════════════════════════════
-           SPLASH SCREEN
-        ═══════════════════════════════════════ */
-        #splash-screen {
-            position: fixed;
-            inset: 0;
-            z-index: 99999;
-            background: #121E2F;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        #splash-screen.fade-out {
-            opacity: 0;
-            pointer-events: none;
-        }
-        #splash-video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-        body.splash-active {
-            overflow: hidden;
-        }
-
-        /* Tap-to-play overlay (shown only when autoplay with audio is blocked) */
-        #splash-tap {
-            position: absolute;
-            inset: 0;
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 1.5rem;
-            background: rgba(8, 12, 20, 0.72);
-            backdrop-filter: blur(6px);
-            cursor: pointer;
-            z-index: 1;
-        }
-        #splash-tap.visible { display: flex; }
-        #splash-tap-btn {
-            width: 88px;
-            height: 88px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold2));
-            border: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 40px rgba(245,166,35,0.5), 0 0 80px rgba(245,166,35,0.2);
-            animation: pulseBtn 1.8s ease-in-out infinite;
-            cursor: pointer;
-        }
-        #splash-tap-btn svg { width: 36px; height: 36px; fill: #080C14; margin-left: 4px; }
-        #splash-tap-label {
-            font-family: 'Syne', sans-serif;
-            font-weight: 700;
-            font-size: 1rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--text-primary);
-        }
-        @keyframes pulseBtn {
-            0%, 100% { box-shadow: 0 0 40px rgba(245,166,35,0.5), 0 0 80px rgba(245,166,35,0.2); transform: scale(1); }
-            50%       { box-shadow: 0 0 60px rgba(245,166,35,0.8), 0 0 120px rgba(245,166,35,0.35); transform: scale(1.07); }
         }
 
         /* ═══════════════════════════════════════
@@ -1137,6 +1064,377 @@
             border-radius: 0.75rem;
             transition: box-shadow 0.3s ease;
         }
+        /* Mobile polish */
+        #catalogo,
+        #sobre-autor,
+        #testimonios,
+        #contacto {
+            scroll-margin-top: 6rem;
+        }
+
+        @media (max-width: 640px) {
+            body::before {
+                opacity: 0.18;
+            }
+
+            [data-theme="light"] body::before {
+                opacity: 0.06;
+            }
+
+            header.fixed {
+                top: 0.75rem;
+            }
+
+            .nav-glass {
+                width: calc(100vw - 1rem);
+                padding: 0.65rem 0.85rem;
+                gap: 0.5rem;
+            }
+
+            .nav-logo {
+                height: 1.75rem;
+            }
+
+            .hero-section {
+                min-height: auto;
+                padding-top: 6.25rem;
+                padding-bottom: 3.5rem;
+            }
+
+            .hero-section .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .hero-grid,
+            .hero-section .orb {
+                opacity: 0.16;
+                filter: blur(60px);
+            }
+
+            [data-theme="light"] .hero-grid,
+            [data-theme="light"] .hero-section .orb {
+                opacity: 0.1;
+            }
+
+            .hero-section .orb-blue {
+                display: none;
+            }
+
+            .hero-copy {
+                text-align: center;
+            }
+
+            .hero-copy > * + * {
+                margin-top: 1rem !important;
+            }
+
+            .hero-brand-title {
+                display: none;
+            }
+
+            .hero-logo {
+                height: 4.5rem;
+            }
+
+            #hero-headline {
+                font-size: clamp(2.15rem, 10vw, 3rem);
+                line-height: 0.96;
+                letter-spacing: -0.03em;
+            }
+
+            #hero-subtitle {
+                font-size: 1rem;
+                line-height: 1.55;
+                max-width: 22rem;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.75rem;
+            }
+
+            .hero-actions > a {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .hero-stats {
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 0.5rem;
+                padding-top: 1rem;
+            }
+
+            .hero-stats .stat-card {
+                padding: 0.875rem 0.75rem;
+                border-radius: 0.9rem;
+            }
+
+            .hero-stats .stat-number {
+                font-size: 1.5rem;
+                line-height: 1;
+            }
+
+            .hero-stats .text-xs {
+                font-size: 0.625rem;
+                letter-spacing: 0.12em;
+            }
+
+            .hero-visual {
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+
+            .hero-promo {
+                max-width: 20rem;
+            }
+
+            .hero-badge,
+            .hero-rating-tag {
+                display: none;
+            }
+
+            .hero-visual .book-hero img {
+                border-radius: 1rem;
+            }
+
+            #catalogo {
+                padding-top: 4.5rem;
+                padding-bottom: 4.5rem;
+            }
+
+            #catalogo .text-center.mb-14,
+            #sobre-autor .text-center.mb-14,
+            #testimonios .text-center.mb-14 {
+                margin-bottom: 2rem;
+            }
+
+            #catalogo .section-title,
+            #sobre-autor .section-title,
+            #testimonios .section-title {
+                font-size: clamp(2rem, 8vw, 2.75rem);
+                line-height: 1.05;
+            }
+
+            #catalogo .section-subtitle,
+            #sobre-autor .section-subtitle,
+            #testimonios .section-subtitle {
+                font-size: 0.98rem;
+                margin-left: auto;
+                margin-right: auto;
+                max-width: 22rem;
+            }
+
+            .catalog-notice {
+                display: flex;
+                width: 100%;
+                padding: 0.9rem 1rem;
+                border-radius: 1rem;
+                gap: 0.75rem;
+                align-items: flex-start;
+                text-align: left;
+            }
+
+            .catalog-notice > span,
+            .catalog-notice > a {
+                width: 100%;
+            }
+
+            .catalog-controls {
+                gap: 1rem;
+                align-items: stretch;
+                margin-bottom: 1.75rem;
+            }
+
+            .catalog-filters {
+                justify-content: center;
+            }
+
+            .catalog-sort {
+                width: 100%;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.75rem;
+            }
+
+            #book-counter {
+                text-align: center;
+            }
+
+            #sort-select {
+                width: 100%;
+                min-height: 44px;
+                border-radius: 0.9rem;
+            }
+
+            .filter-btn {
+                padding: 0.6rem 0.95rem;
+                font-size: 0.8rem;
+            }
+
+            #books-grid {
+                gap: 1rem;
+            }
+
+            #books-grid .book-cover img {
+                height: 12rem;
+            }
+
+            #books-grid > .book-card > div.p-5 {
+                padding: 1rem;
+            }
+
+            #books-grid .flex.gap-2 {
+                gap: 0.5rem;
+            }
+
+            .book-card {
+                border-radius: 1rem;
+            }
+
+            .author-card {
+                border-radius: 1.25rem;
+            }
+
+            .author-split {
+                flex-direction: column;
+            }
+
+            .author-photo-col {
+                padding: 1.25rem 1.25rem 0;
+                justify-content: center;
+            }
+
+            .author-photo-col img {
+                width: 9.5rem;
+                height: 9.5rem;
+            }
+
+            #sobre-autor .author-photo-col .bestseller-badge {
+                font-size: 0.65rem;
+                padding: 0.28rem 0.55rem;
+                bottom: -0.4rem;
+                right: -0.4rem;
+            }
+
+            .author-bio {
+                padding: 1.25rem;
+            }
+
+            .author-bio p.leading-relaxed {
+                font-size: 1rem;
+            }
+
+            .author-bio .grid.grid-cols-1.md\:grid-cols-2 {
+                gap: 0.75rem;
+            }
+
+            .credential-card {
+                padding: 1rem;
+            }
+
+            .testimonial-card {
+                padding: 1.25rem;
+            }
+
+            .testimonial-card::before {
+                font-size: 3.25rem;
+                top: 0.9rem;
+                right: 1rem;
+            }
+
+            .testimonials-grid {
+                gap: 1rem;
+            }
+
+            #mobile-menu {
+                top: 4.85rem;
+                left: 0.5rem;
+                right: 0.5rem;
+                width: auto;
+                max-height: calc(100vh - 5.75rem);
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+                padding: 1rem;
+                border-radius: 1.25rem;
+            }
+
+            .mobile-menu-list {
+                gap: 0.75rem;
+            }
+
+            .mobile-menu-ctas {
+                flex-direction: column;
+            }
+
+            .mobile-menu-ctas > a {
+                width: 100%;
+            }
+
+            .mobile-menu-lang {
+                padding-top: 0.25rem;
+            }
+
+            .modal-scrollable {
+                max-height: calc(90vh - 4rem);
+            }
+        }
+
+        @media (max-width: 380px) {
+            .nav-glass {
+                width: calc(100vw - 0.75rem);
+                padding: 0.55rem 0.7rem;
+                gap: 0.4rem;
+            }
+
+            .nav-logo {
+                height: 1.55rem;
+            }
+
+            #hero-headline {
+                font-size: clamp(1.9rem, 11vw, 2.55rem);
+            }
+
+            .hero-logo {
+                height: 3.9rem;
+            }
+
+            .hero-stats {
+                gap: 0.4rem;
+            }
+
+            .hero-stats .stat-card {
+                padding: 0.75rem 0.55rem;
+            }
+
+            .hero-stats .stat-number {
+                font-size: 1.25rem;
+            }
+
+            .hero-stats .text-xs {
+                font-size: 0.58rem;
+            }
+
+            .filter-btn {
+                padding: 0.55rem 0.8rem;
+                font-size: 0.75rem;
+            }
+
+            .author-photo-col img {
+                width: 8.5rem;
+                height: 8.5rem;
+            }
+
+            .mobile-menu-ctas > a {
+                padding-top: 0.9rem;
+                padding-bottom: 0.9rem;
+            }
+        }
+
     </style>
     
     <!-- Schema markup para SEO -->
@@ -1200,168 +1498,72 @@
 }
 </script>
 </head>
-<body class="font-sans splash-active">
+<body class="font-sans">
 
-    <!-- ==================== SPLASH SCREEN ==================== -->
-    <div id="splash-screen" role="presentation" aria-hidden="true">
-        <video
-            id="splash-video"
-            playsinline
-            preload="auto"
-        ></video>
-
-        <!-- Shown only when browser blocks autoplay with audio -->
-        <div id="splash-tap" role="button" tabindex="0" aria-label="Toca para continuar">
-            <button id="splash-tap-btn">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8 5v14l11-7z"/>
-                </svg>
-            </button>
-            <span id="splash-tap-label">Toca para continuar</span>
-        </div>
-    </div>
-
-    <script>
-        (function () {
-            var splash   = document.getElementById('splash-screen');
-            var video    = document.getElementById('splash-video');
-            var tapLayer = document.getElementById('splash-tap');
-            var fallback;
-
-            // ── Select video based on screen orientation ──
-            var isPortrait = window.innerHeight > window.innerWidth;
-            video.src = isPortrait
-                ? 'assets/media/splash_screen_portrait.mp4'
-                : 'assets/media/splash_screen.mp4';
-
-            function hideSplash() {
-                clearTimeout(fallback);
-                splash.classList.add('fade-out');
-                document.body.classList.remove('splash-active');
-                setTimeout(function () { splash.style.display = 'none'; }, 850);
-            }
-
-            function startFallback() {
-                fallback = setTimeout(hideSplash, 11000);
-            }
-
-            video.addEventListener('ended', hideSplash);
-            video.addEventListener('error', hideSplash);
-
-            // Try autoplay WITH sound
-            var playPromise = video.play();
-
-            if (playPromise !== undefined) {
-                playPromise.then(function () {
-                    // Autoplay with sound allowed — hide tap overlay
-                    tapLayer.classList.remove('visible');
-                    startFallback();
-                }).catch(function () {
-                    // Browser blocked autoplay with audio — show tap overlay
-                    video.pause();
-                    tapLayer.classList.add('visible');
-
-                    function onTap() {
-                        tapLayer.classList.remove('visible');
-                        video.currentTime = 0;
-                        video.play();
-                        startFallback();
-                        tapLayer.removeEventListener('click', onTap);
-                        tapLayer.removeEventListener('keydown', onKeyTap);
-                    }
-                    function onKeyTap(e) {
-                        if (e.key === 'Enter' || e.key === ' ') onTap();
-                    }
-                    tapLayer.addEventListener('click', onTap);
-                    tapLayer.addEventListener('keydown', onKeyTap);
-                });
-            } else {
-                // Older browsers without promise-based play()
-                startFallback();
-            }
-        })();
-    </script>
-
-    <!-- ==================== NAVEGACIÓN (Floating Glass) ==================== -->
+    <!-- ==================== NAVEGACIÓN (Floating Glass — collapsible, sin splash) ==================== -->
     <header class="fixed top-5 left-0 right-0 z-50 flex justify-center pointer-events-none">
-        <nav class="nav-glass pointer-events-auto rounded-full px-6 py-3 flex items-center gap-8 max-w-4xl mx-auto w-[95%]">
+        <nav class="nav-glass pointer-events-auto rounded-full px-6 py-3 flex items-center gap-4 max-w-5xl mx-auto w-[96%]">
             <!-- Logo -->
-            <a href="#" class="flex items-center gap-2 pr-4 border-r border-white/10 shrink-0">
-                <img src="assets/icons/Logo Arcus.png" 
-                     alt="Editorial Arcus" 
-                     class="h-10 w-auto object-contain"
-                     style="filter: drop-shadow(0 0 8px rgba(245,166,35,0.4));">
+            <a href="index.html" class="flex items-center gap-2 pr-4 border-r border-white/10 shrink-0">
+                <img src="assets/icons/Logo Arcus.png" alt="Editorial Arcus" class="nav-logo h-10 w-auto object-contain" style="filter: drop-shadow(0 0 8px rgba(245,166,35,0.4));">
             </a>
-
-            <!-- Menu Center -->
-            <div class="hidden md:flex items-center gap-6 flex-1">
-                <a href="#catalogo" class="nav-link" 
-   data-intro="Explora el catálogo, filtra por categorías y ordena los libros." 
-   data-step="2" data-position="bottom">Libros</a>
-                <a href="#sobre-autor" class="nav-link">Autor</a>
-                <a href="#testimonios" class="nav-link">Historias</a>
+            <!-- Menu desktop — visible en desktop, idéntico a terms/privacy -->
+            <div class="hidden md:flex items-center gap-5 flex-1">
+                <a href="#catalogo" class="nav-link" data-nav-key="nav_catalog">Libros</a>
+                <a href="#sobre-autor" class="nav-link" data-nav-key="nav_author">Autor</a>
+                <a href="#testimonios" class="nav-link" data-nav-key="nav_testimonials">Historias</a>
+                <a href="terms.html" class="nav-link" data-nav-key="nav_terms">Términos</a>
+                <a href="privacy.html" class="nav-link" data-nav-key="nav_privacy">Privacidad</a>
             </div>
-
-            <!-- Actions Right -->
-            <div class="flex items-center gap-3 pl-4 border-l border-white/10 ml-auto">
-                <!-- Lang Toggle -->
-                <div class="flex items-center gap-1 bg-white/5 rounded-full p-1"
-     data-intro="Cambia entre español e inglés en cualquier momento."
-     data-step="6" data-position="bottom">
-   <button id="lang-es" class="px-2.5 py-1 text-[10px] font-bold rounded-full transition-all lang-active">ES</button>
-   <button id="lang-en" class="px-2.5 py-1 text-[10px] font-bold rounded-full transition-all text-text-muted hover:text-white">EN</button>
-</div>
-                <!-- Theme Toggle -->
-                <button id="theme-toggle-btn" onclick="toggleTheme()" aria-label="Cambiar tema" title="Cambiar tema"
-                data-intro="Alterna entre modo oscuro y claro según tu preferencia."
-                data-step="7" data-position="bottom">
-           <i id="theme-icon" class="fas fa-moon"></i>
-        </button>
-
-                <!-- Cart -->
+            <!-- Actions -->
+            <div class="flex items-center gap-2 sm:gap-3 ml-auto pl-4 border-l border-white/10">
+                <div class="hidden sm:flex items-center gap-1 bg-white/5 rounded-full p-1">
+                    <button id="lang-es" class="px-2.5 py-1 text-[10px] font-bold rounded-full transition-all lang-active">ES</button>
+                    <button id="lang-en" class="px-2.5 py-1 text-[10px] font-bold rounded-full transition-all text-text-muted hover:text-white">EN</button>
+                </div>
+                <button id="theme-toggle-btn" data-aria-key="aria_toggle_theme" onclick="toggleTheme()" class="w-9 h-9 rounded-full flex items-center justify-center" style="background:rgba(255,255,255,0.06);border:1px solid var(--border);color:var(--text-muted)" aria-label="Cambiar tema"><i id="theme-icon" class="fas fa-sun text-sm"></i></button>
                 <div class="relative">
-                    <button id="cart-btn" class="w-10 h-10 rounded-full flex items-center justify-center transition-all relative"
-        style="background:rgba(245,166,35,0.12);border:1px solid rgba(245,166,35,0.25)" aria-label="Carrito"
-        data-intro="Aquí se guardan los libros que elijas. Puedes revisar tu carrito y proceder al pago."
-        data-step="5" data-position="left">
-   <i class="fas fa-shopping-bag text-sm" style="color:var(--accent-gold)"></i>
-   <span id="cart-count" class="cart-badge">0</span>
-</button>
-                </div>
-                <!-- Login -->
-                <button id="login-btn" class="w-10 h-10 rounded-full flex items-center justify-center transition-all"
-                        style="background:rgba(255,255,255,0.06);border:1px solid var(--border)" onclick="openAuthModal()" aria-label="Iniciar sesión">
-                    <i class="far fa-user text-sm text-text-muted"></i>
-                </button>
-                <!-- User Menu -->
-                <div id="user-menu" class="hidden absolute top-16 right-4 modal-glass rounded-xl w-48 py-2 z-50">
-                    <button id="user-menu-btn" class="w-full text-left px-4 py-2 hover:bg-white/5 flex items-center gap-2">
-                        <span id="user-name" class="truncate font-head text-sm text-text-main">Usuario</span>
+                    <button id="cart-btn" data-aria-key="aria_cart" class="w-9 h-9 rounded-full flex items-center justify-center relative" style="background:rgba(245,166,35,0.12);border:1px solid rgba(245,166,35,0.25)" aria-label="Carrito">
+                        <i class="fas fa-shopping-bag text-sm" style="color:var(--accent-gold)"></i>
+                        <span id="cart-count" class="cart-badge">0</span>
                     </button>
-                    <div class="divider-gold mx-4 my-1"></div>
-                    <button onclick="showPurchaseHistory()" class="w-full text-left px-4 py-2 hover:bg-white/5 text-sm text-text-muted hover:text-white transition-colors">Mis Compras</button>
-                    <button onclick="handleLogout()" class="w-full text-left px-4 py-2 hover:bg-white/5 text-sm transition-colors" style="color:#FCA5A5">Salir</button>
                 </div>
+                <button id="login-btn" data-aria-key="aria_login" class="hidden sm:flex w-9 h-9 rounded-full items-center justify-center" style="background:rgba(255,255,255,0.06);border:1px solid var(--border);color:var(--text-muted)" onclick="openAuthModal()" aria-label="Iniciar sesión"><i class="far fa-user text-sm"></i></button>
+                <div id="user-menu" class="hidden absolute top-16 right-4 modal-glass rounded-xl w-48 py-2 z-50 shadow-xl" style="background:var(--bg-elevated);border:1px solid var(--border)">
+                    <button id="user-menu-btn" class="w-full text-left px-4 py-2 hover:bg-white/5 flex items-center gap-2"><span id="user-name" class="truncate font-head text-sm text-text-main">Usuario</span></button>
+                    <div class="divider-gold mx-4 my-1"></div>
+                    <button data-ui-key="nav_my_purchases" onclick="showPurchaseHistory()" class="w-full text-left px-4 py-2 hover:bg-white/5 text-sm text-text-muted hover:text-white transition-colors">Mis Compras</button>
+                    <button data-ui-key="nav_logout" onclick="handleLogout()" class="w-full text-left px-4 py-2 hover:bg-white/5 text-sm transition-colors" style="color:#FCA5A5">Salir</button>
+                </div>
+                <!-- Hamburger — FIX: siempre visible en móvil, garantiza apertura -->
+                <button id="mobile-menu-btn" data-aria-key="aria_open_menu" class="md:hidden w-9 h-9 rounded-full flex items-center justify-center ml-1" style="background:var(--accent-gold);color:#080C14;box-shadow:0 2px 10px var(--glow-gold)" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
+                    <i id="mobile-menu-icon" class="fas fa-bars text-sm"></i>
+                </button>
             </div>
-            
-            <!-- Menú móvil trigger -->
-            <button id="mobile-menu-btn" class="md:hidden ml-2" style="color:var(--text-muted)">
-                <i class="fas fa-bars text-lg"></i>
-            </button>
         </nav>
-        
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden absolute top-20 left-4 right-4 modal-glass rounded-2xl p-6 pointer-events-auto">
-            <div class="flex flex-col gap-5 text-center">
-                <a href="#catalogo" onclick="toggleMobileMenu()" class="font-head text-lg text-white/80 hover:text-white transition-colors">Colección</a>
-                <a href="#sobre-autor" onclick="toggleMobileMenu()" class="font-head text-lg text-white/80 hover:text-white transition-colors">Autor</a>
-                <a href="#contacto" onclick="toggleMobileMenu()" class="font-head text-lg text-white/80 hover:text-white transition-colors">Contacto</a>
-                <div class="pt-4 border-t border-white/10 flex justify-center gap-3">
-                    <button id="mobile-lang-es" class="btn-primary text-sm px-5 py-2">Español</button>
-                    <button id="mobile-lang-en" class="btn-secondary text-sm px-5 py-2">English</button>
+        <!-- Panel colapsable — idéntico a terms/privacy, funciona en móvil -->
+        <div id="mobile-menu" class="hidden absolute top-20 left-4 right-4 modal-glass rounded-2xl p-6 pointer-events-auto shadow-2xl mobile-menu-panel" style="background:var(--bg-elevated);border:1px solid var(--border)">
+            <div class="flex flex-col gap-3 text-center mobile-menu-list">
+                <a href="#catalogo" data-nav-key="nav_catalog" onclick="closeMobileMenu()" class="flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-semibold" style="background:rgba(245,166,35,0.08);border:1px solid var(--border-gold);color:var(--text-primary)"><i class="fas fa-book-open text-xs" style="color:var(--accent-gold)"></i><span class="nav-label">Libros</span></a>
+                <a href="#sobre-autor" data-nav-key="nav_author" onclick="closeMobileMenu()" class="flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-semibold" style="background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--text-primary)"><i class="fas fa-user-graduate text-xs" style="color:var(--accent-teal)"></i><span class="nav-label">Autor</span></a>
+                <a href="#testimonios" data-nav-key="nav_testimonials" onclick="closeMobileMenu()" class="flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-semibold" style="background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--text-primary)"><i class="fas fa-comment-dots text-xs" style="color:var(--accent-teal)"></i><span class="nav-label">Historias</span></a>
+                <a href="terms.html" data-nav-key="nav_terms" onclick="closeMobileMenu()" class="flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-semibold" style="background:rgba(245,166,35,0.08);border:1px solid var(--border-gold);color:var(--text-primary)"><i class="fas fa-scale-balanced text-xs" style="color:var(--accent-gold)"></i><span class="nav-label">Términos</span></a>
+                <a href="privacy.html" data-nav-key="nav_privacy" onclick="closeMobileMenu()" class="flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-bold" style="background:var(--accent-gold);color:#080C14"><i class="fas fa-shield-halved text-xs"></i><span class="nav-label">Privacidad</span></a>
+                <a href="#contacto" data-nav-key="nav_contact" onclick="closeMobileMenu()" class="flex items-center justify-center gap-2 py-2 text-sm" style="color:var(--text-muted)"><i class="fas fa-envelope text-xs"></i><span class="nav-label">Contacto</span></a>
+                <div class="h-px my-2" style="background:var(--border)"></div>
+                <div class="flex gap-3 mobile-menu-ctas">
+                    <a href="https://arcus-reading.vercel.app/" data-nav-key="nav_reader" target="_blank" rel="noopener noreferrer" class="flex-1 btn-secondary justify-center text-xs py-2.5" onclick="closeMobileMenu()"><i class="fas fa-book-reader"></i><span class="nav-label">Reader</span></a>
+                    <a href="https://books2read.com/editorialarcus" data-nav-key="nav_stores" target="_blank" rel="noopener noreferrer" class="flex-1 btn-primary justify-center text-xs py-2.5" onclick="closeMobileMenu()"><i class="fas fa-store"></i><span class="nav-label">Tiendas</span></a>
+                </div>
+                <div class="flex justify-center sm:hidden pt-2 mobile-menu-lang">
+                    <div class="flex items-center gap-1 bg-white/5 rounded-full p-1">
+                        <button id="mobile-lang-es" onclick="changeLanguage('es');closeMobileMenu()" class="px-4 py-1.5 text-xs font-bold rounded-full lang-active">ES</button>
+                        <button id="mobile-lang-en" onclick="changeLanguage('en');closeMobileMenu()" class="px-4 py-1.5 text-xs font-bold rounded-full" style="color:var(--text-muted)">EN</button>
+                    </div>
                 </div>
             </div>
         </div>
+        <div id="main-menu-panel" class="hidden"></div>
     </header>
 
     <!-- ==================== HERO SECTION (Premium Dark) ==================== -->
@@ -1376,7 +1578,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
                 
                 <!-- Left Content -->
-                <div class="animate-fadeIn space-y-8">
+                <div class="animate-fadeIn space-y-8 hero-copy">
                     <!-- Logo grande con colores -->
                     <div class="hero-logo-wrap">
                         <img src="assets/icons/Logo Arcus.png"
@@ -1390,7 +1592,7 @@
                         <span class="dot"></span>
                         Colección 2026
                     </div>-->
-                    <h1 class="section-title text-5xl md:text-6xl lg:text-7xl">
+                    <h1 class="section-title text-5xl md:text-6xl lg:text-7xl hero-brand-title">
                        
                         <span class="text-gold-gradient font-serif italic">Editorial ARCUS</span>
                     
@@ -1409,7 +1611,7 @@
                     </p>
 
                     <!-- CTA Buttons -->
-                    <div class="flex flex-wrap gap-4 pt-2">
+                    <div class="flex flex-wrap gap-4 pt-2 hero-actions">
                         <a href="#catalogo" class="btn-primary text-sm" 
    data-intro="Aquí puedes ver la colección completa de libros digitales." 
    data-step="1" data-position="bottom">
@@ -1422,7 +1624,7 @@
                     </div>
 
                     <!-- Stats -->
-                    <div class="flex gap-6 pt-6">
+                    <div class="flex gap-6 pt-6 hero-stats">
                         <div class="stat-card flex-1">
                             <div class="stat-number">50k+</div>
                             <div class="text-xs uppercase tracking-widest mt-1" style="color:var(--text-dim)">Lectores</div>
@@ -1439,8 +1641,8 @@
                 </div>
 
                 <!-- Right Content — Imagen Promocional -->
-                <div class="relative flex items-center justify-center py-8">
-                    <div class="relative w-full max-w-lg">
+                <div class="relative flex items-center justify-center py-8 hero-visual">
+                    <div class="relative w-full max-w-lg hero-promo">
                         <!-- Glow aura -->
                         <div class="absolute inset-0 rounded-2xl"
                              style="background:radial-gradient(ellipse at center, rgba(245,166,35,0.3) 0%, transparent 70%); filter:blur(40px); transform:scale(0.95) translateY(15px)"></div>
@@ -1453,12 +1655,12 @@
                         </div>
 
                         <!-- Bestseller Badge -->
-                        <div class="bestseller-badge absolute -bottom-4 -left-4 z-20 px-4 py-2 rounded-full shadow-xl">
+                        <div class="bestseller-badge hero-badge absolute -bottom-4 -left-4 z-20 px-4 py-2 rounded-full shadow-xl">
                             <i class="fas fa-award mr-1"></i>BEST SELLER
                         </div>
 
                         <!-- Rating tag -->
-                        <div class="absolute -top-4 -right-4 z-20 modal-glass rounded-xl px-3 py-2 text-center">
+                        <div class="hero-rating-tag absolute -top-4 -right-4 z-20 modal-glass rounded-xl px-3 py-2 text-center">
                             <div class="rating-stars text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                             <div class="font-head text-xs font-bold mt-0.5" style="color:var(--text-muted)">4.9 / 5</div>
                         </div>
@@ -1479,12 +1681,18 @@
                 <p class="section-subtitle mx-auto text-center">
                     Descubre nuestra selección de libros digitales diseñados para guiarte en tu camino de transformación personal
                 </p>
+                <div class="mt-6 inline-flex flex-col sm:flex-row items-center gap-3 text-xs rounded-full px-4 py-2 catalog-notice" style="background:rgba(0,212,170,0.08);border:1px solid var(--border-teal);color:var(--text-muted)">
+                    <span class="flex items-center gap-2"><i class="fas fa-book-open" style="color:var(--accent-teal)"></i> Títulos de pago: solo eBook en <a href="https://arcus-reading.vercel.app/" target="_blank" rel="noopener noreferrer" class="underline font-bold" style="color:var(--accent-teal)">ARCUS Reader</a> (no descargable)</span>
+                    <span class="hidden sm:inline" style="color:var(--border)">|</span>
+                    <a href="https://books2read.com/editorialarcus" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 font-semibold hover:underline" style="color:var(--accent-gold)"><i class="fas fa-store text-xs"></i> Ver en Amazon, Apple y más <span style="color:var(--text-dim)" class="font-normal">(externo Books2Read)</span></a>
+                </div>
+                <p class="mt-2 text-[11px] max-w-2xl mx-auto" style="color:var(--text-dim)">Books2Read es plataforma externa de Draft2Digital — intermediario ajeno a ARCUS. Gratis: descarga directa. De pago en esta web: lectura online.</p>
             </div>
             
             <!-- Filtros y controles -->
-            <div class="flex flex-col md:flex-row justify-between items-center mb-10 gap-4">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-10 gap-4 catalog-controls">
                 <!-- Filtros por categoría -->
-                <div class="flex flex-wrap gap-2" role="group" aria-label="Filtros de categoría"
+                <div class="flex flex-wrap gap-2 catalog-filters" role="group" aria-label="Filtros de categoría"
      data-intro="Usa estos botones para filtrar libros por temas como Mindfulness, Sistemas, Comunicación..." 
      data-step="3" data-position="top">
                     <button class="filter-btn" data-category="all" aria-pressed="true">Todos</button>
@@ -1495,7 +1703,7 @@
                 </div>
                 
                 <!-- Ordenar y contador -->
-                <div class="flex items-center gap-4">
+                <div class="flex items-center gap-4 catalog-sort">
                     <span id="book-counter" class="text-sm" style="color:var(--text-muted)">
                         Mostrando <span class="font-bold" style="color:var(--accent-gold)">4</span> libros
                     </span>
@@ -1610,21 +1818,39 @@
                                 <div id="modal-categories" class="flex flex-wrap gap-2"></div>
                             </div>
                             
-                            <!-- Formatos disponibles -->
-                            <div>
-                                <h4 class="font-head font-bold mb-3 text-white">Formatos disponibles</h4>
-                                <div class="flex flex-wrap gap-3">
-                                    <div class="flex items-center px-3 py-1.5 rounded-lg text-sm" style="background:rgba(0,212,170,0.1);color:var(--accent-teal);border:1px solid var(--border-teal)">
-                                        <i class="fas fa-tablet-alt mr-2"></i>EPUB
+                            <!-- Cómo leerás — dual + externa -->
+                            <div id="modal-format-paid">
+                                <h4 class="font-head font-bold mb-3 text-white">Cómo leerás tu libro</h4>
+                                <div class="p-4 rounded-xl" style="background:rgba(0,212,170,0.07);border:1px solid var(--border-teal)">
+                                    <div class="flex gap-3">
+                                        <i class="fas fa-book-open mt-1" style="color:var(--accent-teal)"></i>
+                                        <div>
+                                            <p class="font-bold text-sm text-white">Solo eBook — lectura online en ARCUS Reader</p>
+                                            <p class="text-sm mt-1" style="color:var(--text-muted)">No descargable, no impreso, no audio. Acceso inmediato tras el pago en <a href="https://arcus-reading.vercel.app/" target="_blank" rel="noopener noreferrer" class="underline font-bold" style="color:var(--accent-teal)">arcus-reading.vercel.app</a> (app gratuita, requiere internet).</p>
+                                        </div>
                                     </div>
-                                    <!--<div class="flex items-center px-3 py-1.5 rounded-lg text-sm" style="background:rgba(245,166,35,0.1);color:var(--accent-gold);border:1px solid var(--border-gold)">
-                                        <i class="fab fa-amazon mr-2"></i>MOBI
-                                    </div>-->
-                                    <div class="flex items-center px-3 py-1.5 rounded-lg text-sm"
-                                     style="background:rgba(245,166,35,0.1);color:var(--accent-gold);border:1px solid var(--border-gold)">
-                                        <i class="fas fa-headphones mr-2"></i>AUDIOBOOK
-                                   </div>
+                                    <a href="https://arcus-reading.vercel.app/" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex items-center gap-2 text-xs font-bold px-3 py-1.5 rounded-full" style="background:rgba(0,212,170,0.12);color:var(--accent-teal);border:1px solid var(--border-teal)"><i class="fas fa-external-link-alt"></i> Abrir ARCUS Reader</a>
                                 </div>
+                            </div>
+                            <div id="modal-format-free" class="hidden">
+                                <h4 class="font-head font-bold mb-3 text-white">Formato</h4>
+                                <div class="p-4 rounded-xl" style="background:rgba(245,166,35,0.08);border:1px solid var(--border-gold)">
+                                    <div class="flex gap-3">
+                                        <i class="fas fa-download mt-1" style="color:var(--accent-gold)"></i>
+                                        <div>
+                                            <p class="font-bold text-sm text-white">Descarga gratuita — archivo descargable</p>
+                                            <p class="text-sm mt-1" style="color:var(--text-muted)">Obra gratuita. Recibirás el archivo descargable vía formulario para lectura offline. No requiere ARCUS Reader.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Bloque externo solo para títulos de pago -->
+                            <div id="external-stores-block" class="mt-5 pt-5 hidden" style="border-top:1px solid var(--border)">
+                                <p class="text-[11px] uppercase tracking-widest font-bold mb-3 flex items-center gap-2" style="color:var(--text-dim)"><i class="fas fa-store" style="color:var(--accent-gold)"></i> ¿Prefieres otra tienda?</p>
+                                <a href="https://books2read.com/editorialarcus" target="_blank" rel="noopener noreferrer" class="w-full justify-center btn-secondary text-sm py-3" style="border-color:var(--border-gold);color:var(--accent-gold);display:flex">
+                                    <i class="fas fa-external-link-alt"></i> Ver en Amazon, Apple Books, Barnes & Noble y más
+                                </a>
+                                <p class="text-[11px] leading-relaxed mt-2 text-center" style="color:var(--text-dim)">Books2Read es plataforma externa de Draft2Digital — intermediario ajeno a ARCUS que redirige a tiendas externas. Precios, entrega del archivo/Kindle, pagos y devoluciones los gestiona cada retailer según sus propias condiciones.</p>
                             </div>
                         </div>
                     </div>
@@ -1833,9 +2059,9 @@
                 <h2 class="section-title text-4xl md:text-5xl">Ulises R. Cruz García</h2>
             </div>
             <div class="author-card">
-                <div class="flex flex-col lg:flex-row">
+                <div class="author-split flex flex-col lg:flex-row">
                     <!-- Foto del autor -->
-                    <div class="lg:w-1/3 flex justify-center items-start p-10 lg:p-14">
+                    <div class="author-photo-col lg:w-1/3 flex justify-center items-start p-10 lg:p-14">
                         <div class="relative">
                             <div class="author-photo-ring">
                                 <img src="https://static.wixstatic.com/media/af3a4a_1e83490b7701425a904b4f33085a2d72~mv2.png" 
@@ -1849,7 +2075,7 @@
                     </div>
                     
                     <!-- Biografía -->
-                    <div class="lg:w-2/3 p-8 lg:p-14">
+                    <div class="author-bio lg:w-2/3 p-8 lg:p-14">
                         <div class="divider-gold mb-8"></div>
                         
                         <p class="leading-relaxed mb-8 text-lg" style="color:var(--text-muted)">
@@ -1923,7 +2149,7 @@
                 </p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 testimonials-grid">
                 <!-- Testimonio 1 -->
                 <div class="testimonial-card">
                     <div class="flex items-center mb-5 gap-3">
@@ -2242,6 +2468,10 @@
                     <li><a href="#sobre-autor" class="footer-link">Sobre el Autor</a></li>
                     <li><a href="#testimonios" class="footer-link">Testimonios</a></li>
                     <li><button onclick="openContactModal()" class="footer-link">Contacto</button></li>
+                    <li><a href="terms.html" class="footer-link">Términos y Condiciones</a></li>
+                    <li><a href="privacy.html" class="footer-link">Privacidad</a></li>
+                    <li><a href="https://arcus-reading.vercel.app/" target="_blank" rel="noopener noreferrer" class="footer-link">ARCUS Reader <i class="fas fa-external-link-alt text-xs ml-1"></i></a></li>
+                    <li><a href="https://books2read.com/editorialarcus" target="_blank" rel="noopener noreferrer" class="footer-link">Books2Read <span class="text-[10px] ml-1" style="color:var(--text-dim)">(externo)</span></a></li>
                     <!-- NUEVO -->
                     <li><button onclick="replayCoachMark()" class="footer-link"><i class="fas fa-question-circle"></i> Guía rápida</button></li>
                  </ul>
@@ -2263,8 +2493,9 @@
             <div class="flex flex-col sm:flex-row justify-between items-center gap-4 text-sm" style="color:var(--text-dim)">
                 <p>&copy; 2026 Editorial Arcus &mdash; Ulises R. Cruz García. Todos los derechos reservados.</p>
                 <p class="flex gap-4">
-                    <a href="#" class="footer-link">Términos y Condiciones</a>
-                    <a href="#" class="footer-link">Privacidad</a>
+                    <a href="terms.html" class="footer-link">Términos y Condiciones</a>
+                    <a href="privacy.html" class="footer-link">Privacidad</a>
+                    <a href="https://arcus-reading.vercel.app/" target="_blank" rel="noopener noreferrer" class="footer-link">ARCUS Reader</a>
                 </p>
             </div>
         </div>
