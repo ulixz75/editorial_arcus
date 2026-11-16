@@ -5,6 +5,7 @@
     <!-- Meta tags mejorados para SEO -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
     <meta name="description" content="ARCUS Editorial: libros de no ficción del autor Ulises R. Cruz García. Las tres tentaciones (Anatomía del Poder) y Lo que realmente funciona. Disponibles en Amazon, Google Play Books y Gumroad.">
     <meta name="keywords" content="Ulises R. Cruz García, Las tres tentaciones, Lo que realmente funciona, Anatomía del Poder, libros no ficción, liderazgo, poder, ARCUS Editorial">
     <meta name="author" content="Ulises R. Cruz García">
@@ -13,7 +14,7 @@
     <!-- Open Graph para redes sociales -->
     <meta property="og:title" content="Editorial Arcus — Ulises R. Cruz García">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="assets/icons/NuevaPortada.png">
+    <meta property="og:image" content="https://arcus-editorial.vercel.app/assets/icons/NuevaPortada.png">
     <meta property="og:description" content="Descubre la colección de Editorial Arcus: libros que descifran lo que otros no quieren que sepas.">
     
     <title>ARCUS Editorial — Libros de Ulises R. Cruz García</title>
@@ -60,10 +61,10 @@
         }
     </script>
     
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Font Awesome (con SRI — subresource integrity) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha384-iw3OoTErCYJJB9mCa8LNS2hbsQ7M3C0EpIsO/H5+EGAkPGc6rk+V8i04oW/K5xq0" crossorigin="anonymous" referrerpolicy="no-referrer">
     <!-- Intro.js CSS (NUEVO) -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.2.0/introjs.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.2.0/introjs.min.css" integrity="sha384-WrNrUU1p2jx6o0iGe4D8mbzwjRZ6eFv5rVqz0r7cj87IrSYIlFkFNp7gt0CAIlhw" crossorigin="anonymous" referrerpolicy="no-referrer">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -75,17 +76,30 @@
            DESIGN SYSTEM — TOKENS
         ═══════════════════════════════════════ */
         :root {
+            color-scheme: dark;
+
             --bg-base:      #080C14;
+            --bg-base:      oklch(17% 0.03 260);
             --bg-surface:   #0F1623;
+            --bg-surface:   oklch(21% 0.03 260);
             --bg-elevated:  #161E2E;
+            --bg-elevated:  oklch(25% 0.028 260);
             --bg-card:      #111827;
+            --bg-card:      oklch(23% 0.03 260);
             --accent-gold:  #F5A623;
+            --accent-gold:  oklch(79% 0.155 75);
             --accent-gold2: #E8940F;
+            --accent-gold2: oklch(73% 0.155 65);
             --accent-teal:  #00D4AA;
+            --accent-teal:  oklch(77% 0.135 180);
             --accent-teal2: #00B894;
+            --accent-teal2: oklch(71% 0.13 180);
             --text-primary: #F0F4FF;
+            --text-primary: oklch(97% 0.012 260);
             --text-muted:   #6B7A99;
+            --text-muted:   oklch(59% 0.04 260);
             --text-dim:     #3D4A63;
+            --text-dim:     oklch(38% 0.04 260);
             --border:       rgba(255,255,255,0.07);
             --border-gold:  rgba(245,166,35,0.25);
             --border-teal:  rgba(0,212,170,0.25);
@@ -98,7 +112,11 @@
         ═══════════════════════════════════════ */
         *, *::before, *::after { box-sizing: border-box; }
 
-        html { scroll-behavior: smooth; }
+        html {
+            scroll-behavior: smooth;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent-gold) var(--bg-surface);
+        }
 
         body {
             font-family: 'Inter', system-ui, sans-serif;
@@ -137,6 +155,10 @@
         .font-head  { font-family: 'Syne', sans-serif; }
         .font-serif { font-family: 'DM Serif Display', serif; }
 
+        /* Tipografía moderna: titulares equilibrados y párrafos sin líneas huérfanas */
+        .section-title, h1, h2, h3 { text-wrap: balance; }
+        p, li { text-wrap: pretty; }
+
         /* ═══════════════════════════════════════
            NAVBAR GLASS
         ═══════════════════════════════════════ */
@@ -160,13 +182,15 @@
             position: absolute;
             bottom: -4px;
             left: 0;
-            width: 0;
+            width: 100%;
             height: 1.5px;
             background: linear-gradient(90deg, var(--accent-gold), var(--accent-teal));
-            transition: width 0.3s ease;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
         }
         .nav-link:hover { color: var(--text-primary); }
-        .nav-link:hover::after { width: 100%; }
+        .nav-link:hover::after { transform: scaleX(1); }
 
         /* ═══════════════════════════════════════
            BUTTONS
@@ -233,6 +257,7 @@
         .hero-section {
             position: relative;
             min-height: 100vh;
+            min-height: 100svh;
             display: flex;
             align-items: center;
             overflow: hidden;
@@ -252,7 +277,6 @@
             background: radial-gradient(circle, rgba(245,166,35,0.18) 0%, transparent 70%);
             top: -120px;
             right: -80px;
-            animation: orbFloat 8s ease-in-out infinite;
         }
         .orb-teal {
             width: 640px;
@@ -260,7 +284,6 @@
             background: radial-gradient(circle, rgba(0,212,170,0.12) 0%, transparent 70%);
             bottom: -160px;
             left: -120px;
-            animation: orbFloat 10s ease-in-out infinite reverse;
         }
         .orb-blue {
             width: 360px;
@@ -268,7 +291,12 @@
             background: radial-gradient(circle, rgba(99,102,241,0.1) 0%, transparent 70%);
             top: 40%;
             right: 30%;
-            animation: orbFloat 12s ease-in-out infinite 2s;
+        }
+        /* Motion opt-in: solo si el usuario no pidió movimiento reducido */
+        @media (prefers-reduced-motion: no-preference) {
+            .orb-gold { animation: orbFloat 8s ease-in-out infinite; }
+            .orb-teal { animation: orbFloat 10s ease-in-out infinite reverse; }
+            .orb-blue { animation: orbFloat 12s ease-in-out infinite 2s; }
         }
         @keyframes orbFloat {
             0%, 100% { transform: translate(0, 0) scale(1); }
@@ -297,6 +325,13 @@
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
             position: relative;
+            container-type: inline-size;
+        }
+        /* Container query: la card se adapta a su PROPIO espacio, no al viewport */
+        @container (max-width: 300px) {
+            .book-card > div.p-5 { padding: 0.875rem; }
+            .book-card .text-lg { font-size: 1rem; }
+            .book-card button, .book-card a.btn-primary { font-size: 0.75rem; padding: 0.5rem 0.875rem; }
         }
         .book-card::before {
             content: '';
@@ -396,7 +431,9 @@
             height: 6px;
             border-radius: 50%;
             background: var(--accent-teal);
-            animation: pulse 2s ease-in-out infinite;
+        }
+        @media (prefers-reduced-motion: no-preference) {
+            .section-eyebrow span.dot { animation: pulse 2s ease-in-out infinite; }
         }
         @keyframes pulse {
             0%, 100% { opacity: 1; transform: scale(1); }
@@ -694,6 +731,20 @@
         .animate-slideIn { animation: slideIn 0.35s cubic-bezier(0.4,0,0.2,1) forwards; }
         .cart-btn-active { animation: cartBounce 0.35s ease; }
 
+        /* Scroll-Driven Animations: reveal al hacer scroll, en CSS puro (compositor thread).
+           Progresivo: en navegadores sin soporte la animación termina inmediatamente (visible). */
+        @media (prefers-reduced-motion: no-preference) {
+            .scroll-reveal {
+                animation: scrollReveal linear both;
+                animation-timeline: view();
+                animation-range: entry 0% entry 35%;
+            }
+            @keyframes scrollReveal {
+                from { opacity: 0; transform: translateY(32px); }
+                to   { opacity: 1; transform: none; }
+            }
+        }
+
         /* ═══ HERO LOGO GRANDE ══════════════════ */
         .hero-logo-wrap {
             display: inline-block;
@@ -815,17 +866,30 @@
            LIGHT THEME — VARIABLES & OVERRIDES
         ═══════════════════════════════════════ */
         [data-theme="light"] {
+            color-scheme: light;
+
             --bg-base:      #F0F3FA;
+            --bg-base:      oklch(96% 0.01 260);
             --bg-surface:   #FFFFFF;
+            --bg-surface:   oklch(100% 0 0);
             --bg-elevated:  #E8EDF7;
+            --bg-elevated:  oklch(93.5% 0.012 260);
             --bg-card:      #FFFFFF;
+            --bg-card:      oklch(100% 0 0);
             --accent-gold:  #C97A08;
+            --accent-gold:  oklch(62% 0.13 65);
             --accent-gold2: #A86308;
+            --accent-gold2: oklch(53% 0.115 60);
             --accent-teal:  #008F6D;
+            --accent-teal:  oklch(60% 0.11 175);
             --accent-teal2: #007558;
+            --accent-teal2: oklch(53% 0.095 175);
             --text-primary: #0D1421;
+            --text-primary: oklch(19% 0.03 260);
             --text-muted:   #4A5568;
+            --text-muted:   oklch(45% 0.03 260);
             --text-dim:     #9AA5B4;
+            --text-dim:     oklch(70% 0.02 260);
             --border:       rgba(0,0,0,0.09);
             --border-gold:  rgba(201,122,8,0.28);
             --border-teal:  rgba(0,143,109,0.28);
@@ -1584,7 +1648,8 @@
                         <img src="assets/icons/Logo Arcus.png"
                              alt="Editorial Arcus"
                              class="hero-logo"
-                             id="hero-logo-img">
+                             id="hero-logo-img"
+                             fetchpriority="high" decoding="async">
                     </div>
 
                     <!-- Eyebrow 
@@ -1649,9 +1714,9 @@
                         
                         <!-- Promo Image -->
                         <div class="book-hero relative z-10">
-                            <img src="assets/icons/promo.png" 
-                                 alt="Las Tres Tentaciones — Editorial Arcus" 
-                                 class="w-full rounded-2xl shadow-2xl">
+                            <img src="assets/icons/promo.png"
+                                 alt="Las Tres Tentaciones — Editorial Arcus"
+                                 class="w-full rounded-2xl shadow-2xl" loading="lazy" decoding="async">
                         </div>
 
                         <!-- Bestseller Badge -->
@@ -1672,7 +1737,7 @@
     </section>
 
     <!-- ==================== CATÁLOGO DE LIBROS ==================== -->
-    <section id="catalogo" class="py-24" style="background:var(--bg-surface)">
+    <section id="catalogo" class="py-24 scroll-reveal" style="background:var(--bg-surface)">
         <div class="container mx-auto px-4 md:px-8">
             <!-- Header -->
             <div class="text-center mb-14">
@@ -2052,7 +2117,7 @@
     </div>
 
     <!-- ==================== SECCIÓN DEL AUTOR ==================== -->
-    <section id="sobre-autor" class="py-24" style="background:var(--bg-base)">
+    <section id="sobre-autor" class="py-24 scroll-reveal" style="background:var(--bg-base)">
         <div class="container mx-auto px-4 md:px-8">
             <div class="text-center mb-14">
                 <div class="section-eyebrow inline-flex"><span class="dot"></span>El Autor</div>
@@ -2064,9 +2129,9 @@
                     <div class="author-photo-col lg:w-1/3 flex justify-center items-start p-10 lg:p-14">
                         <div class="relative">
                             <div class="author-photo-ring">
-                                <img src="https://static.wixstatic.com/media/af3a4a_1e83490b7701425a904b4f33085a2d72~mv2.png" 
-                                     alt="Ulises R. Cruz García - Autor" 
-                                     class="w-56 h-56 object-cover rounded-full">
+                                <img src="https://static.wixstatic.com/media/af3a4a_1e83490b7701425a904b4f33085a2d72~mv2.png"
+                                     alt="Ulises R. Cruz García - Autor"
+                                     class="w-56 h-56 object-cover rounded-full" loading="lazy" decoding="async">
                             </div>
                             <div class="bestseller-badge absolute -bottom-2 -right-2 px-4 py-2 rounded-full shadow-xl">
                                 <i class="fas fa-medal mr-1"></i>Autor <br>[nonfiction]
@@ -2139,7 +2204,7 @@
     </section>
 
     <!-- ==================== TESTIMONIOS ==================== -->
-    <section id="testimonios" class="py-24" style="background:var(--bg-surface)">
+    <section id="testimonios" class="py-24 scroll-reveal" style="background:var(--bg-surface)">
         <div class="container mx-auto px-4 md:px-8">
             <div class="text-center mb-14">
                 <div class="section-eyebrow inline-flex"><span class="dot"></span>Testimonios</div>
@@ -2238,7 +2303,7 @@
                             <label for="login-password" class="form-label">
                                 <i class="fas fa-lock mr-2" style="color:var(--accent-gold)"></i>Contraseña
                             </label>
-                            <input type="password" id="login-password" class="form-input" placeholder="••••••••" required>
+                            <input type="password" id="login-password" class="form-input" placeholder="••••••••" autocomplete="current-password" required>
                         </div>
                         <button type="submit" class="btn-primary w-full justify-center">
                             <i class="fas fa-sign-in-alt"></i>Iniciar Sesión
@@ -2263,7 +2328,7 @@
                             <label for="register-password" class="form-label">
                                 <i class="fas fa-lock mr-2" style="color:var(--accent-gold)"></i>Contraseña
                             </label>
-                            <input type="password" id="register-password" class="form-input" placeholder="Mínimo 6 caracteres" required>
+                            <input type="password" id="register-password" class="form-input" placeholder="Mínimo 6 caracteres" autocomplete="new-password" required>
                         </div>
                         <button type="submit" class="btn-primary w-full justify-center">
                             <i class="fas fa-user-plus"></i>Crear Cuenta
@@ -2438,9 +2503,9 @@
                 <!-- Información del autor -->
                 <div>
                     <div class="mb-4">
-                        <img src="assets/icons/Logo Arcus.png" 
-                             alt="Editorial Arcus" 
-                             class="h-14 w-auto object-contain"
+                        <img src="assets/icons/Logo Arcus.png"
+                             alt="Editorial Arcus"
+                             class="h-14 w-auto object-contain" loading="lazy" decoding="async"
                              style="filter:brightness(0) invert(1);">
                     </div>
                         <p class="mb-6 text-sm leading-relaxed" style="color:var(--text-dim)">
@@ -2538,7 +2603,7 @@
 <a id="jotform-trigger" class="lightbox-261214323221036" style="display:none;" aria-hidden="true"></a>
 
 <!-- Intro.js y Coach Mark -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.2.0/intro.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.2.0/intro.min.js" integrity="sha384-dnCOn7BN1Q6GfmuQMdJ0gNoyzjUps6NsIfYCtDc6g2pXZ8ELg7sXXg8KGzxTSleL" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="js/coachmark.js"></script>
 <script src="js/analytics-tracker.js" defer></script>
 

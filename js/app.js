@@ -583,7 +583,7 @@ function renderBooks(filterCategory = 'all', sortBy = 'featured') {
         });
 
         // Limpiar contenedor
-        container.innerHTML = '';
+        container.replaceChildren();
 
         // Mostrar mensaje si no hay resultados
         if (filteredBooks.length === 0) {
@@ -774,7 +774,7 @@ function openBookModal(bookId) {
 
         // Actualizar beneficios
         const benefitsList = document.getElementById('modal-benefits');
-        benefitsList.innerHTML = '';
+        benefitsList.replaceChildren();
         const benefits = currentLanguage === 'es' ? book.benefits_es : book.benefits_en;
         benefits.forEach(benefit => {
             const li = document.createElement('li');
@@ -789,7 +789,7 @@ function openBookModal(bookId) {
 
         // Actualizar categorías
         const categoriesContainer = document.getElementById('modal-categories');
-        categoriesContainer.innerHTML = '';
+        categoriesContainer.replaceChildren();
         book.categories.forEach(cat => {
             const span = document.createElement('span');
             span.className = 'category-badge';
@@ -1008,7 +1008,7 @@ function renderCartItems() {
     if (!container) return;
 
     if (shoppingCart.length === 0) {
-        container.innerHTML = '';
+        container.replaceChildren();
         if (emptyCart) emptyCart.classList.remove('hidden');
         if (checkoutBtn) checkoutBtn.disabled = true;
         updateCartSummary();
@@ -1442,13 +1442,13 @@ function setupSearch() {
         const noResults = document.getElementById('no-results');
 
         if (filtered.length === 0) {
-            container.innerHTML = '';
+            container.replaceChildren();
             noResults.classList.remove('hidden');
             return;
         }
 
         noResults.classList.add('hidden');
-        container.innerHTML = '';
+        container.replaceChildren();
 
         filtered.forEach(book => {
             const bookElement = createBookCard(book);
@@ -2010,7 +2010,7 @@ async function loadPurchaseHistory() {
         } else {
             // Empty State
             const template = document.getElementById('history-empty-template');
-            listContainer.innerHTML = '';
+            listContainer.replaceChildren();
             if (template) {
                 listContainer.appendChild(template.content.cloneNode(true));
             } else {
@@ -2056,7 +2056,7 @@ window.closeVideoModal = function() {
 
 function renderHistoryList(purchases) {
     const listContainer = document.getElementById('history-list');
-    listContainer.innerHTML = '';
+    listContainer.replaceChildren();
 
     // Sort logic
     purchases.sort((a, b) => {
@@ -2137,6 +2137,8 @@ window.toggleTheme = function() {
     if (currentTheme === 'light') {
         html.removeAttribute('data-theme');
         localStorage.setItem('arcus-theme', 'dark');
+        const csMeta = document.querySelector('meta[name="color-scheme"]');
+        if (csMeta) csMeta.content = 'dark';
         if (icon) {
             icon.classList.remove('fa-sun');
             icon.classList.add('fa-moon');
@@ -2144,6 +2146,8 @@ window.toggleTheme = function() {
     } else {
         html.setAttribute('data-theme', 'light');
         localStorage.setItem('arcus-theme', 'light');
+        const csMeta = document.querySelector('meta[name="color-scheme"]');
+        if (csMeta) csMeta.content = 'light';
         if (icon) {
             icon.classList.remove('fa-moon');
             icon.classList.add('fa-sun');
@@ -2155,8 +2159,10 @@ window.toggleTheme = function() {
 (function() {
     const savedTheme = localStorage.getItem('arcus-theme');
     const icon = document.getElementById('theme-icon');
+    const csMeta = document.querySelector('meta[name="color-scheme"]');
     if (savedTheme === 'dark') {
         document.documentElement.removeAttribute('data-theme');
+        if (csMeta) csMeta.content = 'dark';
         if (icon) {
             icon.classList.remove('fa-sun');
             icon.classList.add('fa-moon');
@@ -2164,6 +2170,7 @@ window.toggleTheme = function() {
     } else {
         // default light
         document.documentElement.setAttribute('data-theme', 'light');
+        if (csMeta) csMeta.content = 'light';
         if (icon) {
             icon.classList.remove('fa-moon');
             icon.classList.add('fa-sun');
