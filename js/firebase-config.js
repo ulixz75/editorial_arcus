@@ -31,20 +31,22 @@ import {
 // CONFIGURACIÓN DE FIREBASE
 // ============================================
 
-const firebaseConfig = {
-    apiKey: "AIzaSyCxRU1Vu1CfCjLeuQVIlJEllZfPDo6uEss",
-    authDomain: "professional-ebook-shop.firebaseapp.com",
-    projectId: "professional-ebook-shop",
-    storageBucket: "professional-ebook-shop.firebasestorage.app",
-    messagingSenderId: "106178721927",
-    appId: "1:106178721927:web:e2cdf9e4e402c9b124e022"
-};
+let firebaseConfig = {};
+try {
+    const res = await fetch('/api/firebase-config');
+    if (res.ok) {
+        firebaseConfig = await res.json();
+    }
+} catch (e) {
+    console.warn('No se pudo cargar la configuración de Firebase desde el servidor.');
+}
 
-// Inicializar Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-const googleProvider = new GoogleAuthProvider();
+// Inicializar Firebase solo si existe apiKey configurada
+const isFirebaseConfigured = Boolean(firebaseConfig && firebaseConfig.apiKey);
+const app = isFirebaseConfigured ? initializeApp(firebaseConfig) : null;
+const auth = app ? getAuth(app) : null;
+const db = app ? getFirestore(app) : null;
+const googleProvider = app ? new GoogleAuthProvider() : null;
 
 // ============================================
 // AUTENTICACIÓN
@@ -52,6 +54,7 @@ const googleProvider = new GoogleAuthProvider();
 
 // Registrar nuevo usuario con email/password
 async function registerUser(email, password, displayName) {
+    if (!auth || !db) return { success: false, error: 'Firebase no configurado' };
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
@@ -88,6 +91,7 @@ async function registerUser(email, password, displayName) {
 
 // Iniciar sesión con email/password
 async function loginUser(email, password) {
+    if (!auth || !db) return { success: false, error: 'Firebase no configurado' };
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
@@ -111,6 +115,7 @@ async function loginUser(email, password) {
 
 // Iniciar sesión con Google
 async function loginWithGoogle() {
+    if (!auth || !db || !googleProvider) return { success: false, error: 'Firebase no configurado' };
     try {
         const result = await signInWithPopup(auth, googleProvider);
         const user = result.user;
@@ -153,6 +158,7 @@ async function loginWithGoogle() {
 
 // Cerrar sesión
 async function logoutUser() {
+    if (!auth) return { success: true };
     try {
         await signOut(auth);
         console.log('✅ Sesión cerrada exitosamente');
@@ -165,6 +171,10 @@ async function logoutUser() {
 
 // Observador de estado de autenticación
 function setupAuthObserver(callback) {
+    if (!auth) {
+        callback({ authenticated: false, user: null, userData: null });
+        return;
+    }
     onAuthStateChanged(auth, async (user) => {
         if (user) {
             // Usuario autenticado
@@ -188,6 +198,7 @@ function setupAuthObserver(callback) {
 
 // Obtener datos del usuario
 async function getUserData(userId) {
+    if (!db) return { success: false, error: 'Firebase no configurado' };
     try {
         const userDoc = await getDoc(doc(db, 'users', userId));
         
@@ -208,6 +219,7 @@ async function getUserData(userId) {
 
 // Guardar favoritos en Firestore
 async function saveFavorites(userId, favorites) {
+    if (!db) return { success: false, error: 'Firebase no configurado' };
     try {
         await setDoc(doc(db, 'users', userId, 'data', 'favorites'), {
             bookIds: favorites,
@@ -224,6 +236,7 @@ async function saveFavorites(userId, favorites) {
 
 // Obtener favoritos de Firestore
 async function getFavorites(userId) {
+    if (!db) return { success: true, favorites: [] };
     try {
         const favDoc = await getDoc(doc(db, 'users', userId, 'data', 'favorites'));
         
@@ -244,6 +257,7 @@ async function getFavorites(userId) {
 
 // Guardar compra en Firestore
 async function savePurchaseHistory(userId, purchaseData) {
+    if (!db) return { success: false, error: 'Firebase no configurado' };
     try {
         const purchase = {
             userId: userId,
@@ -277,6 +291,7 @@ async function savePurchaseHistory(userId, purchaseData) {
 
 // Obtener historial de compras del usuario
 async function getUserPurchases(userId) {
+    if (!db) return { success: true, purchases: [] };
     try {
         const q = query(
             collection(db, 'purchases'), 

@@ -1,2180 +1,873 @@
-// ================ TRADUCCIONES COMPLETAS ================
-const translations = {
+/**
+ * ARCUS Editorial — Storefront Controller
+ * Zero on-site payment/cart/checkout; routes buyers directly to Amazon, Google Play Books, Books2Read, and free edition downloads.
+ */
+(function () {
+  'use strict';
+
+  const Catalog = window.ArcusCatalog;
+  const BOOKS = Catalog ? Catalog.BOOKS : [];
+
+  let currentLanguage = 'es';
+  let activeCategory = 'all';
+  let activeSort = 'featured';
+  let searchQuery = '';
+  let currentReadingBookId = null;
+  let readingFontSize = 100;
+
+  const I18N = {
     es: {
-        // Navegación
-        nav_catalog: 'Catálogo',
-
-        nav_author: 'Autor',
-        nav_testimonials: 'Testimonios',
-        nav_contact: 'Contacto',
-        nav_terms: 'Términos',
-        nav_privacy: 'Privacidad',
-        nav_reader: 'Lector',
-        nav_stores: 'Tiendas',
-        nav_my_purchases: 'Mis compras',
-        nav_logout: 'Cerrar sesión',
-        nav_user_default: 'Usuario',
-        search_placeholder: 'Buscar libros...',
-        aria_toggle_theme: 'Cambiar tema',
-        aria_cart: 'Carrito',
-        aria_login: 'Iniciar sesión',
-        aria_open_menu: 'Abrir menú',
-
-        // Hero
-        hero_title: 'Descubre tu <span class="text-accent">transformación</span> personal',
-        hero_subtitle: 'Explora la colección completa de libros sobre mindfulness, nutrición y bienestar integral',
-        hero_search_mobile: 'Buscar por título, categoría...',
-        hero_books: 'Libros',
-        hero_readers: 'Lectores',
-        hero_languages: 'Idiomas',
-        hero_cta_catalog: 'Explorar Catálogo',
-        hero_cta_video: 'Ver Video',
-
-        // Catálogo
-        catalog_title: 'Colección de Libros',
-        catalog_subtitle: 'Descubre nuestra selección de libros digitales diseñados para guiarte en tu camino de transformación personal',
-        filter_all: 'Todos',
-        filter_mindfulness: 'Mindfulness',
-        filter_nutrition: 'Sistemas',
-        filter_exercise: 'Comunicación',
-        filter_wellness: 'Rendimiento',
-        showing_books: 'Mostrando',
-        books_text: 'libros',
-        sort_featured: 'Destacados',
-        sort_newest: 'Más recientes',
-        sort_rating: 'Mejor valorados',
-        sort_title: 'Orden A-Z',
-        no_results_title: 'No se encontraron libros',
-        no_results_text: 'Intenta con otros filtros o términos de búsqueda',
-
-        // Tarjetas de libro
-        badge_bestseller: '⭐ Top',
-        badge_featured: 'Destacado',
-        btn_view_details: 'Ver Detalles',
-        reviews: 'reseñas',
-
-        // Modal de libro
-        modal_description: 'Descripción',
-        modal_what_learn: 'Lo que aprenderás',
-        modal_categories: 'Categorías',
-        modal_formats: 'Formatos disponibles',
-        modal_pages: 'páginas',
-        modal_languages: 'Español / English',
-        btn_buy_now: 'Comprar Ahora',
-        btn_add_cart: 'Añadir al Carrito',
-        btn_read_sample: 'Leer Muestra Gratis',
-
-
-        // Modo lectura
-        reading_free_sample: 'Muestra gratuita',
-        reading_like_sample: '¿Te gustó esta muestra?',
-        reading_get_full: 'Obtén el libro completo para continuar leyendo.',
-        btn_close: 'Cerrar',
-        btn_buy_full: 'Comprar Libro Completo',
-
-        // Carrito
-        cart_title: 'Tu Carrito',
-        cart_empty: 'Tu carrito está vacío',
-        cart_items: 'items',
-        cart_item: 'item',
-        cart_subtotal: 'Subtotal',
-        cart_taxes: 'Impuestos',
-        cart_total: 'Total',
-        btn_checkout: 'Proceder al Pago',
-        btn_continue_shopping: 'Seguir Comprando',
-        payment_methods: 'Métodos de pago aceptados:',
-
-        // Contacto
-        contact_title: 'Contáctame',
-        contact_subtitle: 'Tienes alguna pregunta? Escríbeme y te responderé lo antes posible',
-        contact_name: 'Nombre',
-        contact_email: 'Email',
-        contact_message: 'Mensaje',
-        btn_send: 'Enviar Mensaje',
-        btn_sending: 'Enviando...',
-        contact_success: '¡Mensaje enviado! Te responderé pronto.',
-        contact_error: 'Error al enviar. Inténtalo de nuevo.',
-
-        // Autor
-        author_title: 'Sobre el Autor',
-        author_subtitle: 'Especialista en Mindfulness y Bienestar Integral',
-
-        // Testimonios
-        testimonials_title: 'Lo que dicen los lectores',
-
-        // Footer
-        footer_rights: 'Todos los derechos reservados',
-        footer_follow: 'Sígueme',
-
-        // Notificaciones
-        notif_added_cart: 'Libro añadido al carrito',
-        notif_removed_cart: 'Libro removido del carrito',
-
-        notif_redirecting_stripe: 'Redirigiendo a Stripe...',
-        notif_empty_cart: 'Tu carrito está vacío',
-        notif_welcome_back: '¡Bienvenido de vuelta! Si completaste tu compra, recibirás un email pronto.',
-        notif_error_loading: 'Error al cargar la aplicación',
-        notif_error_books: 'Error al cargar los libros',
-        notif_error_book_details: 'Error al mostrar detalles del libro',
-        notif_error_add_cart: 'Error al añadir el libro al carrito',
+      nav_catalog: 'Catálogo',
+      nav_stores: 'Dónde comprar',
+      nav_author: 'Autor',
+      nav_testimonials: 'Lectores',
+      nav_reader: 'ARCUS Reader',
+      nav_cta_stores: 'Ver tiendas oficiales',
+      nav_terms: 'Términos',
+      nav_privacy: 'Privacidad',
+      theme_label: 'Tema',
+      theme_dark: 'Modo oscuro',
+      theme_light: 'Modo claro',
+      hero_kicker: 'Sello editorial independiente · No ficción y pensamiento sistémico',
+      hero_headline: 'Ideas que descifran lo que otros prefieren callar.',
+      hero_subtitle:
+        'Publicaciones de no ficción sobre sistemas de poder, ciencia cognitiva y transformación humana escritas por Ulises R. Cruz García. Disponibles globalmente en las principales librerías digitales.',
+      hero_cta_catalog: 'Explorar catálogo',
+      hero_cta_stores: 'Dónde comprar',
+      hero_cta_video: 'Ver presentación',
+      hero_caption_title: 'Lanzamiento destacado · Las tres tentaciones',
+      stat_readers: 'Lectores internacionales',
+      stat_rating: 'Valoración media',
+      stat_stores: 'Tiendas oficiales',
+      catalog_kicker: 'Colección completa',
+      catalog_title: 'Catálogo de Libros',
+      catalog_subtitle:
+        'Explora las obras publicadas, lee muestras gratuitas directamente en el navegador y accede a cada libro en Amazon, Google Play Books o Books2Read.',
+      filter_all: 'Todos',
+      filter_systems: 'Sistemas',
+      filter_mindfulness: 'Mindfulness',
+      filter_performance: 'Rendimiento',
+      filter_communication: 'Comunicación',
+      search_placeholder: 'Buscar título o tema...',
+      sort_featured: 'Destacados',
+      sort_newest: 'Más recientes',
+      sort_rating: 'Mejor valorados',
+      sort_title: 'Orden A–Z',
+      showing_prefix: 'Mostrando',
+      showing_unit_singular: 'libro',
+      showing_unit_plural: 'libros',
+      no_results_title: 'No se encontraron títulos',
+      no_results_text: 'Prueba con otra categoría o limpia el término de búsqueda.',
+      btn_reset_filters: 'Restablecer filtros',
+      btn_details_stores: 'Ver tiendas',
+      btn_free_download: 'Descargar gratis',
+      btn_sample: 'Muestra',
+      btn_read_sample: 'Leer muestra gratuita',
+      btn_get_free: 'Obtener edición gratuita',
+      free_label: 'Gratis',
+      pages_unit: 'págs.',
+      reviews_unit: 'reseñas',
+      stores_kicker: 'Distribución oficial global',
+      stores_title: 'Dónde adquirir nuestras obras',
+      stores_subtitle:
+        'Las compras se gestionan directamente en las plataformas oficiales de distribución para garantizar entrega instantánea, seguridad de pago y soporte multiplataforma.',
+      store_amazon_desc:
+        'Ediciones Kindle digitales y versiones impresas en tapa blanda con envío internacional a través de las tiendas regionales de Amazon.',
+      store_play_desc:
+        'Lectura sincronizada al instante en Android, iOS y navegador web con tu cuenta de Google y descarga para lectura sin conexión.',
+      store_b2r_desc:
+        'Selector universal de Draft2Digital que conecta con Apple Books, Barnes & Noble, Kobo, Vivlio y librerías digitales locales.',
+      store_cta_amazon: 'Explorar en Amazon',
+      store_cta_play: 'Abrir Google Play Books',
+      store_cta_b2r: 'Ir a Books2Read',
+      store_choose_book: 'Elige la obra que deseas adquirir:',
+      reader_strip_text:
+        '¿Ya tienes acceso a la biblioteca web? Accede directamente a tus lecturas online desde la aplicación ARCUS Reader.',
+      reader_strip_cta: 'Abrir ARCUS Reader',
+      author_role: 'Autor & Fundador',
+      author_origin: 'Puerto Rico · Residente en España',
+      author_meta_imprint: 'Sello editorial',
+      author_kicker: 'Perfil editorial',
+      author_heading: 'Ciencia cognitiva, sistemas humanos y análisis crítico del poder.',
+      author_bio:
+        'Pensador en la convergencia entre ciencia, sistemas y bienestar integral. Integra ingeniería biomecánica, análisis cognitivo y enfoque consciente para comprender por qué las personas y las instituciones repiten patrones evitables—y cómo rediseñarlos con criterio práctico.',
+      author_quote:
+        '“La verdadera transformación nace de la integración armoniosa entre claridad mental, criterio sistémico y salud física. No es una teoría abstracta, sino una disciplina cotidiana.”',
+      author_edu_title: 'Formación Académica',
+      author_cert_title: 'Certificaciones',
+      testimonials_kicker: 'Reseñas verificadas',
+      testimonials_title: 'Lo que dicen nuestros lectores',
+      testimonials_subtitle:
+        'Opiniones reales sobre el impacto práctico de las obras publicadas por Editorial Arcus.',
+      testimonial_1_quote:
+        '“Por primera vez en mi vida entiendo por qué las dietas restrictivas nunca funcionaron para mí. Este libro me dio herramientas claras para escuchar a mi cuerpo sin culpa.”',
+      testimonial_2_quote:
+        '“Un libro que te confronta más de lo que te consuela. Me hizo replantear decisiones cotidianas que daba por inofensivas. Directo, incómodo y necesario.”',
+      testimonial_3_quote:
+        '“Me sorprendió lo actual que se siente el diagnóstico histórico. No es moralista, sino profundamente lúcido. Terminé cuestionando hábitos que daba por sentados.”',
+      spec_price: 'Precio de referencia',
+      spec_rating: 'Valoración',
+      spec_pages: 'Extensión',
+      spec_date: 'Publicación',
+      spec_languages: 'Idiomas',
+      spec_languages_val: 'Español / English',
+      modal_description: 'Sinopsis',
+      modal_what_learn: 'Puntos clave',
+      modal_stores_heading: 'Adquirir en plataformas oficiales',
+      modal_free_desc:
+        'Esta obra es de descarga gratuita. Solicita el archivo digital directamente mediante el formulario editorial.',
+      reading_free_sample: 'Muestra de lectura',
+      reading_footer_prompt: 'Continúa la lectura en tu plataforma preferida:',
+      contact_title: 'Contacto Editorial',
+      contact_name: 'Nombre completo',
+      contact_email: 'Correo electrónico',
+      contact_subject: 'Asunto',
+      contact_message: 'Mensaje',
+      btn_send: 'Enviar mensaje',
+      footer_desc:
+        'Publicamos obras de no ficción que analizan los mecanismos del poder, la cognición y el desarrollo humano.',
+      footer_links_title: 'Catálogo y Tiendas',
+      footer_contact_title: 'Contacto y Legal',
+      footer_contact_desc: 'Consultas de prensa, derechos editoriales o soporte al lector.',
+      btn_contact: 'Enviar mensaje',
+      btn_tour: 'Guía rápida',
     },
     en: {
-        // Navigation
-        nav_catalog: 'Catalog',
+      nav_catalog: 'Catalog',
+      nav_stores: 'Where to buy',
+      nav_author: 'Author',
+      nav_testimonials: 'Readers',
+      nav_reader: 'ARCUS Reader',
+      nav_cta_stores: 'Official stores',
+      nav_terms: 'Terms',
+      nav_privacy: 'Privacy',
+      theme_label: 'Theme',
+      theme_dark: 'Dark mode',
+      theme_light: 'Light mode',
+      hero_kicker: 'Independent publishing house · Non-fiction & systems thinking',
+      hero_headline: 'Ideas that decode what others prefer left unsaid.',
+      hero_subtitle:
+        'Non-fiction works on systems of power, cognitive science, and human transformation by Ulises R. Cruz García. Available worldwide across major digital bookstores.',
+      hero_cta_catalog: 'Explore catalog',
+      hero_cta_stores: 'Where to buy',
+      hero_cta_video: 'Watch overview',
+      hero_caption_title: 'Featured release · The Three Temptations',
+      stat_readers: 'International readers',
+      stat_rating: 'Average rating',
+      stat_stores: 'Official platforms',
+      catalog_kicker: 'Complete collection',
+      catalog_title: 'Book Catalog',
+      catalog_subtitle:
+        'Explore published titles, read free samples directly in your browser, and acquire each book on Amazon, Google Play Books, or Books2Read.',
+      filter_all: 'All',
+      filter_systems: 'Systems',
+      filter_mindfulness: 'Mindfulness',
+      filter_performance: 'Performance',
+      filter_communication: 'Communication',
+      search_placeholder: 'Search title or topic...',
+      sort_featured: 'Featured',
+      sort_newest: 'Newest',
+      sort_rating: 'Top Rated',
+      sort_title: 'A–Z Order',
+      showing_prefix: 'Showing',
+      showing_unit_singular: 'book',
+      showing_unit_plural: 'books',
+      no_results_title: 'No matching titles found',
+      no_results_text: 'Try another category or clear your search query.',
+      btn_reset_filters: 'Reset filters',
+      btn_details_stores: 'View stores',
+      btn_free_download: 'Download free',
+      btn_sample: 'Sample',
+      btn_read_sample: 'Read free sample',
+      btn_get_free: 'Get free edition',
+      free_label: 'Free',
+      pages_unit: 'pp.',
+      reviews_unit: 'reviews',
+      stores_kicker: 'Global official distribution',
+      stores_title: 'Where to acquire our books',
+      stores_subtitle:
+        'Purchases are fulfilled directly through official distribution platforms to guarantee instant delivery, secure checkout, and cross-device support.',
+      store_amazon_desc:
+        'Digital Kindle editions and paperback print copies with international shipping across regional Amazon storefronts.',
+      store_play_desc:
+        'Instant synchronized reading on Android, iOS, and web browsers with your Google account and offline download support.',
+      store_b2r_desc:
+        'Universal Draft2Digital selector connecting you to Apple Books, Barnes & Noble, Kobo, Vivlio, and local digital bookstores.',
+      store_cta_amazon: 'Browse on Amazon',
+      store_cta_play: 'Open Google Play Books',
+      store_cta_b2r: 'Go to Books2Read',
+      store_choose_book: 'Select the title to purchase:',
+      reader_strip_text:
+        'Already have web library access? Open your online reading shelf directly in ARCUS Reader.',
+      reader_strip_cta: 'Open ARCUS Reader',
+      author_role: 'Author & Founder',
+      author_origin: 'Puerto Rico · Based in Spain',
+      author_meta_imprint: 'Imprint',
+      author_kicker: 'Editorial profile',
+      author_heading: 'Cognitive science, human systems, and critical analysis of power.',
+      author_bio:
+        'A thinker at the intersection of science, systems, and holistic performance. Integrates biomechanical engineering, cognitive science, and mindfulness to examine why individuals and institutions repeat avoidable patterns—and how to redesign them.',
+      author_quote:
+        '“True transformation emerges from the disciplined integration of mental clarity, systemic judgment, and physical health. It is not an abstract theory, but a daily practice.”',
+      author_edu_title: 'Academic Background',
+      author_cert_title: 'Certifications',
+      testimonials_kicker: 'Verified reader reviews',
+      testimonials_title: 'What readers say',
+      testimonials_subtitle:
+        'Authentic feedback on the practical impact of works published by Editorial Arcus.',
+      testimonial_1_quote:
+        '“For the first time in my life I understand why restrictive diets never worked for me. This book gave me clear tools to listen to my body without guilt.”',
+      testimonial_2_quote:
+        '“A book that challenges you rather than comforts you. It made me rethink everyday decisions I once assumed were harmless. Direct, sharp, and necessary.”',
+      testimonial_3_quote:
+        '“I was struck by how timely the historical diagnosis feels. Never preachy—deeply introspective. I ended up questioning habits I took for granted.”',
+      spec_price: 'Reference price',
+      spec_rating: 'Rating',
+      spec_pages: 'Length',
+      spec_date: 'Published',
+      spec_languages: 'Languages',
+      spec_languages_val: 'Spanish / English',
+      modal_description: 'Synopsis',
+      modal_what_learn: 'Key takeaways',
+      modal_stores_heading: 'Buy on official platforms',
+      modal_free_desc:
+        'This edition is free to download. Request the digital file directly via the editorial form.',
+      reading_free_sample: 'Reading sample',
+      reading_footer_prompt: 'Continue reading on your preferred store:',
+      contact_title: 'Editorial Contact',
+      contact_name: 'Full name',
+      contact_email: 'Email address',
+      contact_subject: 'Subject',
+      contact_message: 'Message',
+      btn_send: 'Send message',
+      footer_desc:
+        'We publish non-fiction works examining the mechanics of power, cognition, and human development.',
+      footer_links_title: 'Catalog & Stores',
+      footer_contact_title: 'Contact & Legal',
+      footer_contact_desc: 'Press inquiries, publishing rights, or reader support.',
+      btn_contact: 'Send message',
+      btn_tour: 'Quick tour',
+    },
+  };
 
-        nav_author: 'Author',
-        nav_testimonials: 'Testimonials',
-        nav_contact: 'Contact',
-        nav_terms: 'Terms',
-        nav_privacy: 'Privacy',
-        nav_reader: 'Reader',
-        nav_stores: 'Stores',
-        nav_my_purchases: 'My purchases',
-        nav_logout: 'Log out',
-        nav_user_default: 'User',
-        search_placeholder: 'Search books...',
-        aria_toggle_theme: 'Toggle theme',
-        aria_cart: 'Cart',
-        aria_login: 'Sign in',
-        aria_open_menu: 'Open menu',
+  function t(key) {
+    return (I18N[currentLanguage] && I18N[currentLanguage][key]) || key;
+  }
 
-        // Hero
-        hero_title: 'Discover your personal <span class="text-accent">transformation</span>',
-        hero_subtitle: 'Explore the complete collection of books on mindfulness, nutrition and holistic wellness',
-        hero_search_mobile: 'Search by title, category...',
-        hero_books: 'Books',
-        hero_readers: 'Readers',
-        hero_languages: 'Languages',
-        hero_cta_catalog: 'Explore Catalog',
-        hero_cta_video: 'Watch Video',
+  function applySavedTheme() {
+    const saved = localStorage.getItem('arcus-theme');
+    const theme = saved === 'dark' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+    const meta = document.querySelector('meta[name="color-scheme"]');
+    if (meta) meta.content = theme;
+    updateThemeButton(theme);
+  }
 
-        // Catalog
-        catalog_title: 'Book Collection',
-        catalog_subtitle: 'Discover our selection of digital books designed to guide you on your personal transformation journey',
-        filter_all: 'All',
-        filter_mindfulness: 'Mindfulness',
-        filter_nutrition: 'Systems',
-        filter_exercise: 'Communication',
-        filter_wellness: 'Performance',
-        showing_books: 'Showing',
-        books_text: 'books',
-        sort_featured: 'Featured',
-        sort_newest: 'Newest',
-        sort_rating: 'Top Rated',
-        sort_title: 'A-Z Order',
-        no_results_title: 'No books found',
-        no_results_text: 'Try other filters or search terms',
-
-        // Book cards
-        badge_bestseller: '⭐ Top',
-        badge_featured: 'Featured',
-        btn_view_details: 'View Details',
-        reviews: 'reviews',
-
-        // Book modal
-        modal_description: 'Description',
-        modal_what_learn: 'What you\'ll learn',
-        modal_categories: 'Categories',
-        modal_formats: 'Available formats',
-        modal_pages: 'pages',
-        modal_languages: 'Spanish / English',
-        btn_buy_now: 'Buy Now',
-        btn_add_cart: 'Add to Cart',
-        btn_read_sample: 'Read Free Sample',
-
-
-        // Reading mode
-        reading_free_sample: 'Free sample',
-        reading_like_sample: 'Did you like this sample?',
-        reading_get_full: 'Get the full book to continue reading.',
-        btn_close: 'Close',
-        btn_buy_full: 'Buy Full Book',
-
-        // Cart
-        cart_title: 'Your Cart',
-        cart_empty: 'Your cart is empty',
-        cart_items: 'items',
-        cart_item: 'item',
-        cart_subtotal: 'Subtotal',
-        cart_taxes: 'Taxes',
-        cart_total: 'Total',
-        btn_checkout: 'Proceed to Checkout',
-        btn_continue_shopping: 'Continue Shopping',
-        payment_methods: 'Accepted payment methods:',
-
-        // Contact
-        contact_title: 'Contact Me',
-        contact_subtitle: 'Have a question? Write to me and I\'ll respond as soon as possible',
-        contact_name: 'Name',
-        contact_email: 'Email',
-        contact_message: 'Message',
-        btn_send: 'Send Message',
-        btn_sending: 'Sending...',
-        contact_success: 'Message sent! I\'ll respond soon.',
-        contact_error: 'Error sending. Please try again.',
-
-        // Author
-        author_title: 'About the Author',
-        author_subtitle: 'Mindfulness and Holistic Wellness Specialist',
-
-        // Testimonials
-        testimonials_title: 'What readers say',
-
-        // Footer
-        footer_rights: 'All rights reserved',
-        footer_follow: 'Follow me',
-
-        // Notifications
-        notif_added_cart: 'Book added to cart',
-        notif_removed_cart: 'Book removed from cart',
-
-        notif_redirecting_stripe: 'Redirecting to Stripe...',
-        notif_empty_cart: 'Your cart is empty',
-        notif_welcome_back: 'Welcome back! If you completed your purchase, you\'ll receive an email soon.',
-        notif_error_loading: 'Error loading application',
-        notif_error_books: 'Error loading books',
-        notif_error_book_details: 'Error showing book details',
-        notif_error_add_cart: 'Error adding book to cart',
+  function updateThemeButton(theme) {
+    const icon = document.getElementById('theme-icon');
+    const text = document.getElementById('theme-text');
+    if (icon) {
+      icon.className = theme === 'dark' ? 'fas fa-sun text-xs' : 'fas fa-moon text-xs';
     }
-};
-
-// Función para obtener traducción
-function t(key) {
-    return translations[currentLanguage][key] || key;
-}
-
-// ================ DATOS DE LOS LIBROS ================
-const booksCatalog = {
-    currentLanguage: 'es', // 'es' o 'en'
-    books: [
-        {
-            id: 1,
-            slug: 'descubre-lo-que-realmente-funciona',
-            title_es: 'Descubre lo que realmente funciona',
-            title_en: 'Discover What Really Works',
-            subtitle_es: 'El método mindfulness que transforma tu cuerpo desde adentro',
-            subtitle_en: 'The mindfulness method that transforms your body from within',
-            description_es: 'Aprende a escuchar a tu cuerpo y transforma tu relación con la comida y el ejercicio. Este libro te guía a través de un proceso de mindfulness aplicado para lograr resultados sostenibles sin dietas restrictivas.',
-            description_en: 'Learn to listen to your body and transform your relationship with food and exercise. This book guides you through an applied mindfulness process to achieve sustainable results without restrictive diets.',
-            cover_es: 'assets/icons/Descubre lo que realmente funciona cover.png',
-            cover_en: 'assets/icons/Discover what really works cover.png',
-            price: 3.99,
-            pages: 136,
-            publish_date: '2024-01-15',
-            rating: 4.5,
-            review_count: 148,
-            categories: ['mindfulness', 'nutricion', 'ejercicio'],
-            benefits_es: [
-                'Rompe el ciclo de dietas fallidas',
-                'Aprende a distinguir hambre real vs emocional',
-                'Movimiento intuitivo sin sufrimiento',
-                'Resultados sostenibles a largo plazo'
-            ],
-            benefits_en: [
-                'Break the cycle of failed diets',
-                'Learn to distinguish real vs emotional hunger',
-                'Intuitive movement without suffering',
-                'Sustainable long-term results'
-            ],
-            sample_content_es: `
-                <h2>Capítulo 1: El Comienzo del Camino</h2>
-                <p>Durante años, busqué respuestas en dietas milagrosas y rutinas de ejercicio extenuantes. Siempre terminaba en el mismo lugar: frustrado, sin resultados y con una relación cada vez más complicada con mi cuerpo.</p>
-
-                <p>Fue entonces cuando descubrí que el problema no estaba en mi fuerza de voluntad, sino en mi enfoque. Estaba luchando contra mi cuerpo en lugar de trabajar con él.</p>
-
-                <h3>El Punto de Inflexión</h3>
-                <p>Recuerdo claramente el día que cambié mi perspectiva. Después de otra dieta fallida, me senté en silencio y por primera vez en mucho tiempo, simplemente escuché. Escuché lo que mi cuerpo realmente necesitaba, no lo que las revistas decían que debía necesitar.</p>
-
-                <p>Ese momento de quietud fue el comienzo de un viaje que transformaría no solo mi cuerpo, sino mi relación completa con la comida y el movimiento.</p>
-            `,
-            sample_content_en: `
-                <h2>Chapter 1: The Beginning of the Journey</h2>
-                <p>For years, I searched for answers in miracle diets and strenuous exercise routines. I always ended up in the same place: frustrated, without results, and with an increasingly complicated relationship with my body.</p>
-
-                <p>It was then that I discovered the problem wasn't my willpower, but my approach. I was fighting against my body instead of working with it.</p>
-
-                <h3>The Turning Point</h3>
-                <p>I remember clearly the day I changed my perspective. After another failed diet, I sat in silence and for the first time in a long time, I simply listened. I listened to what my body really needed, not what magazines said I should need.</p>
-
-                <p>That moment of stillness was the beginning of a journey that would transform not only my body, but my entire relationship with food and movement.</p>
-            `,
-            featured: true,
-            bestseller: true
-        },
-        {
-            id: 2,
-            slug: 'porque la historia se repite',
-            title_es: 'Las tres tentaciones',
-            title_en: 'The three temptations',
-            subtitle_es: 'El código oculto de la historia...',
-            subtitle_en: 'The hidden code of history...',
-            description_es: 'Los sistemas no colapsan por errores evidentes, sino por decisiones que parecen correctas.',
-            description_en: 'Systems do not collapse due to obvious errors, but due to decisions that seem correct.',
-            cover_es: 'assets/icons/NuevaPortada.png',
-            cover_en: 'assets/icons/L3t_portada_en.png',
-            price: 4.99,
-            pages: 112,
-            publish_date: '2026-05-10',
-            rating: 4.9,
-            review_count: 89,
-            categories: ['sistemas', 'ciencia cognitiva', 'historia'],
-
-benefits_es: [
-    'Identifica patrones invisibles que preceden al colapso',
-    'Comprende cómo decisiones racionales generan resultados destructivos',
-    'Reconoce trampas sistémicas antes de que se normalicen',
-    'Aplica pensamiento crítico a historia, poder y toma de decisiones'
-],
-
-benefits_en: [
-    'Identify hidden patterns that precede collapse',
-    'Understand how rational decisions create destructive outcomes',
-    'Recognize systemic traps before they normalize',
-    'Apply critical thinking to history, power, and decision-making'
-],
-
-sample_content_es: `
-    <h2>Capítulo 1: La Ilusión del Control</h2>
-    <p>Ninguna civilización colapsa el día en que cree haber cometido un error. Colapsa mucho antes, cuando empieza a llamar virtud a lo que en realidad es una distorsión de su propio instinto de supervivencia.</p>
-
-    <p>El problema no es la falta de información. Tampoco la ausencia de inteligencia. A lo largo de la historia, los imperios han estado dirigidos por personas capaces, educadas y convencidas de que actuaban de forma racional. Y, sin embargo, los resultados se repiten con una consistencia inquietante.</p>
-
-    <h3>La Arquitectura Invisible</h3>
-    <p>Roma no cayó por ignorancia. Durante siglos, supo adaptarse, reorganizarse y resistir. Lo que la hizo insostenible no fue un evento aislado, sino una acumulación de decisiones que, vistas individualmente, parecían correctas.</p>
-
-    <p>Eso es lo que este libro intenta señalar: no los eventos, ni las fechas, ni los nombres, sino la arquitectura invisible que hace que ciertos errores no solo sean probables, sino inevitables.</p>
-
-    <p>A esa arquitectura la llamaremos tentación. No en un sentido moral, sino estructural: soluciones que funcionan a corto plazo, pero que introducen distorsiones profundas en el sistema.</p>
-`,
-
-sample_content_en: `
-    <h2>Chapter 1: The Illusion of Control</h2>
-    <p>No civilization collapses on the day it believes it has made a mistake. It collapses much earlier, when it begins to call virtue what is actually a distortion of its own survival instinct.</p>
-
-    <p>The problem is not a lack of information. Nor is it a lack of intelligence. Throughout history, empires have been led by capable, educated individuals who were convinced they were acting rationally. And yet, the outcomes repeat with unsettling consistency.</p>
-
-    <h3>The Invisible Architecture</h3>
-    <p>Rome did not fall because of ignorance. For centuries, it adapted, reorganized, and endured. What made it unsustainable was not a single event, but a series of decisions that, when viewed in isolation, seemed reasonable.</p>
-
-    <p>This is what the book aims to reveal: not events, dates, or names, but the invisible architecture that makes certain errors not only possible, but inevitable.</p>
-
-    <p>We will call that architecture temptation. Not in a moral sense, but a structural one: solutions that work in the short term while quietly distorting the system beneath them.</p>
-`,
-            featured: true,
-            bestseller: true
-        },
-        {
-            id: 3,
-slug: 'movimiento-intuitivo',
-title_es: 'Richard Hargreaves & IRONPOWER Publishing',
-title_en: 'Richard Hargreaves & IRONPOWER Publishing',
-subtitle_es: 'El cuerpo como sistema inteligente de alto rendimiento',
-subtitle_en: 'The body as a high-performance intelligent system',
-description_es: 'En SUPER HUMAN, Richard Hargreaves redefine el movimiento como una herramienta biológica de optimización. Aprende a moverte escuchando tu fisiología, mejorando tu energía, longevidad y rendimiento sin depender de rutinas rígidas.',
-description_en: 'In SUPER HUMAN, Richard Hargreaves redefines movement as a biological optimization tool. Learn to move by listening to your physiology, improving energy, longevity and performance without relying on rigid routines.',
-cover_es: 'assets/icons/super-human.png',
-cover_en: 'assets/icons/super-human.png',
-price: 0.00,
-pages: 78,
-publish_date: '2023-08-22',
-rating: 4.3,
-review_count: 67,
-categories: ['biología humana', 'rendimiento', 'mindfulness'],
-
-benefits_es: [
-    'Optimización del movimiento humano natural',
-    'Mayor energía y claridad mental',
-    'Reducción de lesiones y sobreentrenamiento',
-    'Rendimiento físico sostenible a largo plazo'
-],
-
-benefits_en: [
-    'Optimization of natural human movement',
-    'Increased energy and mental clarity',
-    'Reduced injuries and overtraining',
-    'Sustainable long-term physical performance'
-],
-
-sample_content_es: `
-    <h2>Capítulo 1: El cuerpo como sistema inteligente</h2>
-    <p>El error moderno no es la falta de ejercicio, sino la desconexión del cuerpo. SUPER HUMAN plantea que el movimiento no es una tarea, sino un lenguaje biológico.</p>
-
-    <p>Cuando aprendes a escuchar señales internas —fatiga, energía, tensión— el entrenamiento deja de ser forzado y se convierte en una estrategia de optimización humana.</p>
-`,
-
-sample_content_en: `
-    <h2>Chapter 1: The body as an intelligent system</h2>
-    <p>The modern mistake is not lack of exercise, but disconnection from the body. SUPER HUMAN proposes that movement is not a task, but a biological language.</p>
-
-    <p>When you learn to listen to internal signals—fatigue, energy, tension—training stops being forced and becomes a strategy for human optimization.</p>
-`,
-            featured: true,
-            bestseller: false
-        },
-        {
-            id: 4,
-            slug: 'bienestar-integral',
-            title_es: 'Ian Tohvsky & Positive Coaching LLC',
-            title_en: 'Ian Tohvsky & Positive Coaching LLC',
-            subtitle_es: 'Transforma tu forma de comunicarte en 21 días',
-            subtitle_en: 'Transform the way you communicate in 21 days',
-            description_es: 'Un enfoque práctico que combina hábitos diarios, psicología aplicada y ejercicios reales para mejorar tu comunicación, fortalecer tus relaciones y aumentar tu inteligencia social.',
-            description_en: 'A practical approach combining daily habits, applied psychology, and real exercises to improve your communication, strengthen relationships, and boost your social intelligence.',
-            cover_es: 'assets/icons/21days.png',
-            cover_en: 'assets/icons/21days.png',
-            price: 0.00,
-            pages: 94,
-            publish_date: '2023-04-05',
-            rating: 4.0,
-            review_count: 42,
-            categories: ['comunicación', 'desarrollo personal', 'habilidades sociales'],
-
-benefits_es: [
-    'Comunicación clara y persuasiva',
-    'Mejora de relaciones personales y profesionales',
-    'Mayor confianza al expresarte',
-    'Resolución efectiva de conflictos'
-],
-
-benefits_en: [
-    'Clear and persuasive communication',
-    'Improved personal and professional relationships',
-    'Greater confidence in self-expression',
-    'Effective conflict resolution'
-],
-
-sample_content_es: `
-    <h2>Capítulo 1: La Comunicación como Puente, no como Barrera</h2>
-    <p>La mayoría de los conflictos en la vida no provienen de lo que decimos, sino de cómo lo decimos y cómo es percibido por los demás. Comunicar no es solo transmitir información, sino crear entendimiento.</p>
-
-    <p>En este viaje de 21 días, aprenderás a transformar tu forma de expresarte para que tus palabras construyan puentes en lugar de muros, generando conexiones más profundas y auténticas.</p>
-`,
-            featured: true,
-            bestseller: false
-        },
-
-    ]
-};
-
-// ================ VARIABLES GLOBALES ================
-let currentLanguage = 'es';
-let shoppingCart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
-
-let currentReadingBook = null;
-let readingFontSize = 100;
-
-// Stripe Payment Link — canal propio ARCUS
-const STRIPE_PAYMENT_LINK = 'https://buy.stripe.com/28E6oI8YW2C03yW4ZPfQI00';
-const READING_APP_URL = 'https://arcus-reading.vercel.app/';
-const BOOKS2READ_URL = 'https://books2read.com/editorialarcus';
-
-// ================ INICIALIZACIÓN ================
-document.addEventListener('DOMContentLoaded', function() {
-    try {
-        // Cargar catálogo
-        renderBooks();
-
-        // Actualizar contadores
-        updateCartCount();
-
-
-        // Configurar event listeners
-        setupEventListeners();
-
-        // Configurar idioma
-        setupLanguage();
-
-        // Inicializar búsqueda
-        setupSearch();
-
-        // Configurar formulario de contacto (función eliminada/no definida)
-        // setupContactForm();
-
-        // Implementar lazy loading de imágenes
-        setupLazyLoading();
-
-        // Verificar si hay compra pendiente (regreso de Stripe)
-        checkPendingPurchase();
-
-    } catch (error) {
-        console.error('Error durante la inicialización:', error);
-        showNotification('Error al cargar la aplicación', 'error');
+    if (text) {
+      text.textContent = theme === 'dark' ? t('theme_light') : t('theme_dark');
     }
-});
+  }
 
-// ================ LAZY LOADING DE IMÁGENES ================
-function setupLazyLoading() {
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                if (img.dataset.src) {
-                    img.src = img.dataset.src;
-                    img.classList.add('loaded');
-                    observer.unobserve(img);
-                }
-            }
-        });
+  window.toggleTheme = function () {
+    const current = document.documentElement.getAttribute('data-theme') || 'light';
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('arcus-theme', next);
+    const meta = document.querySelector('meta[name="color-scheme"]');
+    if (meta) meta.content = next;
+    updateThemeButton(next);
+  };
+
+  function applyTranslations() {
+    document.documentElement.lang = currentLanguage;
+    document.querySelectorAll('[data-i18n]').forEach((el) => {
+      const key = el.getAttribute('data-i18n');
+      if (key) {
+        el.textContent = t(key);
+      }
     });
 
-    // Observar todas las imágenes lazy-load
-    document.querySelectorAll('.lazy-load').forEach(img => {
-        imageObserver.observe(img);
-    });
-}
+    const headline = document.getElementById('hero-headline');
+    if (headline) headline.textContent = t('hero_headline');
+    const subtitle = document.getElementById('hero-subtitle');
+    if (subtitle) subtitle.textContent = t('hero_subtitle');
 
-// ================ VERIFICAR COMPRA PENDIENTE ================
-function checkPendingPurchase() {
-    const pendingPurchase = sessionStorage.getItem('pendingPurchase');
+    const searchInput = document.getElementById('search-input');
+    if (searchInput) searchInput.placeholder = t('search_placeholder');
 
-    if (pendingPurchase) {
-        try {
-            const purchase = JSON.parse(pendingPurchase);
-            const timeDiff = Date.now() - purchase.timestamp;
-
-            // Si han pasado menos de 30 minutos
-            if (timeDiff < 30 * 60 * 1000) {
-                // Mostrar mensaje de bienvenida
-                showNotification('¡Bienvenido de vuelta! Si completaste tu compra, recibirás un email pronto.', 'info');
-            }
-
-            // Limpiar compra pendiente
-            sessionStorage.removeItem('pendingPurchase');
-        } catch (error) {
-            console.error('Error al verificar compra pendiente:', error);
-        }
+    const heroCover = document.getElementById('hero-featured-cover');
+    if (heroCover) {
+      heroCover.src =
+        currentLanguage === 'en' ? 'assets/icons/L3t_portada_en.png' : 'assets/icons/NuevaPortada.png';
     }
-}
 
-// ================ RENDERIZAR LIBROS ================
-function renderBooks(filterCategory = 'all', sortBy = 'featured') {
-    const container = document.getElementById('books-grid');
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+    updateThemeButton(currentTheme);
+
+    updateLanguageButtons();
+  }
+
+  function updateLanguageButtons() {
+    const pairs = [
+      ['lang-es', 'es'],
+      ['lang-en', 'en'],
+      ['mobile-lang-es', 'es'],
+      ['mobile-lang-en', 'en'],
+    ];
+    pairs.forEach(([id, code]) => {
+      const btn = document.getElementById(id);
+      if (!btn) return;
+      btn.classList.toggle('is-active', currentLanguage === code);
+    });
+  }
+
+  window.changeLanguage = function (lang) {
+    currentLanguage = lang === 'en' ? 'en' : 'es';
+    applyTranslations();
+    renderBooks();
+    renderStoresGrid();
+    if (currentReadingBookId !== null) {
+      window.openReadingMode(currentReadingBookId);
+    }
+  };
+
+  function renderStoresGrid() {
+    const grid = document.getElementById('stores-grid');
+    if (!grid || !Catalog || typeof Catalog.getStoreDirectory !== 'function') return;
+
+    const stores = Catalog.getStoreDirectory(currentLanguage);
+    grid.replaceChildren();
+
+    stores.forEach((store) => {
+      const card = document.createElement('article');
+      card.className = 'rounded-xl border p-6 sm:p-8 flex flex-col gap-6';
+      card.style.backgroundColor = 'var(--bg-canvas)';
+      card.style.borderColor = 'var(--border-hairline)';
+
+      const bookChoicesHtml = store.books
+        .map(
+          (book) => `
+          <a href="${book.url}"
+             target="_blank"
+             rel="noopener noreferrer"
+             class="store-link-btn"
+             data-store-id="${store.id}"
+             data-book-id="${book.id}"
+             data-book-slug="${book.slug}">
+            <div class="min-w-0">
+              <div class="font-semibold text-sm leading-snug truncate">${book.title}</div>
+              <div class="font-mono-tabular text-xs mt-0.5" style="color: var(--text-muted);">${book.metaLabel || `$${book.price.toFixed(2)} USD`}</div>
+            </div>
+            <i class="fas fa-external-link-alt text-xs shrink-0" style="color: var(--accent-brass);"></i>
+          </a>`
+        )
+        .join('');
+
+      card.innerHTML = `
+        <div>
+          <div class="flex items-center justify-between mb-5">
+            <span class="font-mono-tabular text-xs uppercase tracking-wider" style="color: var(--text-subtle);">${store.indexLabel}</span>
+            <i class="${store.iconClass} text-xl" style="color: var(--text-main);"></i>
+          </div>
+          <h3 class="font-serif-display text-2xl font-semibold mb-2" style="color: var(--text-main);">${store.name}</h3>
+          <p class="text-sm leading-relaxed" style="color: var(--text-muted);">${store.description}</p>
+        </div>
+
+        <div class="space-y-2.5 pt-4 border-t" style="border-color: var(--border-hairline);">
+          <p class="text-[11px] uppercase tracking-[0.12em] font-semibold" style="color: var(--text-subtle);">
+            ${t('store_choose_book')}
+          </p>
+          ${bookChoicesHtml}
+        </div>
+      `;
+
+      grid.appendChild(card);
+    });
+  }
+
+  function renderBooks() {
+    const grid = document.getElementById('books-grid');
     const noResults = document.getElementById('no-results');
+    const counter = document.getElementById('book-counter');
+    if (!grid || !Catalog) return;
 
-    if (!container) return;
+    const list = Catalog.filterAndSortBooks(BOOKS, {
+      category: activeCategory,
+      sortBy: activeSort,
+      query: searchQuery,
+      lang: currentLanguage,
+    });
 
-    try {
-        // Filtrar libros
-        let filteredBooks = booksCatalog.books;
+    grid.replaceChildren();
 
-        if (filterCategory !== 'all') {
-            filteredBooks = filteredBooks.filter(book =>
-                book.categories.includes(filterCategory)
-            );
-        }
-
-        // Ordenar libros
-        filteredBooks.sort((a, b) => {
-            switch(sortBy) {
-                case 'newest':
-                    return new Date(b.publish_date) - new Date(a.publish_date);
-                case 'rating':
-                    return b.rating - a.rating;
-                case 'title':
-                    return a.title_es.localeCompare(b.title_es);
-                case 'featured':
-                default:
-                    if (a.featured && !b.featured) return -1;
-                    if (!a.featured && b.featured) return 1;
-                    if (a.bestseller && !b.bestseller) return -1;
-                    if (!a.bestseller && b.bestseller) return 1;
-                    return b.rating - a.rating;
-            }
-        });
-
-        // Limpiar contenedor
-        container.replaceChildren();
-
-        // Mostrar mensaje si no hay resultados
-        if (filteredBooks.length === 0) {
-            if (noResults) noResults.classList.remove('hidden');
-            return;
-        }
-
-        if (noResults) noResults.classList.add('hidden');
-
-        // Renderizar cada libro
-        filteredBooks.forEach(book => {
-            const bookElement = createBookCard(book);
-            container.appendChild(bookElement);
-        });
-
-        // Actualizar contador
-        const bookCounter = document.getElementById('book-counter');
-        if (bookCounter) {
-            bookCounter.innerHTML =
-                `Mostrando <span class="font-bold" style="color:var(--accent-gold)">${filteredBooks.length}</span> libros`;
-        }
-
-    } catch (error) {
-        console.error('Error al renderizar libros:', error);
-        showNotification('Error al cargar los libros', 'error');
+    if (counter) {
+      const unit = list.length === 1 ? t('showing_unit_singular') : t('showing_unit_plural');
+      counter.textContent = `${t('showing_prefix')} ${list.length} ${unit}`;
     }
-}
 
-// ================ CREAR TARJETA DE LIBRO ================
-function createBookCard(book) {
-    const div = document.createElement('div');
-    div.className = 'book-card';
-    div.innerHTML = `
-        <div class="book-cover relative">
-            <img src="${currentLanguage === 'es' ? book.cover_es : book.cover_en}"
-                 alt="${currentLanguage === 'es' ? book.title_es : book.title_en}"
-                 class="w-full h-64 object-contain">
+    if (list.length === 0) {
+      if (noResults) noResults.classList.remove('hidden');
+      return;
+    }
 
-            <!-- Badges -->
-            <div class="absolute top-2 left-2 flex flex-col items-start gap-1">
-                ${book.bestseller ?
-                    `<span class="bestseller-badge px-2 py-0.5 text-[0.6rem] rounded-full shadow-lg"><i class="fas fa-fire mr-1"></i>${t('badge_bestseller')}</span>` :
-                    ''}
-                ${book.featured ?
-                    `<span style="background:rgba(0,212,170,0.2);color:var(--accent-teal);border:1px solid var(--border-teal);font-size:0.6rem;font-weight:700;padding:0.15rem 0.5rem;border-radius:999px">${t('badge_featured')}</span>` :
-                    ''}
-            </div>
+    if (noResults) noResults.classList.add('hidden');
+
+    list.forEach((book) => {
+      grid.appendChild(createBookCard(book));
+    });
+  }
+
+  function createBookCard(book) {
+    const title = currentLanguage === 'en' ? book.title_en : book.title_es;
+    const subtitle = currentLanguage === 'en' ? book.subtitle_en : book.subtitle_es;
+    const cover = currentLanguage === 'en' ? book.cover_en : book.cover_es;
+    const series = currentLanguage === 'en' ? book.series_en : book.series_es;
+    const priceLabel = book.price === 0 ? t('free_label') : `$${book.price.toFixed(2)} USD`;
+
+    const card = document.createElement('article');
+    card.className = 'editorial-card';
+
+    const storeLinksHtml =
+      book.price > 0
+        ? Catalog.getBookPurchaseChannels(book, currentLanguage)
+            .map(
+              (ch) =>
+                `<a href="${ch.url}" target="_blank" rel="noopener noreferrer" class="hover:underline" style="color: var(--text-muted);">${ch.name}</a>`
+            )
+            .join('<span aria-hidden="true"> · </span>')
+        : '';
+
+    card.innerHTML = `
+      <div class="cover-stage cursor-pointer" data-open-book="${book.id}">
+        <img src="${cover}" alt="${title}" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+      </div>
+      <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between gap-4">
+        <div class="space-y-2">
+          <div class="text-[11px] uppercase tracking-wider font-medium" style="color: var(--text-subtle);">
+            <span>${series}</span>
+            <span aria-hidden="true"> · </span>
+            <span class="font-mono-tabular">${book.pages} ${t('pages_unit')}</span>
+          </div>
+          <h3 class="font-serif-display text-xl font-semibold leading-snug line-clamp-2 cursor-pointer"
+              style="color: var(--text-main);"
+              data-open-book="${book.id}">
+            ${title}
+          </h3>
+          <p class="text-xs font-medium" style="color: var(--text-subtle);">${book.author}</p>
+          <p class="text-sm line-clamp-2 leading-relaxed" style="color: var(--text-muted);">${subtitle}</p>
         </div>
 
-        <div class="p-5">
-            <!-- Título y precio -->
-            <div class="flex justify-between items-start mb-3 gap-2">
-                <h3 class="font-head font-bold text-base cursor-pointer line-clamp-2 transition-colors flex-1"
-                    style="color: var(--text-primary);"
-                    onmouseover="this.style.color='var(--accent-gold)'"
-                    onmouseout="this.style.color='var(--text-primary)'"
-                    onclick="openBookModal(${book.id})">
-                    ${currentLanguage === 'es' ? book.title_es : book.title_en}
-                </h3>
-                <div class="text-right shrink-0">
-                    <span class="price-chip">$${book.price}</span>
-                    <div class="text-xs" style="color:var(--text-dim)">USD</div>
-                </div>
-            </div>
+        <div class="space-y-3 pt-3 border-t" style="border-color: var(--border-hairline);">
+          <div class="flex items-center justify-between text-xs">
+            <span class="font-mono-tabular font-semibold text-sm" style="color: var(--text-main);">${priceLabel}</span>
+            <span class="font-mono-tabular" style="color: var(--text-muted);">★ ${book.rating.toFixed(1)} (${book.review_count})</span>
+          </div>
 
-            <!-- Subtítulo -->
-            <p class="text-sm line-clamp-2 mb-4" style="color:var(--text-muted)">
-                ${currentLanguage === 'es' ? book.subtitle_es : book.subtitle_en}
-            </p>
-
-            <!-- Rating -->
-            <div class="flex items-center mb-4">
-                <div class="rating-stars mr-2 text-sm">
-                    ${generateStars(book.rating)}
-                </div>
-                <span class="text-xs" style="color:var(--text-dim)">${book.review_count} ${t('reviews')}</span>
-            </div>
-
-            <!-- Categorías -->
-            <div class="flex flex-wrap gap-1.5 mb-3">
-                ${book.categories.map(cat =>
-                    `<span class="category-badge">${cat}</span>`
-                ).join('')}
-            </div>
-            <!-- Formato / externa según precio -->
-            ${book.price === 0 ?
-                `<div class="mb-4 inline-flex items-center gap-1.5 text-[11px] px-2.5 py-1 rounded-full" style="background:rgba(245,166,35,0.08);border:1px solid var(--border-gold);color:var(--accent-gold)"><i class="fas fa-download text-xs"></i> ${currentLanguage==='es' ? 'Descarga gratuita' : 'Free download'}</div>`
-                :
-                `<div class="mb-4 flex flex-col gap-1.5">
-                    <div class="inline-flex items-center gap-1.5 text-[11px] px-2.5 py-1 rounded-full w-fit" style="background:rgba(0,212,170,0.08);border:1px solid var(--border-teal);color:var(--accent-teal)"><i class="fas fa-book-open text-xs"></i> ${currentLanguage==='es' ? 'Solo eBook en ARCUS Reader' : 'eBook only on ARCUS Reader'}</div>
-                    <a href="${BOOKS2READ_URL}" target="_blank" rel="noopener noreferrer" class="text-[11px] hover:underline flex items-center gap-1" style="color:var(--text-dim)"><i class="fas fa-external-link-alt text-[10px]"></i> ${currentLanguage==='es' ? 'También en Amazon, Apple y más (externo)' : 'Also on Amazon, Apple & more (external)'}</a>
-                </div>`
+          <div class="flex items-center gap-2">
+            ${
+              book.price === 0
+                ? `<button type="button" class="btn-editorial-primary flex-1 py-2.5 px-3 text-xs" onclick="abrirModalGratis()">${t('btn_free_download')}</button>`
+                : `<button type="button" class="btn-editorial-primary flex-1 py-2.5 px-3 text-xs" onclick="openBookModal(${book.id})">${t('btn_details_stores')}</button>`
             }
+            <button type="button" class="btn-editorial-secondary py-2.5 px-3 text-xs" onclick="openReadingMode(${book.id})" aria-label="${t('btn_read_sample')}: ${title}">
+              ${t('btn_sample')}
+            </button>
+          </div>
 
-            <!-- Botones -->
-            <div class="flex gap-2">
-                <button class="view-btn flex-1 btn-gradient font-bold py-2.5 rounded-xl text-sm"
-                        onclick="openBookModal(${book.id})"
-                        aria-label="Ver detalles de ${currentLanguage === 'es' ? book.title_es : book.title_en}">
-                    <i class="fas fa-eye mr-1.5"></i>${t('btn_view_details')}
-                </button>
-                ${book.price === 0 ?
-                    `<button class="cart-btn w-10 h-10 flex items-center justify-center rounded-xl transition-all"
-                            style="background:rgba(0,212,170,0.1);color:var(--accent-teal);border:1px solid var(--accent-teal)"
-                            onclick="abrirModalGratis()"
-                            aria-label="Obtener Gratis">
-                        <i class="fas fa-gift text-sm"></i>
-                    </button>`
-                :
-                    `<button class="cart-btn w-10 h-10 flex items-center justify-center rounded-xl transition-all"
-                            style="background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--text-muted)"
-                            onmouseover="this.style.borderColor='var(--accent-teal)';this.style.color='var(--accent-teal)'"
-                            onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-muted)'"
-                            onclick="addToCart(${book.id})"
-                            data-book-id="${book.id}"
-                            aria-label="Añadir al carrito">
-                        <i class="fas fa-shopping-cart text-sm"></i>
-                    </button>`
-                }
-            </div>
+          ${
+            storeLinksHtml
+              ? `<div class="text-[11px] pt-1 flex flex-wrap items-center gap-1.5">${storeLinksHtml}</div>`
+              : ''
+          }
         </div>
+      </div>
     `;
 
-    return div;
-}
+    card.querySelectorAll('[data-open-book]').forEach((el) => {
+      el.addEventListener('click', () => window.openBookModal(book.id));
+    });
 
-// ================ GENERAR ESTRELLAS DE RATING ================
-function generateStars(rating) {
-    let stars = '';
-    const fullStars = Math.floor(rating);
-    const hasHalfStar = rating % 1 >= 0.5;
+    return card;
+  }
 
-    for (let i = 0; i < fullStars; i++) {
-        stars += '<i class="fas fa-star"></i>';
-    }
-
-    if (hasHalfStar) {
-        stars += '<i class="fas fa-star-half-alt"></i>';
-    }
-
-    const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
-    for (let i = 0; i < emptyStars; i++) {
-        stars += '<i class="far fa-star"></i>';
-    }
-
-    return stars;
-}
-
-// ================ ACTUALIZAR CONTADOR DE LIBROS ================
-function updateBookCounter() {
-    const container = document.getElementById('books-grid');
-    if (!container) return;
-
-    const bookCount = container.children.length;
-    const bookCounter = document.getElementById('book-counter');
-
-    if (bookCounter) {
-        bookCounter.innerHTML =
-            `${t('showing_books')} <span class="font-bold">${bookCount}</span> ${t('books_text')}`;
-    }
-}
-
-// ================ MODAL DE LIBRO ================
-function openBookModal(bookId) {
-    const book = booksCatalog.books.find(b => b.id === bookId);
+  window.openBookModal = function (bookId) {
+    const book = BOOKS.find((b) => b.id === bookId);
     if (!book) return;
 
-    try {
-        // Actualizar contenido del modal
-        document.getElementById('modal-title').textContent =
-            currentLanguage === 'es' ? book.title_es : book.title_en;
-        document.getElementById('modal-subtitle').textContent =
-            currentLanguage === 'es' ? book.subtitle_es : book.subtitle_en;
-        document.getElementById('modal-description').textContent =
-            currentLanguage === 'es' ? book.description_es : book.description_en;
-        document.getElementById('modal-cover').src =
-            currentLanguage === 'es' ? book.cover_es : book.cover_en;
-        document.getElementById('modal-price').textContent = `$${book.price}`;
-        document.getElementById('modal-rating').textContent = book.rating;
-        document.getElementById('modal-pages').textContent = `${book.pages} páginas`;
-        document.getElementById('modal-languages').textContent = 'Disponible en español o inglés, según la naturaleza de cada obra';
-        document.getElementById('modal-date').textContent =
-            new Date(book.publish_date).toLocaleDateString('es-ES', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            });
+    const title = currentLanguage === 'en' ? book.title_en : book.title_es;
+    const subtitle = currentLanguage === 'en' ? book.subtitle_en : book.subtitle_es;
+    const description = currentLanguage === 'en' ? book.description_en : book.description_es;
+    const cover = currentLanguage === 'en' ? book.cover_en : book.cover_es;
+    const series = currentLanguage === 'en' ? book.series_en : book.series_es;
+    const benefits = currentLanguage === 'en' ? book.benefits_en : book.benefits_es;
 
-        // Actualizar beneficios
-        const benefitsList = document.getElementById('modal-benefits');
-        benefitsList.replaceChildren();
-        const benefits = currentLanguage === 'es' ? book.benefits_es : book.benefits_en;
-        benefits.forEach(benefit => {
-            const li = document.createElement('li');
-            li.className = 'flex items-start gap-2 text-sm';
-            li.style.color = 'var(--text-muted)';
-            li.innerHTML = `
-                <i class="fas fa-check mt-0.5 shrink-0" style="color:var(--accent-teal)"></i>
-                <span>${benefit}</span>
-            `;
-            benefitsList.appendChild(li);
-        });
+    document.getElementById('modal-series').textContent = `${series} · ${book.author}`;
+    document.getElementById('modal-title').textContent = title;
+    document.getElementById('modal-subtitle').textContent = subtitle;
+    document.getElementById('modal-description').textContent = description;
 
-        // Actualizar categorías
-        const categoriesContainer = document.getElementById('modal-categories');
-        categoriesContainer.replaceChildren();
-        book.categories.forEach(cat => {
-            const span = document.createElement('span');
-            span.className = 'category-badge';
-            span.textContent = cat;
-            categoriesContainer.appendChild(span);
-        });
+    const modalCover = document.getElementById('modal-cover');
+    modalCover.src = cover;
+    modalCover.alt = title;
 
-        // Configurar botones del modal
-        const modalBuyBtn = document.getElementById('modal-buy');
-        const modalAddCartBtn = document.getElementById('modal-add-to-cart');
+    document.getElementById('modal-price').textContent =
+      book.price === 0 ? t('free_label') : `$${book.price.toFixed(2)} USD`;
+    document.getElementById('modal-rating').textContent = `${book.rating.toFixed(1)} (${book.review_count} ${t('reviews_unit')})`;
+    document.getElementById('modal-pages').textContent = `${book.pages} ${t('pages_unit')}`;
+    document.getElementById('modal-languages').textContent = t('spec_languages_val');
+    document.getElementById('modal-date').textContent = new Date(book.publish_date).toLocaleDateString(
+      currentLanguage === 'en' ? 'en-US' : 'es-ES',
+      { year: 'numeric', month: 'short', day: 'numeric' }
+    );
 
-        if (book.price === 0) {
-            modalBuyBtn.innerHTML = `<i class="fas fa-gift mr-2"></i>Obtener Gratis`;
-            modalBuyBtn.onclick = () => {
-                closeBookModal(); // Cierra primero
-        setTimeout(abrirModalGratis, 50); // Llama al gratis después
-            };
-            modalAddCartBtn.style.display = 'none';
-        } else {
-            modalBuyBtn.innerHTML = `<i class="fas fa-shopping-cart mr-2"></i>${t('btn_buy_now')}`;
-            modalBuyBtn.onclick = () => {
-                addToCart(bookId);
-                closeBookModal();
-                proceedToCheckout();
-            };
-            modalAddCartBtn.style.display = 'flex';
-            modalAddCartBtn.onclick = () => {
-                addToCart(bookId);
-                showNotification('Libro añadido al carrito', 'success');
-            };
-        }
+    const benefitsList = document.getElementById('modal-benefits');
+    benefitsList.replaceChildren();
+    benefits.forEach((item) => {
+      const li = document.createElement('li');
+      li.className = 'flex items-start gap-2.5';
+      li.innerHTML = `<span aria-hidden="true" style="color: var(--accent-brass);">—</span><span>${item}</span>`;
+      benefitsList.appendChild(li);
+    });
 
-        document.getElementById('modal-sample').onclick = () => {
-            openReadingMode(bookId);
+    document.getElementById('modal-sample').onclick = () => {
+      window.closeBookModal();
+      window.openReadingMode(book.id);
+    };
+
+    const storeLinksContainer = document.getElementById('modal-store-links');
+    const freeContainer = document.getElementById('modal-free-download');
+
+    if (book.price === 0) {
+      storeLinksContainer.classList.add('hidden');
+      freeContainer.classList.remove('hidden');
+      const freeBtn = document.getElementById('modal-free-btn');
+      if (freeBtn) {
+        freeBtn.onclick = () => {
+          window.closeBookModal();
+          window.abrirModalGratis();
         };
+      }
+    } else {
+      freeContainer.classList.add('hidden');
+      storeLinksContainer.classList.remove('hidden');
+      storeLinksContainer.replaceChildren();
 
-        // === Formatos dual + externa (Books2Read) — solo pago vs gratis descargable ===
-        const paidBox = document.getElementById('modal-format-paid');
-        const freeBox = document.getElementById('modal-format-free');
-        const externalBox = document.getElementById('external-stores-block');
-        // Actualizar enlaces dinámicos por si cambian constantes
-        if (externalBox) {
-            const extLink = externalBox.querySelector('a[href*="books2read"]');
-            if (extLink) extLink.href = BOOKS2READ_URL;
-        }
-        const readerLinks = document.querySelectorAll('#modal-format-paid a[href*="arcus-reading"]');
-        readerLinks.forEach(a => a.href = READING_APP_URL);
-        if (book.price === 0) {
-            if (paidBox) paidBox.classList.add('hidden');
-            if (freeBox) freeBox.classList.remove('hidden');
-            if (externalBox) externalBox.classList.add('hidden');
-        } else {
-            if (paidBox) paidBox.classList.remove('hidden');
-            if (freeBox) freeBox.classList.add('hidden');
-            if (externalBox) externalBox.classList.remove('hidden');
-        }
+      const channels = Catalog.getBookPurchaseChannels(book, currentLanguage);
+      channels.forEach((ch) => {
+        const sub = currentLanguage === 'en' ? ch.subtitle_en : ch.subtitle_es;
+        const a = document.createElement('a');
+        a.href = ch.url;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        a.className = 'store-link-btn';
+        a.innerHTML = `
+          <div>
+            <div class="font-semibold text-sm">${ch.name}</div>
+            <div class="text-xs" style="color: var(--text-muted);">${sub}</div>
+          </div>
+          <i class="fas fa-external-link-alt text-xs" style="color: var(--accent-brass);"></i>
+        `;
+        storeLinksContainer.appendChild(a);
+      });
 
-        // Mostrar modal
-        document.getElementById('book-modal').classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-
-    } catch (error) {
-        console.error('Error al abrir modal de libro:', error);
-        showNotification('Error al mostrar detalles del libro', 'error');
+      if (book.stores && book.stores.reader) {
+        const readerLink = document.createElement('a');
+        readerLink.href = book.stores.reader;
+        readerLink.target = '_blank';
+        readerLink.rel = 'noopener noreferrer';
+        readerLink.className = 'store-link-btn';
+        readerLink.innerHTML = `
+          <div>
+            <div class="font-semibold text-sm">ARCUS Reader</div>
+            <div class="text-xs" style="color: var(--text-muted);">${
+              currentLanguage === 'en' ? 'Web reading shelf' : 'Lectura online en navegador'
+            }</div>
+          </div>
+          <i class="fas fa-book-reader text-xs" style="color: var(--accent-brass);"></i>
+        `;
+        storeLinksContainer.appendChild(readerLink);
+      }
     }
-}
 
-function closeBookModal() {
+    document.getElementById('book-modal').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  };
+
+  window.closeBookModal = function () {
     document.getElementById('book-modal').classList.add('hidden');
-    document.body.style.overflow = 'auto';
-}
+    document.body.style.overflow = '';
+  };
 
-
-// ================ MODO LECTURA ================
-function openReadingMode(bookId) {
-    const book = booksCatalog.books.find(b => b.id === bookId);
+  window.openReadingMode = function (bookId) {
+    const book = BOOKS.find((b) => b.id === bookId);
     if (!book) return;
 
-    try {
-        currentReadingBook = bookId;
+    currentReadingBookId = bookId;
+    const title = currentLanguage === 'en' ? book.title_en : book.title_es;
+    const content = currentLanguage === 'en' ? book.sample_content_en : book.sample_content_es;
 
-        // Actualizar contenido
-        document.getElementById('reading-title').textContent =
-            currentLanguage === 'es' ? book.title_es : book.title_en;
-        document.getElementById('reading-content').innerHTML =
-            currentLanguage === 'es' ? book.sample_content_es : book.sample_content_en;
-        document.getElementById('reading-price').textContent = `$${book.price}`;
+    document.getElementById('reading-title').textContent = title;
+    document.getElementById('reading-content').innerHTML = content;
 
-        // Configurar botón de compra
-        const readingBuyBtn = document.getElementById('reading-buy-btn');
-        if (book.price === 0) {
-            readingBuyBtn.textContent = 'Obtener Gratis';
-            readingBuyBtn.onclick = () => {
-                closeReadingMode(); // Cierra primero
-        setTimeout(abrirModalGratis, 50); // Llama al gratis después
-            };
-        } else {
-            readingBuyBtn.textContent = t('btn_buy_full');
-            readingBuyBtn.onclick = () => {
-                addToCart(bookId);
-                closeReadingMode();
-                proceedToCheckout();
-            };
-        }
+    const actions = document.getElementById('reading-store-actions');
+    actions.replaceChildren();
 
-        // Mostrar modal
-        document.getElementById('reading-modal').classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-
-        // Resetear tamaño de fuente
-        readingFontSize = 100;
-        updateReadingFontSize();
-
-    } catch (error) {
-        console.error('Error al abrir modo lectura:', error);
-        showNotification('Error al abrir muestra del libro', 'error');
+    if (book.price === 0) {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'btn-editorial-primary py-2 px-4 text-xs';
+      btn.textContent = t('btn_get_free');
+      btn.onclick = () => {
+        window.closeReadingMode();
+        window.abrirModalGratis();
+      };
+      actions.appendChild(btn);
+    } else {
+      Catalog.getBookPurchaseChannels(book, currentLanguage).forEach((ch) => {
+        const a = document.createElement('a');
+        a.href = ch.url;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        a.className = 'btn-editorial-secondary py-1.5 px-3 text-xs';
+        a.textContent = ch.name;
+        actions.appendChild(a);
+      });
     }
-}
 
-function closeReadingMode() {
+    readingFontSize = 100;
+    updateReadingFontSize();
+
+    document.getElementById('reading-modal').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  };
+
+  window.closeReadingMode = function () {
     document.getElementById('reading-modal').classList.add('hidden');
-    document.body.style.overflow = 'auto';
-    currentReadingBook = null;
-}
+    document.body.style.overflow = '';
+    currentReadingBookId = null;
+  };
 
-function changeReadingFontSize(delta) {
+  window.changeReadingFontSize = function (delta) {
     readingFontSize = Math.max(80, Math.min(150, readingFontSize + delta * 10));
     updateReadingFontSize();
-}
-
-function updateReadingFontSize() {
-    const content = document.getElementById('reading-content');
-    if (content) {
-        content.style.fontSize = `${readingFontSize}%`;
-        document.getElementById('font-size-display').textContent = `${readingFontSize}%`;
-    }
-}
-
-// ================ CARRITO DE COMPRAS ================
-function addToCart(bookId) {
-    try {
-        const book = booksCatalog.books.find(b => b.id === bookId);
-        if (!book) {
-            throw new Error('Libro no encontrado');
-        }
-
-        // Verificar si el libro ya está en el carrito
-        const existingItem = shoppingCart.find(item => item.id === bookId);
-
-        if (existingItem) {
-            existingItem.quantity += 1;
-        } else {
-            shoppingCart.push({
-                id: bookId,
-                title_es: book.title_es,
-                title_en: book.title_en,
-                price: book.price,
-                quantity: 1,
-                cover: currentLanguage === 'es' ? book.cover_es : book.cover_en
-            });
-        }
-
-        // Guardar en localStorage
-        localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));
-
-        // Actualizar UI
-        updateCartCount();
-        showNotification('Libro añadido al carrito', 'success');
-
-        // Animación del botón de carrito
-        const cartBtn = document.getElementById('cart-btn');
-        if (cartBtn) {
-            cartBtn.classList.add('cart-btn-active');
-            setTimeout(() => cartBtn.classList.remove('cart-btn-active'), 300);
-        }
-
-        // Si el carrito está abierto, actualizarlo
-        if (!document.getElementById('cart-modal').classList.contains('hidden')) {
-            renderCartItems();
-        }
-
-    } catch (error) {
-        console.error('Error al añadir al carrito:', error);
-        showNotification('Error al añadir el libro al carrito', 'error');
-    }
-}
-
-function removeFromCart(bookId) {
-    shoppingCart = shoppingCart.filter(item => item.id !== bookId);
-    localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));
-    updateCartCount();
-    renderCartItems();
-    showNotification('Libro removido del carrito', 'info');
-}
-
-function updateCartCount() {
-    const totalItems = shoppingCart.reduce((sum, item) => sum + item.quantity, 0);
-    const cartCount = document.getElementById('cart-count');
-    if (cartCount) {
-        cartCount.textContent = totalItems;
-    }
-
-    // Actualizar resumen
-    const itemText = totalItems === 1 ? 'item' : 'items';
-    const cartSummary = document.getElementById('cart-summary');
-    if (cartSummary) {
-        cartSummary.textContent = `${totalItems} ${itemText}`;
-    }
-}
-
-function renderCartItems() {
-    const container = document.getElementById('cart-items');
-    const emptyCart = document.getElementById('empty-cart');
-    const checkoutBtn = document.getElementById('checkout-btn');
-
-    if (!container) return;
-
-    if (shoppingCart.length === 0) {
-        container.replaceChildren();
-        if (emptyCart) emptyCart.classList.remove('hidden');
-        if (checkoutBtn) checkoutBtn.disabled = true;
-        updateCartSummary();
-        return;
-    }
-
-    if (emptyCart) emptyCart.classList.add('hidden');
-    if (checkoutBtn) checkoutBtn.disabled = false;
-
-    let html = '';
-    let subtotal = 0;
-
-    shoppingCart.forEach(item => {
-        const itemTotal = item.price * item.quantity;
-        subtotal += itemTotal;
-
-        html += `
-            <div class="cart-item flex items-center py-4 gap-3" data-book-id="${item.id}" style="border-bottom:1px solid var(--border)">
-                <img src="${item.cover}"
-                     alt="${currentLanguage === 'es' ? item.title_es : item.title_en}"
-                     class="w-14 h-18 object-cover rounded-lg shrink-0" style="height:4.5rem">
-                <div class="flex-1 min-w-0">
-                    <h4 class="font-head font-bold text-sm text-white line-clamp-2">${currentLanguage === 'es' ? item.title_es : item.title_en}</h4>
-                    <div class="flex justify-between items-center mt-2">
-                        <div class="flex items-center gap-2">
-                            <button class="w-6 h-6 rounded flex items-center justify-center transition-all"
-                                    style="background:rgba(255,255,255,0.07);color:var(--text-muted)"
-                                    onclick="updateQuantity(${item.id}, -1)"
-                                    aria-label="Reducir cantidad">
-                                <i class="fas fa-minus text-xs"></i>
-                            </button>
-                            <span class="font-bold text-sm text-white">${item.quantity}</span>
-                            <button class="w-6 h-6 rounded flex items-center justify-center transition-all"
-                                    style="background:rgba(255,255,255,0.07);color:var(--text-muted)"
-                                    onclick="updateQuantity(${item.id}, 1)"
-                                    aria-label="Aumentar cantidad">
-                                <i class="fas fa-plus text-xs"></i>
-                            </button>
-                        </div>
-                        <span class="font-bold text-sm price-chip">$${itemTotal.toFixed(2)}</span>
-                    </div>
-                </div>
-                <button class="remove-btn ml-1 shrink-0"
-                        style="color:var(--text-dim)"
-                        onmouseover="this.style.color='#FCA5A5'"
-                        onmouseout="this.style.color='var(--text-dim)'"
-                        onclick="removeFromCart(${item.id})"
-                        aria-label="Remover del carrito">
-                    <i class="fas fa-trash text-sm"></i>
-                </button>
-            </div>
-        `;
-    });
-
-    container.innerHTML = html;
-    updateCartSummary(subtotal);
-}
-
-function updateQuantity(bookId, delta) {
-    const item = shoppingCart.find(item => item.id === bookId);
-    if (!item) return;
-
-    item.quantity += delta;
-
-    if (item.quantity <= 0) {
-        removeFromCart(bookId);
-    } else {
-        localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));
-        renderCartItems();
-        updateCartCount();
-    }
-}
-
-function updateCartSummary(subtotal = 0) {
-    const tax = subtotal * 0.08; // 8% de impuesto
-    const total = subtotal + tax;
-
-    const cartSubtotal = document.getElementById('cart-subtotal');
-    const cartTax = document.getElementById('cart-tax');
-    const cartTotal = document.getElementById('cart-total');
-
-    if (cartSubtotal) cartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
-    if (cartTax) cartTax.textContent = `$${tax.toFixed(2)}`;
-    if (cartTotal) cartTotal.textContent = `$${total.toFixed(2)}`;
-}
-
-function openCart() {
-    renderCartItems();
-    document.getElementById('cart-modal').classList.remove('hidden');
-    document.body.style.overflow = 'hidden';
-}
-
-function closeCart() {
-    document.getElementById('cart-modal').classList.add('hidden');
-    document.body.style.overflow = 'auto';
-}
-
-// ================ CHECKOUT CON STRIPE ================
-
-// ================ CHECKOUT CON STRIPE ================
-function proceedToCheckout() {
-    if (shoppingCart.length === 0) {
-        showNotification(t('cart_empty'), 'info');
-        return;
-    }
-
-    // Si el usuario ya está logueado, vamos directo a Stripe (con registro de compra)
-    if (currentUser) {
-        proceedToStripe();
-        return;
-    }
-
-    // Si NO está logueado, mostrar el modal de registro/invitado
-    closeCart(); // Cerrar modal del carrito
-    openPreCheckoutModal(); // Mostrar modal "¿Quieres registrarte?"
-}
-
-async function proceedToStripe() {
-    try {
-        // Guardar compra PENDIENTE en sessionStorage
-        sessionStorage.setItem('pendingPurchase', JSON.stringify({
-            cart: shoppingCart,
-            userId: currentUser ? currentUser.uid : null,
-            timestamp: Date.now(),
-            total: calculateCartTotal()
-        }));
-
-        // Mostrar loading
-        showNotification(t('redirecting_stripe'), 'info');
-
-        // Si está autenticado, ESPERAR a que se guarde en Firestore
-        if (currentUser) {
-            try {
-                await savePurchaseIntent(currentUser.uid, shoppingCart);
-                console.log('✅ Compra guardada antes de redirigir');
-            } catch (e) {
-                console.error('⚠️ Error guardando compra, pero procediendo:', e);
-            }
-        }
-
-        // Redirigir a Stripe
-        window.location.href = STRIPE_PAYMENT_LINK;
-
-    } catch (error) {
-        console.error('Error al proceder al checkout:', error);
-        showNotification('Error al procesar el checkout', 'error');
-    }
-}
-
-
-
-function calculateCartTotal() {
-    const subtotal = shoppingCart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    const tax = subtotal * 0.08;
-    return subtotal + tax;
-}
-
-
-
-// ================ IDIOMA ================
-function setupLanguage() {
-    const langEsBtn = document.getElementById('lang-es');
-    const langEnBtn = document.getElementById('lang-en');
-    const mobileLangEsBtn = document.getElementById('mobile-lang-es');
-    const mobileLangEnBtn = document.getElementById('mobile-lang-en');
-
-    if (langEsBtn) langEsBtn.onclick = () => changeLanguage('es');
-    if (langEnBtn) langEnBtn.onclick = () => changeLanguage('en');
-    if (mobileLangEsBtn) mobileLangEsBtn.onclick = () => { changeLanguage('es'); closeMobileMenu(); };
-    if (mobileLangEnBtn) mobileLangEnBtn.onclick = () => { changeLanguage('en'); closeMobileMenu(); };
-
-    // Establecer idioma inicial
-    changeLanguage('es');
-}
-
-function changeLanguage(lang) {
-    currentLanguage = lang;
-
-    // Actualizar botones de idioma (Desktop)
-    const langEsBtn = document.getElementById('lang-es');
-    const langEnBtn = document.getElementById('lang-en');
-
-    if (langEsBtn) {
-        langEsBtn.className =
-            `px-2 py-1 text-[10px] font-bold rounded-full transition-all ${lang === 'es' ? 'bg-primary text-white shadow-sm' : 'text-gray-400 hover:text-primary'}`;
-    }
-    if (langEnBtn) {
-        langEnBtn.className =
-            `px-2 py-1 text-[10px] font-bold rounded-full transition-all ${lang === 'en' ? 'bg-primary text-white shadow-sm' : 'text-gray-400 hover:text-primary'}`;
-    }
-
-    // Actualizar botones de idioma (Mobile)
-    const mobileLangEsBtn = document.getElementById('mobile-lang-es');
-    const mobileLangEnBtn = document.getElementById('mobile-lang-en');
-
-    if (mobileLangEsBtn) {
-        mobileLangEsBtn.className =
-            `px-6 py-2 rounded-full font-bold transition-all ${lang === 'es' ? 'bg-primary text-white shadow-lg' : 'bg-gray-100 text-gray-500'}`;
-    }
-    if (mobileLangEnBtn) {
-        mobileLangEnBtn.className =
-            `px-6 py-2 rounded-full font-bold transition-all ${lang === 'en' ? 'bg-primary text-white shadow-lg' : 'bg-gray-100 text-gray-500'}`;
-    }
-
-    // ===== TRADUCIR NAVEGACIÓN =====
-    document.querySelectorAll('[data-nav-key]').forEach((elem) => {
-        const key = elem.dataset.navKey;
-        const label = elem.querySelector('.nav-label');
-        const translated = t(key);
-
-        if (label) {
-            label.textContent = translated;
-        } else {
-            elem.textContent = translated;
-        }
-    });
-
-    document.querySelectorAll('[data-ui-key]').forEach((elem) => {
-        const key = elem.dataset.uiKey;
-        const label = elem.querySelector('.nav-label');
-        const translated = t(key);
-
-        if (label) {
-            label.textContent = translated;
-        } else {
-            elem.textContent = translated;
-        }
-    });
-
-    document.querySelectorAll('[data-aria-key]').forEach((elem) => {
-        const key = elem.dataset.ariaKey;
-        elem.setAttribute('aria-label', t(key));
-    });
-
-    const userName = document.getElementById('user-name');
-    if (userName && (userName.textContent === 'Usuario' || userName.textContent === 'User')) {
-        userName.textContent = t('nav_user_default');
-    }
-
-    // Traducir placeholders de búsqueda
-    const searchInputs = ['search-input', 'mobile-search', 'mobile-search-hero'];
-    searchInputs.forEach(id => {
-        const elem = document.getElementById(id);
-        if (elem) elem.placeholder = t('search_placeholder');
-    });
-
-    // ===== TRADUCIR HERO SECTION =====
-    const heroSection = document.querySelector('.hero-section');
-    if (heroSection) {
-        const headline = document.getElementById('hero-headline');
-        if (headline) {
-            if (lang === 'es') {
-                headline.innerHTML = `Descifra lo que<br>\n                        <span class="text-gold-gradient font-serif italic">otros no quieren</span><br>\n                        que sepas.`;
-            } else {
-                headline.innerHTML = `Decode what<br>\n                        <span class="text-gold-gradient font-serif italic">others don't want</span><br>\n                        you to know.`;
-            }
-        }
-
-        const heroSubtitle = document.getElementById('hero-subtitle');
-        if (heroSubtitle) {
-            if (lang === 'es') {
-                heroSubtitle.textContent = 'Libros que despiertan preguntas incómodas y revelan nuevas perspectivas.';
-            } else {
-                heroSubtitle.textContent = 'Books that awaken uncomfortable questions and reveal new perspectives.';
-            }
-        }
-
-        const heroCatalogBtn = heroSection.querySelector('a[href="#catalogo"]');
-        if (heroCatalogBtn) heroCatalogBtn.textContent = t('hero_cta_catalog');
-
-        const heroAuthorBtn = document.getElementById('video-btn');
-        if (heroAuthorBtn) {
-             heroAuthorBtn.innerHTML = `${lang === 'es' ? 'Conocer al Autor' : 'Meet the Author'} <i class="fas fa-arrow-down transform -rotate-45"></i>`;
-        }
-
-        // Stats Labels
-        const statsLabels = heroSection.querySelectorAll('.text-gray-500');
-        if (statsLabels.length >= 2) {
-            statsLabels[0].textContent = t('hero_readers');
-            statsLabels[1].textContent = 'Rating';
-        }
-
-        // Badge
-        const badge = heroSection.querySelector('.uppercase');
-        if (badge) badge.textContent = lang === 'es' ? 'Nueva Colección 2026' : 'New Collection 2026';
-    }
-
-    // ===== TRADUCIR CATÁLOGO =====
-    const catalogTitle = document.querySelector('#catalogo h2');
-    if (catalogTitle) catalogTitle.textContent = t('catalog_title');
-
-    const catalogSubtitle = document.querySelector('#catalogo p.text-gray-600');
-    if (catalogSubtitle) catalogSubtitle.textContent = t('catalog_subtitle');
-
-    // Traducir filtros
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const filterKeys = ['filter_all', 'filter_mindfulness', 'filter_nutrition', 'filter_exercise', 'filter_wellness'];
-    filterButtons.forEach((btn, index) => {
-        if (filterKeys[index]) btn.textContent = t(filterKeys[index]);
-    });
-
-    // Traducir select de ordenamiento
-    const sortSelect = document.getElementById('sort-select');
-    if (sortSelect) {
-        sortSelect.options[0].text = t('sort_featured');
-        sortSelect.options[1].text = t('sort_newest');
-        sortSelect.options[2].text = t('sort_rating');
-        sortSelect.options[3].text = t('sort_title');
-    }
-
-    // Traducir mensaje sin resultados
-    const noResultsTitle = document.querySelector('#no-results h3');
-    const noResultsText = document.querySelector('#no-results p');
-    if (noResultsTitle) noResultsTitle.textContent = t('no_results_title');
-    if (noResultsText) noResultsText.textContent = t('no_results_text');
-
-    // ===== TRADUCIR MODAL DE LIBRO =====
-    const modalDescTitle = document.querySelector('#book-modal h4');
-    if (modalDescTitle && modalDescTitle.textContent.includes('Descripción') || modalDescTitle.textContent.includes('Description')) {
-        modalDescTitle.textContent = t('modal_description');
-    }
-
-    const modalBenefitsTitle = document.querySelectorAll('#book-modal h4')[1];
-    if (modalBenefitsTitle) modalBenefitsTitle.textContent = t('modal_what_learn');
-
-    const modalCategoriesTitle = document.querySelectorAll('#book-modal h4')[2];
-    if (modalCategoriesTitle) modalCategoriesTitle.textContent = t('modal_categories');
-
-    const modalFormatsTitle = document.querySelectorAll('#book-modal h4')[3];
-    if (modalFormatsTitle) modalFormatsTitle.textContent = t('modal_formats');
-
-    // Traducir botones del modal
-    const modalBuyBtn = document.getElementById('modal-buy');
-    if (modalBuyBtn) modalBuyBtn.innerHTML = `<i class="fas fa-shopping-cart mr-2"></i>${t('btn_buy_now')}`;
-
-    const modalAddCartBtn = document.getElementById('modal-add-to-cart');
-    if (modalAddCartBtn) modalAddCartBtn.innerHTML = `<i class="fas fa-plus mr-2"></i>${t('btn_add_cart')}`;
-
-    const modalSampleBtn = document.getElementById('modal-sample');
-    if (modalSampleBtn) modalSampleBtn.innerHTML = `<i class="fas fa-book-open mr-2"></i>${t('btn_read_sample')}`;
-
-    // ===== TRADUCIR MODO LECTURA =====
-    const readingSample = document.querySelector('#reading-modal .text-gray-600.text-sm');
-    if (readingSample) readingSample.textContent = t('reading_free_sample');
-
-    const readingLikeText = document.querySelector('#reading-modal p.text-gray-600');
-    if (readingLikeText && readingLikeText.textContent.includes('gustó')) {
-        readingLikeText.innerHTML = `${t('reading_like_sample')} <br class="sm:hidden">${t('reading_get_full')}`;
-    }
-
-    const readingCloseBtn = document.querySelector('#reading-modal button:not(#reading-buy-btn)');
-    if (readingCloseBtn && readingCloseBtn.textContent === 'Cerrar') {
-        readingCloseBtn.textContent = t('btn_close');
-    }
-
-    // ===== TRADUCIR CARRITO =====
-    const cartTitle = document.getElementById('cart-title');
-    if (cartTitle) cartTitle.textContent = t('cart_title');
-
-    const emptyCartText = document.querySelector('#empty-cart p');
-    if (emptyCartText) emptyCartText.textContent = t('cart_empty');
-
-    // Traducir labels del carrito
-    const cartLabels = document.querySelectorAll('#cart-modal .text-gray-600');
-    cartLabels.forEach(label => {
-        if (label.textContent === 'Subtotal') label.textContent = t('cart_subtotal');
-        if (label.textContent === 'Impuestos' || label.textContent === 'Taxes') label.textContent = t('cart_taxes');
-    });
-
-    const cartTotalLabel = document.querySelector('#cart-modal .text-lg.font-bold span');
-    if (cartTotalLabel && (cartTotalLabel.textContent === 'Total')) {
-        cartTotalLabel.textContent = t('cart_total');
-    }
-
-    // Traducir botones del carrito
-    const checkoutBtn = document.getElementById('checkout-btn');
-    if (checkoutBtn) checkoutBtn.textContent = t('btn_checkout');
-
-    const continueShoppingBtns = document.querySelectorAll('#cart-modal button');
-    continueShoppingBtns.forEach(btn => {
-        if (btn.textContent.includes('Seguir Comprando') || btn.textContent.includes('Continue Shopping')) {
-            btn.textContent = t('btn_continue_shopping');
-        }
-    });
-
-    const paymentMethodsText = document.querySelector('#cart-modal p.text-gray-600.text-sm.mb-3');
-    if (paymentMethodsText) paymentMethodsText.textContent = t('payment_methods');
-
-    // ===== RE-RENDERIZAR CONTENIDO DINÁMICO =====
-    renderBooks();
-
-    // Actualizar carrito si está abierto
-    if (!document.getElementById('cart-modal').classList.contains('hidden')) {
-        renderCartItems();
-    }
-
-    // Actualizar modo lectura si está abierto
-    if (currentReadingBook) {
-        openReadingMode(currentReadingBook);
-    }
-
-    // Actualizar contador de libros
-    updateBookCounter();
-}
-
-// ================ BÚSQUEDA ================
-function setupSearch() {
+  };
+
+  function updateReadingFontSize() {
+    const el = document.getElementById('reading-content');
+    const display = document.getElementById('font-size-display');
+    if (el) el.style.fontSize = `${readingFontSize}%`;
+    if (display) display.textContent = `${readingFontSize}%`;
+  }
+
+  window.resetCatalogFilters = function () {
+    activeCategory = 'all';
+    searchQuery = '';
     const searchInput = document.getElementById('search-input');
-    const mobileSearch = document.getElementById('mobile-search');
-    const mobileSearchHero = document.getElementById('mobile-search-hero');
+    if (searchInput) searchInput.value = '';
+    document.querySelectorAll('.filter-btn[data-category]').forEach((btn) => {
+      const isAll = btn.dataset.category === 'all';
+      btn.classList.toggle('is-active', isAll);
+      btn.setAttribute('aria-pressed', isAll ? 'true' : 'false');
+    });
+    renderBooks();
+  };
 
-    const performSearch = (query) => {
-        if (query.length < 2) {
-            renderBooks();
-            return;
-        }
+  window.openContactModal = function () {
+    document.getElementById('contact-modal').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  };
 
-        const filtered = booksCatalog.books.filter(book => {
-            const title = currentLanguage === 'es' ? book.title_es : book.title_en;
-            const subtitle = currentLanguage === 'es' ? book.subtitle_es : book.subtitle_en;
-            const description = currentLanguage === 'es' ? book.description_es : book.description_en;
+  window.closeContactModal = function () {
+    document.getElementById('contact-modal').classList.add('hidden');
+    document.body.style.overflow = '';
+  };
 
-            return title.toLowerCase().includes(query.toLowerCase()) ||
-                   subtitle.toLowerCase().includes(query.toLowerCase()) ||
-                   description.toLowerCase().includes(query.toLowerCase()) ||
-                   book.categories.some(cat => cat.toLowerCase().includes(query.toLowerCase()));
-        });
+  window.openVideoModal = function () {
+    const modal = document.getElementById('video-modal');
+    const frame = document.getElementById('video-frame');
+    if (modal && frame) {
+      frame.src = 'https://www.youtube.com/embed/5fZYxOO-81g?si=0Ty7oFlA9UWBoOdm&autoplay=1';
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+  };
 
-        // Mostrar resultados filtrados
-        const container = document.getElementById('books-grid');
-        const noResults = document.getElementById('no-results');
+  window.closeVideoModal = function () {
+    const modal = document.getElementById('video-modal');
+    const frame = document.getElementById('video-frame');
+    if (modal && frame) {
+      modal.classList.add('hidden');
+      frame.src = '';
+      document.body.style.overflow = '';
+    }
+  };
 
-        if (filtered.length === 0) {
-            container.replaceChildren();
-            noResults.classList.remove('hidden');
-            return;
-        }
+  window.openLegalModal = function (type) {
+    const titleEl = document.getElementById('legal-title');
+    const bodyEl = document.getElementById('legal-body');
+    if (!titleEl || !bodyEl) return;
 
-        noResults.classList.add('hidden');
-        container.replaceChildren();
-
-        filtered.forEach(book => {
-            const bookElement = createBookCard(book);
-            container.appendChild(bookElement);
-        });
-
-        const bookCounter = document.getElementById('book-counter');
-        if (bookCounter) {
-            bookCounter.innerHTML =
-                `Mostrando <span class="font-bold">${filtered.length}</span> de ${booksCatalog.books.length} libros`;
-        }
-    };
-
-    // Debounce para búsqueda
-    let searchTimeout;
-    const debouncedSearch = (query) => {
-        clearTimeout(searchTimeout);
-        searchTimeout = setTimeout(() => performSearch(query), 300);
-    };
-
-    if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-            debouncedSearch(e.target.value);
-        });
+    if (type === 'terms') {
+      titleEl.textContent = currentLanguage === 'en' ? 'Terms & Conditions' : 'Términos y Condiciones';
+      bodyEl.innerHTML =
+        currentLanguage === 'en'
+          ? '<p>Editorial Arcus serves as an informational showcase and reading preview portal for works by Ulises R. Cruz García and partner authors.</p><p>All paid book purchases, billing, taxes, refunds, and digital file deliveries are processed exclusively by external retail partners (Amazon, Google Play Books, and Books2Read/Draft2Digital) under their respective terms of service.</p>'
+          : '<p>Editorial Arcus actúa como escaparate editorial y portal de muestras de lectura para las obras de Ulises R. Cruz García y autores colaboradores.</p><p>Todas las transacciones de compra, facturación, impuestos, devoluciones y entrega de libros de pago se procesan exclusivamente en las plataformas externas oficiales (Amazon, Google Play Books y Books2Read / Draft2Digital) bajo sus respectivos términos de servicio.</p>';
+    } else {
+      titleEl.textContent = currentLanguage === 'en' ? 'Privacy Policy' : 'Política de Privacidad';
+      bodyEl.innerHTML =
+        currentLanguage === 'en'
+          ? '<p>Editorial Arcus does not process payments or store credit card details on this website. Theme and language preferences are stored locally in your browser.</p><p>Contact inquiries submitted via Formspree and free-book requests via Jotform are used strictly to respond to your message or deliver the requested free edition.</p>'
+          : '<p>Editorial Arcus no procesa pagos ni almacena datos bancarios en este sitio web. Tus preferencias de idioma y tema visual se guardan únicamente de forma local en tu navegador.</p><p>Las consultas enviadas mediante el formulario de contacto o las solicitudes de descarga gratuita se utilizan exclusivamente para responderte o enviarte la obra solicitada.</p>';
     }
 
-    if (mobileSearch) {
-        mobileSearch.addEventListener('input', (e) => {
-            debouncedSearch(e.target.value);
-        });
+    document.getElementById('legal-modal').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  };
+
+  window.closeLegalModal = function () {
+    document.getElementById('legal-modal').classList.add('hidden');
+    document.body.style.overflow = '';
+  };
+
+  window.abrirModalGratis = function () {
+    const trigger = document.getElementById('jotform-trigger');
+    if (trigger) trigger.click();
+  };
+
+  window.toggleMobileMenu = function () {
+    const menu = document.getElementById('mobile-menu');
+    const btn = document.getElementById('mobile-menu-btn');
+    const icon = document.getElementById('mobile-menu-icon');
+    if (!menu) return;
+    const willOpen = menu.classList.contains('hidden');
+    menu.classList.toggle('hidden');
+    if (btn) btn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+    if (icon) {
+      icon.classList.toggle('fa-bars', !willOpen);
+      icon.classList.toggle('fa-times', willOpen);
     }
+  };
 
-    if (mobileSearchHero) {
-        mobileSearchHero.addEventListener('input', (e) => {
-            debouncedSearch(e.target.value);
-        });
+  window.closeMobileMenu = function () {
+    const menu = document.getElementById('mobile-menu');
+    const btn = document.getElementById('mobile-menu-btn');
+    const icon = document.getElementById('mobile-menu-icon');
+    if (menu) menu.classList.add('hidden');
+    if (btn) btn.setAttribute('aria-expanded', 'false');
+    if (icon) {
+      icon.classList.remove('fa-times');
+      icon.classList.add('fa-bars');
     }
-}
+  };
 
-
-
-// ================ FILTROS ================
-function setupEventListeners() {
-    // Filtros por categoría
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const category = this.dataset.category;
-
-            // Actualizar botón activo
-            document.querySelectorAll('.filter-btn').forEach(b => {
-                b.classList.remove('bg-primary', 'text-white');
-                b.classList.add('bg-gray-100', 'text-gray-700', 'hover:bg-gray-200');
-                b.setAttribute('aria-pressed', 'false');
-            });
-
-            this.classList.remove('bg-gray-100', 'text-gray-700', 'hover:bg-gray-200');
-            this.classList.add('bg-primary', 'text-white');
-            this.setAttribute('aria-pressed', 'true');
-
-            // Aplicar filtro
-            const sortBy = document.getElementById('sort-select').value;
-            renderBooks(category, sortBy);
+  function bindEvents() {
+    document.querySelectorAll('.filter-btn[data-category]').forEach((btn) => {
+      btn.addEventListener('click', function () {
+        activeCategory = this.dataset.category || 'all';
+        document.querySelectorAll('.filter-btn[data-category]').forEach((b) => {
+          b.classList.remove('is-active');
+          b.setAttribute('aria-pressed', 'false');
         });
+        this.classList.add('is-active');
+        this.setAttribute('aria-pressed', 'true');
+        renderBooks();
+      });
     });
 
-    // Ordenar
     const sortSelect = document.getElementById('sort-select');
     if (sortSelect) {
-        sortSelect.addEventListener('change', function() {
-            const activeFilter = document.querySelector('.filter-btn.bg-primary');
-            const category = activeFilter ? activeFilter.dataset.category : 'all';
-            renderBooks(category, this.value);
-        });
+      sortSelect.addEventListener('change', function () {
+        activeSort = this.value;
+        renderBooks();
+      });
     }
 
-    // Carrito
-    const cartBtn = document.getElementById('cart-btn');
-    if (cartBtn) {
-        cartBtn.addEventListener('click', openCart);
+    const searchInput = document.getElementById('search-input');
+    if (searchInput) {
+      let timer;
+      searchInput.addEventListener('input', function () {
+        clearTimeout(timer);
+        const val = this.value;
+        timer = setTimeout(() => {
+          searchQuery = val;
+          renderBooks();
+        }, 160);
+      });
     }
 
+    const langEs = document.getElementById('lang-es');
+    const langEn = document.getElementById('lang-en');
+    if (langEs) langEs.addEventListener('click', () => window.changeLanguage('es'));
+    if (langEn) langEn.addEventListener('click', () => window.changeLanguage('en'));
 
-
-    // Menú móvil / colapsable — profesional, funciona en móvil y desktop
-    window.toggleMobileMenu = function() {
-        const menu = document.getElementById('mobile-menu');
-        const btn = document.getElementById('mobile-menu-btn');
-        const icon = document.getElementById('mobile-menu-icon');
-        if (!menu) return;
-        const isHidden = menu.classList.contains('hidden');
-        menu.classList.toggle('hidden');
-        if (btn) btn.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
-        if (icon) {
-            icon.classList.toggle('fa-bars', !isHidden);
-            icon.classList.toggle('fa-times', isHidden);
-        }
-    };
-    window.closeMobileMenu = function() {
-        const menu = document.getElementById('mobile-menu');
-        const btn = document.getElementById('mobile-menu-btn');
-        const icon = document.getElementById('mobile-menu-icon');
-        if (menu) menu.classList.add('hidden');
-        if (btn) btn.setAttribute('aria-expanded', 'false');
-        if (icon) { icon.classList.remove('fa-times'); icon.classList.add('fa-bars'); }
-    };
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    if (mobileMenuBtn) {
-        // evitar doble listener inline + addEventListener
-        mobileMenuBtn.addEventListener('click', function(e){ e.stopPropagation(); toggleMobileMenu(); });
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    if (mobileBtn) {
+      mobileBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        window.toggleMobileMenu();
+      });
     }
-    // Compatibilidad con antiguo main-menu
-    window.toggleMainMenu = window.toggleMobileMenu;
-    window.closeMainMenu = window.closeMobileMenu;
-    const mainMenuBtn = document.getElementById('main-menu-btn');
-    if (mainMenuBtn) mainMenuBtn.addEventListener('click', function(e){ e.stopPropagation(); toggleMobileMenu(); });
-    // Cerrar al click fuera del header
-    document.addEventListener('click', function(e){
-        const menu = document.getElementById('mobile-menu');
-        const btn = document.getElementById('mobile-menu-btn') || document.getElementById('main-menu-btn');
-        const header = document.querySelector('header');
-        if (!menu || menu.classList.contains('hidden')) return;
-        if (header && header.contains(e.target)) return;
-        closeMobileMenu();
-    });
 
-    // Video
     const videoBtn = document.getElementById('video-btn');
     if (videoBtn) {
-        videoBtn.addEventListener('click', openVideoModal);
+      videoBtn.addEventListener('click', window.openVideoModal);
     }
 
-    // Checkout
-    const checkoutBtn = document.getElementById('checkout-btn');
-    if (checkoutBtn) {
-        checkoutBtn.addEventListener('click', proceedToCheckout);
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+      contactForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const submitBtn = document.getElementById('contact-submit');
+        const successBox = document.getElementById('contact-success');
+        const errorBox = document.getElementById('contact-error');
+        if (successBox) successBox.classList.add('hidden');
+        if (errorBox) errorBox.classList.add('hidden');
+        if (submitBtn) submitBtn.disabled = true;
+
+        try {
+          const response = await fetch(this.action, {
+            method: 'POST',
+            body: new FormData(this),
+            headers: { Accept: 'application/json' },
+          });
+          if (response.ok) {
+            if (successBox) successBox.classList.remove('hidden');
+            this.reset();
+          } else {
+            if (errorBox) errorBox.classList.remove('hidden');
+          }
+        } catch (err) {
+          if (errorBox) errorBox.classList.remove('hidden');
+        } finally {
+          if (submitBtn) submitBtn.disabled = false;
+        }
+      });
     }
 
-    // Cerrar modales al hacer clic fuera
-    document.querySelectorAll('.modal-backdrop').forEach(backdrop => {
-        backdrop.addEventListener('click', function() {
-            if (!document.getElementById('book-modal').classList.contains('hidden')) {
-                closeBookModal();
-            }
-            if (!document.getElementById('cart-modal').classList.contains('hidden')) {
-                closeCart();
-            }
-            if (!document.getElementById('reading-modal').classList.contains('hidden')) {
-                closeReadingMode();
-            }
-            if (!document.getElementById('contact-modal').classList.contains('hidden')) {
-                closeContactModal();
-                closeAuthModal();
-                closePreCheckoutModal();
-            }
-        });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        window.closeBookModal();
+        window.closeReadingMode();
+        window.closeContactModal();
+        window.closeVideoModal();
+        window.closeLegalModal();
+        window.closeMobileMenu();
+      }
     });
-
-    // Cerrar con Escape
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            closeBookModal();
-            closeCart();
-            closeReadingMode();
-            closeContactModal();
-            closeAuthModal();
-            closePreCheckoutModal();
-            if (typeof closeMainMenu==='function') closeMainMenu();
-        }
-    });
-}
-
-// ================ NOTIFICACIONES ================
-function showNotification(message, type = 'info') {
-    // Crear notificación
-    const notification = document.createElement('div');
-    notification.className = `fixed top-4 right-4 z-50 px-6 py-3 rounded-lg shadow-lg animate-fadeIn ${
-        type === 'success' ? 'bg-green-500 text-white' :
-        type === 'error' ? 'bg-red-500 text-white' :
-        'bg-blue-500 text-white'
-    }`;
-    notification.setAttribute('role', 'alert');
-    notification.innerHTML = `
-        <div class="flex items-center">
-            <i class="fas fa-${
-                type === 'success' ? 'check-circle' :
-                type === 'error' ? 'exclamation-circle' :
-                'info-circle'
-            } mr-3"></i>
-            <span>${message}</span>
-        </div>
-    `;
-
-    document.body.appendChild(notification);
-
-    // Remover después de 3 segundos
-    setTimeout(() => {
-        notification.remove();
-    }, 3000);
-}
-
-// ================ FIREBASE INTEGRATION & MODALS ================
-
-// Global Firebase Variables
-let currentUser = null;
-let firebaseAuth = null;
-let firebaseDB = null;
-
-// Initialize Firebase
-async function initializeFirebase() {
-    try {
-        const firebaseModule = await import('./firebase-config.js');
-        firebaseAuth = firebaseModule.auth;
-        firebaseDB = firebaseModule.db;
-
-        // Setup Auth Observer
-        firebaseModule.setupAuthObserver(handleAuthStateChange);
-        console.log('✅ Firebase initialized');
-    } catch (error) {
-        console.error('❌ Firebase init error:', error);
-    }
-}
-
-// Handle Auth State Changes
-function handleAuthStateChange(authState) {
-    currentUser = authState.user;
-
-    if (authState.authenticated) {
-        showUserMenu(authState.user);
-
-    } else {
-        showLoginButton();
-    }
-}
-
-// UI: User Menu vs Login Button
-function showLoginButton() {
-    const loginBtn = document.getElementById('login-btn');
-    if (loginBtn) loginBtn.classList.remove('hidden');
-
-    const userMenu = document.getElementById('user-menu');
-    if (userMenu) userMenu.classList.add('hidden');
-}
-
-function showUserMenu(user) {
-    const loginBtn = document.getElementById('login-btn');
-    if (loginBtn) loginBtn.classList.add('hidden');
-
-    const userMenu = document.getElementById('user-menu');
-    if (userMenu) userMenu.classList.remove('hidden');
-
-    const userName = document.getElementById('user-name');
-    if (userName) userName.textContent = user.displayName || user.email.split('@')[0];
-
-    const userAvatar = document.getElementById('user-avatar');
-    if (userAvatar && user.photoURL) {
-        userAvatar.src = user.photoURL;
-        userAvatar.classList.remove('hidden');
-        document.getElementById('user-icon').classList.add('hidden');
-    }
-}
-
-// ================ MODAL LOGIC ================
-
-// Contact Modal
-window.openContactModal = function() {
-    const modal = document.getElementById('contact-modal');
-    if (modal) {
-        modal.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-    }
-}
-
-window.closeContactModal = function() {
-    const modal = document.getElementById('contact-modal');
-    if (modal) {
-        modal.classList.add('hidden');
-        document.body.style.overflow = 'auto';
-    }
-}
-
-// Auth Modal
-function openAuthModal() {
-    // TEMPORAL: Desactivado para probar WhatsApp
-    alert("Login desactivado temporalmente para pruebas.");
-    return;
-
-    const modal = document.getElementById('auth-modal');
-    if (modal) {
-        modal.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-    }
-}
-
-function closeAuthModal() {
-    const modal = document.getElementById('auth-modal');
-    if (modal) {
-        modal.classList.add('hidden');
-        document.body.style.overflow = 'auto';
-    }
-}
-
-// Pre-Checkout Modal
-function openPreCheckoutModal() {
-    const modal = document.getElementById('pre-checkout-modal');
-    if (modal) {
-        modal.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-    }
-}
-
-function closePreCheckoutModal() {
-    const modal = document.getElementById('pre-checkout-modal');
-    if (modal) {
-        modal.classList.add('hidden');
-        document.body.style.overflow = 'auto';
-    }
-}
-
-// Wrapper to open Auth from Pre-Checkout
-function openAuthModalFromCheckout() {
-    closePreCheckoutModal();
-    openAuthModal();
-}
-
-// Guest Checkout
-function continueAsGuest() {
-    closePreCheckoutModal();
-    proceedToStripe();
-}
-
-// ================ AUTH HANDLERS ================
-
-async function handleLogin(e) {
-    e.preventDefault();
-    const email = document.getElementById('login-email').value;
-    const password = document.getElementById('login-password').value;
-
-    try {
-        const firebaseModule = await import('./firebase-config.js');
-        const result = await firebaseModule.loginUser(email, password);
-        if (result.success) {
-            closeAuthModal();
-            showNotification('Login exitoso', 'success');
-            checkPendingPurchaseRedirect();
-        } else {
-            showNotification(result.error, 'error');
-        }
-    } catch (err) {
-        showNotification('Error en login', 'error');
-    }
-}
-
-async function handleRegister(e) {
-    e.preventDefault();
-    const name = document.getElementById('register-name').value;
-    const email = document.getElementById('register-email').value;
-    const password = document.getElementById('register-password').value;
-
-    try {
-        const firebaseModule = await import('./firebase-config.js');
-        const result = await firebaseModule.registerUser(email, password, name);
-        if (result.success) {
-            closeAuthModal();
-            showNotification('Registro exitoso', 'success');
-            checkPendingPurchaseRedirect();
-        } else {
-            showNotification(result.error, 'error');
-        }
-    } catch (err) {
-        showNotification('Error en registro', 'error');
-    }
-}
-
-async function handleGoogleSignIn() {
-    try {
-        const firebaseModule = await import('./firebase-config.js');
-        const result = await firebaseModule.loginWithGoogle();
-        if (result.success) {
-            closeAuthModal();
-            showNotification('Login con Google exitoso', 'success');
-            checkPendingPurchaseRedirect();
-        } else {
-            showNotification(result.error, 'error');
-        }
-    } catch (err) {
-        showNotification('Error Google Auth', 'error');
-    }
-}
-
-function checkPendingPurchaseRedirect() {
-    if (sessionStorage.getItem('pendingPurchase')) {
-         showNotification('Redirigiendo a pago...', 'info');
-         setTimeout(() => proceedToStripe(), 1000);
-    }
-}
-
-function handleLogout() {
-    import('./firebase-config.js').then(module => {
-        module.logoutUser().then(() => {
-            showNotification('Sesión cerrada correctamente', 'info');
-
-            // 1. Limpiar usuario
-            currentUser = null;
-
-            // 2. Limpiar datos locales
-
-            shoppingCart = [];
-
-            // localStorage.removeItem('shoppingCart'); // Si lo guardas
-
-            // 3. Actualizar UI
-            updateCartCount();
-
-
-            // Quitar corazones rojos y resetear vista
-            renderBooks();
-
-            // 4. Resetear Menú Usuario
-            const userMenu = document.getElementById('user-menu');
-            if(userMenu) userMenu.classList.add('hidden');
-
-            const loginBtn = document.getElementById('login-btn');
-            if(loginBtn) loginBtn.classList.remove('hidden');
-
-            // Cerrar dropdown si estaba abierto
-            const dropdown = document.getElementById('user-dropdown');
-            if(dropdown) dropdown.classList.add('hidden');
-        });
-    });
-}
-
-// ================ FIRESTORE HELPERS ================
-
-async function savePurchaseIntent(userId, cart) {
-    try {
-        const firebaseModule = await import('./firebase-config.js');
-
-        // Calcular desglosede precios
-        const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        const tax = subtotal * 0.08; // 8% tax (ejemplo)
-        const total = subtotal + tax;
-
-        // Usar await para esperar la escritura en DB
-        await firebaseModule.savePurchaseHistory(userId, {
-            items: cart,
-            subtotal: subtotal,
-            tax: tax,
-            total: total,
-            paymentStatus: 'pending_stripe_redirect'
-        });
-        return true;
-    } catch (e) {
-        console.error('Error saving purchase intent', e);
-        throw e; // Propagar error para manejarlo arriba
-    }
-}
-
-
-
-
-
-// Removed duplicate calculateCartTotal since it exists earlier in file
-
-
-// Auth Tabs Switcher
-function switchAuthTab(tab) {
-    const loginForm = document.getElementById('login-form');
-    const registerForm = document.getElementById('register-form');
-    const loginTab = document.getElementById('login-tab');
-    const registerTab = document.getElementById('register-tab');
-
-    if (tab === 'login') {
-        loginForm.classList.remove('hidden');
-        registerForm.classList.add('hidden');
-        loginTab.classList.add('border-primary', 'text-primary');
-        loginTab.classList.remove('border-transparent', 'text-gray-500');
-        registerTab.classList.remove('border-primary', 'text-primary');
-        registerTab.classList.add('border-transparent', 'text-gray-500');
-    } else {
-        loginForm.classList.add('hidden');
-        registerForm.classList.remove('hidden');
-        registerTab.classList.add('border-primary', 'text-primary');
-        registerTab.classList.remove('border-transparent', 'text-gray-500');
-        loginTab.classList.remove('border-primary', 'text-primary');
-        loginTab.classList.add('border-transparent', 'text-gray-500');
-    }
-}
-
-// Initialize on Load
-document.addEventListener('DOMContentLoaded', () => {
-    initializeFirebase();
-
-    const loginForm = document.getElementById('login-form');
-    if (loginForm) loginForm.addEventListener('submit', handleLogin);
-
-    const registerForm = document.getElementById('register-form');
-    if (registerForm) registerForm.addEventListener('submit', handleRegister);
-
-    const googleBtn = document.getElementById('google-signin-btn');
-    if (googleBtn) googleBtn.addEventListener('click', handleGoogleSignIn);
-
-    const userMenuBtn = document.getElementById('user-menu-btn');
-    if (userMenuBtn) {
-        userMenuBtn.addEventListener('click', () => {
-            const dropdown = document.getElementById('user-dropdown');
-            if(dropdown) dropdown.classList.toggle('hidden');
-        });
-    }
-});
-
-// ================ HISTORY MODAL ================
-
-function openHistoryModal() {
-    const modal = document.getElementById('history-modal');
-    if (modal) {
-        modal.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-
-        // Load data immediately
-        loadPurchaseHistory();
-    }
-}
-// ================ JOTFORM — OBTENER GRATIS ================
-window.abrirModalGratis = function() {
-    const trigger = document.getElementById('jotform-trigger');
-    if (trigger) {
-        trigger.click();
-    } else {
-        console.warn('abrirModalGratis: botón jotform-trigger no encontrado.');
-    }
-};
-
-function closeHistoryModal() {
-    const modal = document.getElementById('history-modal');
-    if (modal) {
-        modal.classList.add('hidden');
-        document.body.style.overflow = 'auto';
-    }
-}
-
-async function loadPurchaseHistory() {
-    const listContainer = document.getElementById('history-list');
-    if (!currentUser || !listContainer) return;
-
-    // Spinner
-    listContainer.innerHTML = `
-        <div class="text-center py-10 text-gray-500">
-            <i class="fas fa-spinner fa-spin text-3xl mb-3 text-primary"></i>
-            <p>Cargando tus compras...</p>
-        </div>
-    `;
-
-    try {
-        const firebaseModule = await import('./firebase-config.js');
-        const result = await firebaseModule.getUserPurchases(currentUser.uid);
-
-        if (result.success && result.purchases.length > 0) {
-            renderHistoryList(result.purchases);
-        } else {
-            // Empty State
-            const template = document.getElementById('history-empty-template');
-            listContainer.replaceChildren();
-            if (template) {
-                listContainer.appendChild(template.content.cloneNode(true));
-            } else {
-                 listContainer.innerHTML = '<p class="text-center p-4">No hay compras registradas.</p>';
-            }
-        }
-    } catch (error) {
-        console.error('Error loading history:', error);
-        if (listContainer) {
-            listContainer.innerHTML = `
-            <div class="text-center text-red-500 py-10">
-                <i class="fas fa-exclamation-circle text-3xl mb-2"></i>
-                <p>Error al cargar el historial.</p>
-            </div>
-        `;
-    }
-    }
-}
-
-
-// ================ VIDEO MODAL ================
-
-window.openVideoModal = function() {
-    const modal = document.getElementById('video-modal');
-    const iframe = document.getElementById('video-frame');
-    if (modal && iframe) {
-        // Updated URL provided by user
-        iframe.src = "https://www.youtube.com/embed/5fZYxOO-81g?si=0Ty7oFlA9UWBoOdm&autoplay=1";
-        modal.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-    }
-};
-
-window.closeVideoModal = function() {
-    const modal = document.getElementById('video-modal');
-    const iframe = document.getElementById('video-frame');
-    if (modal && iframe) {
-        modal.classList.add('hidden');
-        iframe.src = ""; // Stop playback
-        document.body.style.overflow = 'auto';
-    }
-};
-
-function renderHistoryList(purchases) {
-    const listContainer = document.getElementById('history-list');
-    listContainer.replaceChildren();
-
-    // Sort logic
-    purchases.sort((a, b) => {
-        const dateA = a.purchaseDate ? (a.purchaseDate.seconds || 0) : 0;
-        const dateB = b.purchaseDate ? (b.purchaseDate.seconds || 0) : 0;
-        return dateB - dateA;
-    });
-
-    purchases.forEach(purchase => {
-        let dateStr = 'Fecha desconocida';
-        if (purchase.purchaseDate) {
-            try {
-                const dateObj = purchase.purchaseDate.toDate ? purchase.purchaseDate.toDate() : new Date(purchase.purchaseDate);
-                dateStr = dateObj.toLocaleDateString(currentLanguage === 'es' ? 'es-ES' : 'en-US', {
-                    year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute:'2-digit'
-                });
-            } catch(e) {}
-        }
-
-        let statusText = purchase.paymentStatus || 'Desconocido';
-        let statusClass = 'bg-gray-100 text-gray-700';
-
-        if (statusText === 'completed') { statusText = 'Completado'; statusClass = 'bg-green-100 text-green-700'; }
-        else if (statusText === 'pending_stripe_redirect') { statusText = 'Pago Pendiente'; statusClass = 'bg-orange-100 text-orange-700'; }
-
-        let itemsHtml = '';
-        if (purchase.items) {
-            itemsHtml = purchase.items.map(item => `
-                <div class="flex items-center gap-3 py-2 border-b border-gray-100 last:border-0">
-                     <div class="w-10 h-14 bg-gray-100 rounded overflow-hidden shrink-0">
-                        <img src="${item.cover || 'assets/covers/placeholder.jpg'}" class="w-full h-full object-cover">
-                    </div>
-                    <div class="flex-1 min-w-0">
-                       <p class="font-medium text-sm truncate text-gray-800">${item.title_es || item.title || 'Libro'}</p>
-                        <p class="text-xs text-gray-500">$${item.price}</p>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        const card = document.createElement('div');
-        card.className = "bg-white p-4 rounded-xl border border-gray-100 shadow-sm mb-4";
-        card.innerHTML = `
-            <div class="flex justify-between items-start mb-3 pb-3 border-b border-gray-100">
-                <div>
-                    <span class="text-xs text-gray-400 uppercase tracking-wide">Fecha</span>
-                    <p class="text-sm font-medium text-gray-700">${dateStr}</p>
-                </div>
-                <span class="px-2 py-1 rounded text-xs font-medium ${statusClass}">${statusText}</span>
-            </div>
-            <div class="mb-3 space-y-1">${itemsHtml}</div>
-            <div class="flex justify-between pt-2 border-t border-gray-100">
-                <span class="text-sm font-bold text-gray-500">Total</span>
-                <span class="text-lg font-bold text-primary">$${(purchase.total || 0).toFixed(2)}</span>
-            </div>
-        `;
-        listContainer.appendChild(card);
-    });
-}
-
-// Global Override for showPurchaseHistory
-window.showPurchaseHistory = function() {
-    if (!currentUser) {
-        showNotification('Inicia sesión para ver tu historial', 'info');
-        return;
-    }
-    const dropdown = document.getElementById('user-dropdown');
-    if(dropdown) dropdown.classList.add('hidden');
-    openHistoryModal();
-};
-
-// ================ THEME TOGGLE ================
-window.toggleTheme = function() {
-    const html = document.documentElement;
-    const icon = document.getElementById('theme-icon');
-    const currentTheme = html.getAttribute('data-theme');
-
-    if (currentTheme === 'light') {
-        html.removeAttribute('data-theme');
-        localStorage.setItem('arcus-theme', 'dark');
-        const csMeta = document.querySelector('meta[name="color-scheme"]');
-        if (csMeta) csMeta.content = 'dark';
-        if (icon) {
-            icon.classList.remove('fa-sun');
-            icon.classList.add('fa-moon');
-        }
-    } else {
-        html.setAttribute('data-theme', 'light');
-        localStorage.setItem('arcus-theme', 'light');
-        const csMeta = document.querySelector('meta[name="color-scheme"]');
-        if (csMeta) csMeta.content = 'light';
-        if (icon) {
-            icon.classList.remove('fa-moon');
-            icon.classList.add('fa-sun');
-        }
-    }
-};
-
-// Apply saved theme on load — default now LIGHT as requested
-(function() {
-    const savedTheme = localStorage.getItem('arcus-theme');
-    const icon = document.getElementById('theme-icon');
-    const csMeta = document.querySelector('meta[name="color-scheme"]');
-    if (savedTheme === 'dark') {
-        document.documentElement.removeAttribute('data-theme');
-        if (csMeta) csMeta.content = 'dark';
-        if (icon) {
-            icon.classList.remove('fa-sun');
-            icon.classList.add('fa-moon');
-        }
-    } else {
-        // default light
-        document.documentElement.setAttribute('data-theme', 'light');
-        if (csMeta) csMeta.content = 'light';
-        if (icon) {
-            icon.classList.remove('fa-moon');
-            icon.classList.add('fa-sun');
-        }
-    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    applySavedTheme();
+    applyTranslations();
+    renderBooks();
+    renderStoresGrid();
+    bindEvents();
+  });
 })();
-

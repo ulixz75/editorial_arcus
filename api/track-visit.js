@@ -15,8 +15,7 @@ module.exports = async (req, res) => {
   const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 
   if (!BOT_TOKEN || !CHAT_ID) {
-    console.error("Faltan TELEGRAM_BOT_TOKEN o TELEGRAM_CHAT_ID en variables de entorno.");
-    res.status(500).json({ error: "Configuración incompleta del servidor" });
+    res.status(200).json({ ok: false, skipped: true });
     return;
   }
 
