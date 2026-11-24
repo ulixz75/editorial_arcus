@@ -21,11 +21,6 @@
         intro: 'Abre cada libro para leer una muestra gratuita y acceder a Amazon, Google Play Books o Books2Read.',
         position: 'top',
       },
-      {
-        element: '[data-step="8"]',
-        intro: '¿Tienes dudas editoriales? Contáctanos directamente por WhatsApp.',
-        position: 'left',
-      },
     ].filter((s) => document.querySelector(s.element));
 
     if (steps.length === 0) return;
