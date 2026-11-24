@@ -15,7 +15,17 @@
     amazonAuthor: 'https://www.amazon.com/s?k=Ulises+R.+Cruz+Garcia',
     playBooksAuthor: 'https://play.google.com/store/search?q=Ulises+R.+Cruz+Garcia&c=books',
     books2read: 'https://books2read.com/editorialarcus',
+    smashwordsSale: 'https://www.smashwords.com/sale',
     arcusReader: 'https://arcus-reading.vercel.app/',
+  };
+
+  const HOLIDAY_CAMPAIGN = {
+    active: true,
+    discountPercent: 25,
+    storeName: 'Smashwords',
+    storeHomeUrl: 'https://www.smashwords.com/sale',
+    dates_es: '1 al 31 de diciembre de 2026',
+    dates_en: 'December 1 – 31, 2026',
   };
 
   const BOOKS = [
@@ -58,8 +68,12 @@
         playBooks:
           'https://play.google.com/store/books/details/Ulises_Ram%C3%B3n_Cruz_Garc%C3%ADa_Las_tres_tentaciones?id=mQLWEQAAQBAJ',
         books2read: 'https://books2read.com/editorialarcus',
+        smashwords: 'https://www.smashwords.com/books/view/2024007',
         reader: 'https://arcus-reading.vercel.app/',
       },
+      holidayDiscountPercent: 25,
+      holidayPrice: 3.74,
+      holidayPoster: 'public/assets/aistudio/Smashwords_2026_Holiday_Book_Sale_453195da.png',
       sample_content_es: `
         <h2>Capítulo 1: La Ilusión del Control</h2>
         <p>Ninguna civilización colapsa el día en que cree haber cometido un error. Colapsa mucho antes, cuando empieza a llamar virtud a lo que en realidad es una distorsión de su propio instinto de supervivencia.</p>
@@ -124,8 +138,12 @@
         playAudiobook:
           'https://play.google.com/store/audiobooks/details/Ulises_R_Cruz_Garc%C3%ADa_Descubre_lo_que_realmente_fun?id=AQAAAEBqfQM9eM',
         books2read: 'https://books2read.com/Descubre-lo-que-realmente-funciona',
+        smashwords: 'https://www.smashwords.com/books/view/1893283',
         reader: 'https://arcus-reading.vercel.app/',
       },
+      holidayDiscountPercent: 25,
+      holidayPrice: 2.99,
+      holidayPoster: 'public/assets/aistudio/Smashwords_2026_Holiday_Sale_Poster_3b74372e.png',
       sample_content_es: `
         <h2>Capítulo 1: El Comienzo del Camino</h2>
         <p>Durante años, busqué respuestas en dietas milagrosas y rutinas de ejercicio extenuantes. Siempre terminaba en el mismo lugar: frustrado, sin resultados y con una relación cada vez más complicada con mi cuerpo.</p>
@@ -292,6 +310,29 @@
     return list;
   }
 
+  function getHolidayPromotions(lang) {
+    if (!HOLIDAY_CAMPAIGN.active) {
+      return [];
+    }
+    const isEn = lang === 'en';
+    return BOOKS.filter(function (book) {
+      return book.price > 0 && book.stores && book.stores.smashwords && book.holidayDiscountPercent;
+    }).map(function (book) {
+      return {
+        id: book.id,
+        slug: book.slug,
+        title: isEn ? book.title_en : book.title_es,
+        series: isEn ? book.series_en : book.series_es,
+        author: book.author,
+        regularPrice: book.price,
+        holidayPrice: book.holidayPrice,
+        discountPercent: book.holidayDiscountPercent,
+        poster: book.holidayPoster,
+        url: book.stores.smashwords,
+      };
+    });
+  }
+
   function getBookPurchaseChannels(book, lang) {
     if (!book || book.price === 0) {
       return [];
@@ -301,22 +342,35 @@
     const playBooksUrl =
       isEn && stores.playBooks_en ? stores.playBooks_en : stores.playBooks || STORE_URLS.playBooksAuthor;
 
-    const channels = [
+    const channels = [];
+
+    if (HOLIDAY_CAMPAIGN.active && stores.smashwords && book.holidayDiscountPercent) {
+      channels.push({
+        id: 'smashwords',
+        name: `Smashwords (-${book.holidayDiscountPercent}% Holiday)`,
+        subtitle_es: `~$${book.holidayPrice.toFixed(2)} USD (antes $${book.price.toFixed(2)} · Solo Smashwords 1–31 dic.)`,
+        subtitle_en: `~$${book.holidayPrice.toFixed(2)} USD (was $${book.price.toFixed(2)} · Smashwords only Dec 1–31)`,
+        url: stores.smashwords,
+        isHolidayPromo: true,
+      });
+    }
+
+    channels.push(
       {
         id: 'amazon',
         name: 'Amazon',
-        subtitle_es: 'Kindle y edición impresa',
-        subtitle_en: 'Kindle & Paperback',
+        subtitle_es: 'Kindle y edición impresa · Precio regular',
+        subtitle_en: 'Kindle & Paperback · Regular price',
         url: stores.amazon || STORE_URLS.amazonAuthor,
       },
       {
         id: 'playbooks',
         name: 'Google Play Books',
-        subtitle_es: isEn ? 'eBook digital en inglés' : 'eBook digital en español',
-        subtitle_en: isEn ? 'English digital eBook' : 'Spanish digital eBook',
+        subtitle_es: isEn ? 'eBook digital en inglés · Precio regular' : 'eBook digital en español · Precio regular',
+        subtitle_en: isEn ? 'English digital eBook · Regular price' : 'Spanish digital eBook · Regular price',
         url: playBooksUrl,
-      },
-    ];
+      }
+    );
 
     if (stores.playAudiobook) {
       channels.push({
@@ -331,8 +385,8 @@
     channels.push({
       id: 'books2read',
       name: 'Books2Read',
-      subtitle_es: 'Apple Books, Kobo, B&N y más',
-      subtitle_en: 'Apple Books, Kobo, B&N & more',
+      subtitle_es: 'Apple Books, Kobo, B&N y más · Precio regular',
+      subtitle_en: 'Apple Books, Kobo, B&N & more · Regular price',
       url: stores.books2read || STORE_URLS.books2read,
     });
 
@@ -345,11 +399,30 @@
       return book.price > 0;
     });
 
-    const storeDefinitions = [
+    const storeDefinitions = [];
+
+    if (HOLIDAY_CAMPAIGN.active) {
+      storeDefinitions.push({
+        id: 'smashwords',
+        storeKey: 'smashwords',
+        indexLabel: '01 · Holiday Sale -25%',
+        name: 'Smashwords',
+        iconClass: 'fas fa-tags',
+        isHolidayPromo: true,
+        desc_es:
+          'Única tienda con 25% de descuento especial de Fin de Año (1 al 31 de diciembre de 2026).',
+        desc_en:
+          'Exclusive 25% End-of-Year Holiday discount storefront (December 1 – 31, 2026).',
+      });
+    }
+
+    const offset = HOLIDAY_CAMPAIGN.active ? 1 : 0;
+
+    storeDefinitions.push(
       {
         id: 'amazon',
         storeKey: 'amazon',
-        indexLabel: '01 · Kindle & Print',
+        indexLabel: `0${1 + offset} · Kindle & Print`,
         name: 'Amazon',
         iconClass: 'fab fa-amazon',
         desc_es:
@@ -360,7 +433,7 @@
       {
         id: 'playbooks',
         storeKey: 'playBooks',
-        indexLabel: '02 · eBook & Audiobook',
+        indexLabel: `0${2 + offset} · eBook & Audiobook`,
         name: 'Google Play Books',
         iconClass: 'fab fa-google-play',
         desc_es:
@@ -371,15 +444,15 @@
       {
         id: 'books2read',
         storeKey: 'books2read',
-        indexLabel: '03 · Apple · Kobo · B&N',
+        indexLabel: `0${3 + offset} · Apple · Kobo · B&N`,
         name: 'Books2Read',
         iconClass: 'fas fa-book-open',
         desc_es:
           'Selector universal de Draft2Digital que conecta con Apple Books, Barnes & Noble, Kobo y Vivlio.',
         desc_en:
           'Universal Draft2Digital selector connecting to Apple Books, Barnes & Noble, Kobo, and Vivlio.',
-      },
-    ];
+      }
+    );
 
     return storeDefinitions.map(function (store) {
       if (store.id === 'playbooks') {
@@ -443,6 +516,7 @@
           indexLabel: store.indexLabel,
           name: store.name,
           iconClass: store.iconClass,
+          isHolidayPromo: false,
           description: isEn ? store.desc_en : store.desc_es,
           books: playBooksEntries,
         };
@@ -453,17 +527,29 @@
         indexLabel: store.indexLabel,
         name: store.name,
         iconClass: store.iconClass,
+        isHolidayPromo: Boolean(store.isHolidayPromo),
         description: isEn ? store.desc_en : store.desc_es,
         books: paidBooks.map(function (book) {
           const stores = book.stores || {};
           const fallbackUrl =
-            store.id === 'amazon' ? STORE_URLS.amazonAuthor : STORE_URLS.books2read;
+            store.id === 'amazon'
+              ? STORE_URLS.amazonAuthor
+              : store.id === 'smashwords'
+              ? STORE_URLS.smashwordsSale
+              : STORE_URLS.books2read;
+          const isSmashwordsPromo = store.id === 'smashwords' && book.holidayDiscountPercent;
+          const metaLabel = isSmashwordsPromo
+            ? isEn
+              ? `$${book.holidayPrice.toFixed(2)} USD (was $${book.price.toFixed(2)} · -${book.holidayDiscountPercent}%)`
+              : `$${book.holidayPrice.toFixed(2)} USD (antes $${book.price.toFixed(2)} · -${book.holidayDiscountPercent}%)`
+            : `$${book.price.toFixed(2)} USD`;
+
           return {
             id: book.id,
             slug: book.slug,
             title: isEn ? book.title_en : book.title_es,
-            price: book.price,
-            metaLabel: `$${book.price.toFixed(2)} USD`,
+            price: isSmashwordsPromo ? book.holidayPrice : book.price,
+            metaLabel: metaLabel,
             url: stores[store.storeKey] || fallbackUrl,
           };
         }),
@@ -473,8 +559,10 @@
 
   return {
     STORE_URLS: STORE_URLS,
+    HOLIDAY_CAMPAIGN: HOLIDAY_CAMPAIGN,
     BOOKS: BOOKS,
     filterAndSortBooks: filterAndSortBooks,
+    getHolidayPromotions: getHolidayPromotions,
     getBookPurchaseChannels: getBookPurchaseChannels,
     getStoreDirectory: getStoreDirectory,
   };

@@ -3,7 +3,9 @@ const assert = require('node:assert/strict');
 const {
   BOOKS,
   STORE_URLS,
+  HOLIDAY_CAMPAIGN,
   filterAndSortBooks,
+  getHolidayPromotions,
   getBookPurchaseChannels,
   getStoreDirectory,
 } = require('../js/catalog-logic.js');
@@ -46,14 +48,40 @@ test('filterAndSortBooks sorts by newest, rating, and title', () => {
   assert.equal(byTitleEs[0].title_es, 'Comunicación Efectiva en 21 Días');
 });
 
-test('getBookPurchaseChannels returns Amazon, Google Play Books, and Books2Read for paid books only', () => {
+test('getHolidayPromotions returns both books with 25% discount exclusive to Smashwords', () => {
+  assert.equal(HOLIDAY_CAMPAIGN.active, true);
+  assert.equal(HOLIDAY_CAMPAIGN.discountPercent, 25);
+
+  const promos = getHolidayPromotions('es');
+  assert.equal(promos.length, 2);
+  assert.deepEqual(
+    promos.map((p) => ({ id: p.id, url: p.url, discountPercent: p.discountPercent })),
+    [
+      {
+        id: 2,
+        url: 'https://www.smashwords.com/books/view/2024007',
+        discountPercent: 25,
+      },
+      {
+        id: 1,
+        url: 'https://www.smashwords.com/books/view/1893283',
+        discountPercent: 25,
+      },
+    ]
+  );
+  assert.equal(promos[0].holidayPrice, 3.74);
+  assert.equal(promos[1].holidayPrice, 2.99);
+});
+
+test('getBookPurchaseChannels returns Smashwords (-25%), Amazon, Google Play, and Books2Read for paid books only', () => {
   const threeTemptations = BOOKS.find((b) => b.id === 2);
   const channels = getBookPurchaseChannels(threeTemptations, 'es');
-  assert.equal(channels.length, 3);
+  assert.equal(channels.length, 4);
   assert.deepEqual(
     channels.map((c) => c.id),
-    ['amazon', 'playbooks', 'books2read']
+    ['smashwords', 'amazon', 'playbooks', 'books2read']
   );
+  assert.equal(channels.find((c) => c.id === 'smashwords').url, 'https://www.smashwords.com/books/view/2024007');
   assert.equal(
     channels.find((c) => c.id === 'playbooks').url,
     'https://play.google.com/store/books/details/Ulises_Ram%C3%B3n_Cruz_Garc%C3%ADa_Las_tres_tentaciones?id=mQLWEQAAQBAJ'
@@ -63,8 +91,9 @@ test('getBookPurchaseChannels returns Amazon, Google Play Books, and Books2Read 
   const channelsEs = getBookPurchaseChannels(reallyWorks, 'es');
   assert.deepEqual(
     channelsEs.map((c) => c.id),
-    ['amazon', 'playbooks', 'playaudiobook', 'books2read']
+    ['smashwords', 'amazon', 'playbooks', 'playaudiobook', 'books2read']
   );
+  assert.equal(channelsEs.find((c) => c.id === 'smashwords').url, 'https://www.smashwords.com/books/view/1893283');
   assert.equal(
     channelsEs.find((c) => c.id === 'playbooks').url,
     'https://play.google.com/store/books/details/Ulises_R_Cruz_Garc%C3%ADa_Descubre_lo_que_realmente_fun?id=D5CTEQAAQBAJ'
@@ -88,11 +117,18 @@ test('getBookPurchaseChannels returns Amazon, Google Play Books, and Books2Read 
   assert.deepEqual(getBookPurchaseChannels(freeBook), []);
 });
 
-test('getStoreDirectory exposes exact book-specific links on Amazon, Google Play Books (ES/EN/Audio), and Books2Read', () => {
+test('getStoreDirectory exposes Smashwords Holiday (-25%) alongside Amazon, Google Play Books (ES/EN/Audio), and Books2Read', () => {
   const storesEs = getStoreDirectory('es');
   assert.deepEqual(
     storesEs.map((s) => s.id),
-    ['amazon', 'playbooks', 'books2read']
+    ['smashwords', 'amazon', 'playbooks', 'books2read']
+  );
+
+  const smashwordsStore = storesEs.find((s) => s.id === 'smashwords');
+  assert.equal(smashwordsStore.isHolidayPromo, true);
+  assert.deepEqual(
+    smashwordsStore.books.map((b) => b.url),
+    ['https://www.smashwords.com/books/view/2024007', 'https://www.smashwords.com/books/view/1893283']
   );
 
   const amazonStore = storesEs.find((s) => s.id === 'amazon');

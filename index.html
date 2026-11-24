@@ -55,6 +55,13 @@
             --shadow-card: 0 1px 2px rgba(20, 21, 24, 0.04), 0 8px 24px rgba(20, 21, 24, 0.04);
             --shadow-elevated: 0 18px 44px rgba(20, 21, 24, 0.10);
             --modal-backdrop: rgba(17, 19, 24, 0.62);
+            --holiday-crimson: #8C1D24;
+            --holiday-crimson-hover: #6E151B;
+            --holiday-crimson-soft: rgba(140, 29, 36, 0.07);
+            --holiday-crimson-border: rgba(140, 29, 36, 0.28);
+            --holiday-pine: #164234;
+            --holiday-banner-bg: #7A1820;
+            --holiday-banner-fg: #FBF7F0;
         }
 
         [data-theme="dark"] {
@@ -76,6 +83,13 @@
             --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.28), 0 8px 24px rgba(0, 0, 0, 0.22);
             --shadow-elevated: 0 24px 54px rgba(0, 0, 0, 0.50);
             --modal-backdrop: rgba(6, 7, 10, 0.80);
+            --holiday-crimson: #E06B73;
+            --holiday-crimson-hover: #EE8289;
+            --holiday-crimson-soft: rgba(224, 107, 115, 0.12);
+            --holiday-crimson-border: rgba(224, 107, 115, 0.32);
+            --holiday-pine: #5CB896;
+            --holiday-banner-bg: #581218;
+            --holiday-banner-fg: #F8F3EB;
         }
 
         *, *::before, *::after { box-sizing: border-box; }
@@ -298,6 +312,73 @@
             transform: translateY(-1px);
         }
 
+        .store-link-btn.is-holiday {
+            border-color: var(--holiday-crimson-border);
+            background-color: var(--holiday-crimson-soft);
+        }
+
+        .store-link-btn.is-holiday:hover {
+            border-color: var(--holiday-crimson);
+        }
+
+        /* Holiday Seasonal Editorial System */
+        .holiday-banner {
+            background-color: var(--holiday-banner-bg);
+            color: var(--holiday-banner-fg);
+            border-bottom: 1px solid rgba(217, 164, 78, 0.35);
+        }
+
+        .btn-holiday-primary {
+            background-color: #8C1D24;
+            color: #FFFFFF;
+            font-weight: 600;
+            font-size: 0.875rem;
+            padding: 0.75rem 1.35rem;
+            border-radius: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+            flex-shrink: 0;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            cursor: pointer;
+            transition: background-color 160ms ease, transform 160ms cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .btn-holiday-primary:hover {
+            background-color: #6E151B;
+            transform: translateY(-1px);
+        }
+
+        .holiday-hero-surface {
+            position: relative;
+            background-image:
+                radial-gradient(circle at 88% 14%, var(--holiday-crimson-soft) 0%, transparent 42%),
+                radial-gradient(circle at 12% 86%, rgba(22, 66, 52, 0.05) 0%, transparent 40%);
+        }
+
+        .holiday-ornament {
+            position: absolute;
+            pointer-events: none;
+            color: var(--accent-brass);
+            opacity: 0.11;
+        }
+
+        .holiday-card {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--holiday-crimson-border);
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+            transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 180ms ease;
+        }
+
+        .holiday-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-elevated);
+        }
+
         /* Form Inputs */
         .editorial-input {
             width: 100%;
@@ -429,6 +510,22 @@
     </script>
 </head>
 <body>
+    <!-- ==================== HOLIDAY ANNOUNCEMENT BANNER ==================== -->
+    <div id="holiday-top-banner" class="holiday-banner py-2.5 px-4 sm:px-8 text-xs sm:text-sm">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2 sm:gap-4">
+            <div class="flex items-center gap-2.5 min-w-0">
+                <i class="fas fa-snowflake shrink-0 text-xs" style="color: #F3D18A;" aria-hidden="true"></i>
+                <p class="leading-snug" data-i18n="holiday_banner_text">
+                    Especial Holiday (1–31 dic. 2026) · 25% de descuento exclusivo en Smashwords en nuestras dos obras principales.
+                </p>
+            </div>
+            <a href="#holiday-smashwords" class="inline-flex items-center gap-1.5 font-semibold underline underline-offset-4 whitespace-nowrap shrink-0" style="color: #F8DFAA;">
+                <span data-i18n="holiday_banner_cta">Ver oferta -25%</span>
+                <i class="fas fa-arrow-right text-[11px]" aria-hidden="true"></i>
+            </a>
+        </div>
+    </div>
+
     <!-- ==================== HEADER (3-Zone Editorial Contract) ==================== -->
     <header class="site-header sticky top-0 z-40 h-16">
         <div class="max-w-7xl mx-auto h-full px-4 sm:px-8 flex items-center justify-between gap-8">
@@ -438,8 +535,9 @@
                 <span class="font-serif-display font-bold text-xl tracking-tight" style="color: var(--text-main);">Editorial Arcus</span>
             </a>
 
-            <!-- Zone 2: Clean Typography Nav Links (4-5 items, single line) -->
-            <nav class="hidden md:flex items-center gap-7" aria-label="Navegación principal">
+            <!-- Zone 2: Clean Typography Nav Links (single line) -->
+            <nav class="hidden md:flex items-center gap-5 lg:gap-7" aria-label="Navegación principal">
+                <a href="#holiday-smashwords" class="nav-text-link font-semibold" style="color: var(--holiday-crimson);" data-i18n="nav_holiday">Holiday -25%</a>
                 <a href="#catalogo" class="nav-text-link" data-i18n="nav_catalog">Catálogo</a>
                 <a href="#tiendas" class="nav-text-link" data-i18n="nav_stores">Dónde comprar</a>
                 <a href="#sobre-autor" class="nav-text-link" data-i18n="nav_author">Autor</a>
@@ -467,6 +565,7 @@
         <!-- Mobile Drawer -->
         <div id="mobile-menu" class="hidden md:hidden border-b px-4 py-5" style="background: var(--bg-surface); border-color: var(--border-hairline);">
             <nav class="flex flex-col gap-3" aria-label="Menú móvil">
+                <a href="#holiday-smashwords" onclick="closeMobileMenu()" class="py-2.5 px-3 rounded-md font-semibold text-sm" style="color: var(--holiday-crimson);" data-i18n="nav_holiday">Holiday -25%</a>
                 <a href="#catalogo" onclick="closeMobileMenu()" class="py-2.5 px-3 rounded-md font-medium text-sm" style="color: var(--text-main);" data-i18n="nav_catalog">Catálogo</a>
                 <a href="#tiendas" onclick="closeMobileMenu()" class="py-2.5 px-3 rounded-md font-medium text-sm" style="color: var(--text-main);" data-i18n="nav_stores">Dónde comprar</a>
                 <a href="#sobre-autor" onclick="closeMobileMenu()" class="py-2.5 px-3 rounded-md font-medium text-sm" style="color: var(--text-main);" data-i18n="nav_author">Autor</a>
@@ -487,8 +586,20 @@
     </header>
 
     <main>
-        <!-- ==================== HERO (Editorial Storefront) ==================== -->
-        <section class="pt-8 pb-16 sm:pt-12 sm:pb-24 border-b" style="border-color: var(--border-hairline);">
+        <!-- ==================== HERO (Editorial Storefront + Subtle Holiday Atmosphere) ==================== -->
+        <section class="holiday-hero-surface overflow-hidden pt-8 pb-16 sm:pt-12 sm:pb-24 border-b" style="border-color: var(--border-hairline);">
+            <!-- Decorative subtle winter snowflakes (non-interactive watermark) -->
+            <svg class="holiday-ornament -top-6 right-8 w-44 h-44 hidden lg:block" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true">
+                <line x1="50" y1="6" x2="50" y2="94"/><line x1="6" y1="50" x2="94" y2="50"/>
+                <line x1="18" y1="18" x2="82" y2="82"/><line x1="82" y1="18" x2="18" y2="82"/>
+                <polyline points="42,16 50,24 58,16"/><polyline points="42,84 50,76 58,84"/>
+                <polyline points="16,42 24,50 16,58"/><polyline points="84,42 76,50 84,58"/>
+            </svg>
+            <svg class="holiday-ornament bottom-4 left-4 w-32 h-32 hidden lg:block" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true">
+                <line x1="50" y1="8" x2="50" y2="92"/><line x1="8" y1="50" x2="92" y2="50"/>
+                <line x1="20" y1="20" x2="80" y2="80"/><line x1="80" y1="20" x2="20" y2="80"/>
+                <circle cx="50" cy="50" r="10"/>
+            </svg>
             <div class="max-w-7xl mx-auto px-4 sm:px-8">
                 <!-- Editorial Masthead Bar (Language & Theme utilities cleanly integrated in editorial masthead) -->
                 <div class="flex flex-wrap items-center justify-between gap-4 pb-6 mb-10 border-b" style="border-color: var(--border-hairline);">
@@ -550,7 +661,7 @@
                                 <div class="text-xs mt-1" style="color: var(--text-muted);" data-i18n="stat_rating">Valoración media</div>
                             </div>
                             <div>
-                                <div class="font-mono-tabular text-2xl sm:text-3xl font-semibold" style="color: var(--text-main);">3</div>
+                                <div id="stat-stores-count" class="font-mono-tabular text-2xl sm:text-3xl font-semibold" style="color: var(--text-main);">4</div>
                                 <div class="text-xs mt-1" style="color: var(--text-muted);" data-i18n="stat_stores">Tiendas oficiales</div>
                             </div>
                         </div>
@@ -559,11 +670,18 @@
                     <!-- Right Visual Plinth -->
                     <div class="lg:col-span-5 flex flex-col">
                         <figure class="h-full flex flex-col justify-between rounded-xl border p-6 sm:p-8" style="background-color: var(--bg-subtle); border-color: var(--border-hairline);">
+                            <div class="pb-3 mb-3 border-b flex items-center justify-between gap-2 text-[11px] uppercase tracking-[0.12em] font-semibold" style="border-color: var(--border-hairline); color: var(--holiday-crimson);">
+                                <span class="inline-flex items-center gap-1.5">
+                                    <i class="fas fa-snowflake text-[10px]" aria-hidden="true"></i>
+                                    <span data-i18n="hero_holiday_tag">Holiday Sale · -25% en Smashwords</span>
+                                </span>
+                                <a href="#holiday-smashwords" class="font-mono-tabular underline underline-offset-2" data-i18n="hero_holiday_dates">1–31 dic.</a>
+                            </div>
                             <div class="flex-1 flex items-center justify-center py-2">
                                 <img id="hero-featured-cover"
                                      src="assets/icons/NuevaPortada.png"
                                      alt="Las tres tentaciones — Obra destacada de Editorial Arcus"
-                                     class="max-h-[410px] w-auto object-contain rounded shadow-xl"
+                                     class="max-h-[390px] w-auto object-contain rounded shadow-xl"
                                      fetchpriority="high"
                                      decoding="async">
                             </div>
@@ -574,6 +692,39 @@
                         </figure>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- ==================== ESPECIAL HOLIDAY · SMASHWORDS (-25%) ==================== -->
+        <section id="holiday-smashwords" class="py-14 sm:py-20 border-b relative overflow-hidden" style="background-color: var(--bg-surface); border-color: var(--border-hairline);">
+            <svg class="holiday-ornament top-4 right-6 w-36 h-36 hidden md:block" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+                <line x1="50" y1="6" x2="50" y2="94"/><line x1="6" y1="50" x2="94" y2="50"/>
+                <line x1="18" y1="18" x2="82" y2="82"/><line x1="82" y1="18" x2="18" y2="82"/>
+                <circle cx="50" cy="50" r="14"/>
+            </svg>
+            <div class="max-w-7xl mx-auto px-4 sm:px-8 relative">
+                <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10">
+                    <div class="max-w-3xl">
+                        <p class="inline-flex items-center gap-2 text-xs uppercase tracking-[0.14em] font-semibold mb-2" style="color: var(--holiday-crimson);">
+                            <i class="fas fa-snowflake text-[11px]" aria-hidden="true"></i>
+                            <span data-i18n="holiday_kicker">Especial Fin de Año · 1 al 31 de diciembre de 2026</span>
+                        </p>
+                        <h2 class="font-serif-display text-3xl sm:text-4xl font-semibold mb-3" style="color: var(--text-main);" data-i18n="holiday_title">
+                            25% de descuento exclusivo en Smashwords
+                        </h2>
+                        <p class="text-sm sm:text-base leading-relaxed" style="color: var(--text-muted);" data-i18n="holiday_subtitle">
+                            Campaña oficial End of Year Sale válida únicamente en Smashwords. En Amazon, Google Play Books y Books2Read las obras mantienen su precio habitual.
+                        </p>
+                    </div>
+                    <div class="shrink-0">
+                        <a href="https://www.smashwords.com/sale" target="_blank" rel="noopener noreferrer" class="btn-editorial-secondary py-2.5 px-4 text-xs">
+                            <span data-i18n="holiday_all_sale_cta">Ver campaña en Smashwords</span>
+                            <i class="fas fa-external-link-alt text-[11px]" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="holiday-cards-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-8"></div>
             </div>
         </section>
 
@@ -656,7 +807,7 @@
                     </p>
                 </div>
 
-                <div id="stores-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8"></div>
+                <div id="stores-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
 
                 <!-- Quiet strip for ARCUS Reader -->
                 <div class="mt-8 pt-6 border-t flex flex-col sm:flex-row sm:items-center justify-between gap-4" style="border-color: var(--border-hairline);">
@@ -1048,6 +1199,7 @@
                     <h4 class="text-xs uppercase tracking-[0.14em] font-semibold mb-3" style="color: var(--text-main);" data-i18n="footer_links_title">Catálogo y Tiendas</h4>
                     <ul class="space-y-2" style="color: var(--text-muted);">
                         <li><a href="#catalogo" class="hover:underline" data-i18n="nav_catalog">Catálogo</a></li>
+                        <li><a href="https://www.smashwords.com/sale" target="_blank" rel="noopener noreferrer" class="hover:underline font-medium" style="color: var(--holiday-crimson);" data-i18n="footer_smashwords">Smashwords (-25% Holiday)</a></li>
                         <li><a href="https://www.amazon.com/s?k=Ulises+R.+Cruz+Garcia" target="_blank" rel="noopener noreferrer" class="hover:underline">Amazon</a></li>
                         <li><a href="https://play.google.com/store/search?q=Ulises+R.+Cruz+Garcia&c=books" target="_blank" rel="noopener noreferrer" class="hover:underline">Google Play Books</a></li>
                         <li><a href="https://books2read.com/editorialarcus" target="_blank" rel="noopener noreferrer" class="hover:underline">Books2Read</a></li>

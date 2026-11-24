@@ -44,6 +44,9 @@ app.use((req, res, next) => {
   next();
 });
 
+// Serve uploaded AI Studio assets cleanly at /assets/aistudio as well as /public/assets/aistudio
+app.use('/assets/aistudio', express.static(path.join(__dirname, 'public', 'assets', 'aistudio')));
+
 // Serve static site from project root
 app.use(express.static(path.join(__dirname)));
 

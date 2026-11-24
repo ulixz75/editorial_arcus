@@ -17,6 +17,7 @@
 
   const I18N = {
     es: {
+      nav_holiday: 'Holiday -25%',
       nav_catalog: 'Catálogo',
       nav_stores: 'Dónde comprar',
       nav_author: 'Autor',
@@ -28,6 +29,19 @@
       theme_label: 'Tema',
       theme_dark: 'Modo oscuro',
       theme_light: 'Modo claro',
+      holiday_banner_text:
+        'Especial Holiday (1–31 dic. 2026) · 25% de descuento exclusivo en Smashwords en nuestras dos obras principales.',
+      holiday_banner_cta: 'Ver oferta -25%',
+      holiday_kicker: 'Especial Fin de Año · 1 al 31 de diciembre de 2026',
+      holiday_title: '25% de descuento exclusivo en Smashwords',
+      holiday_subtitle:
+        'Campaña oficial End of Year Sale válida únicamente en Smashwords. En Amazon, Google Play Books y Books2Read las obras mantienen su precio habitual.',
+      holiday_all_sale_cta: 'Ver campaña en Smashwords',
+      holiday_only_badge: 'Exclusivo en Smashwords · 1–31 dic.',
+      holiday_regular_price_label: 'Precio habitual:',
+      holiday_buy_cta: 'Comprar en Smashwords (-25%)',
+      hero_holiday_tag: 'Holiday Sale · -25% en Smashwords',
+      hero_holiday_dates: '1–31 dic.',
       hero_kicker: 'Sello editorial independiente · No ficción y pensamiento sistémico',
       hero_headline: 'Ideas que descifran lo que otros prefieren callar.',
       hero_subtitle:
@@ -42,7 +56,7 @@
       catalog_kicker: 'Colección completa',
       catalog_title: 'Catálogo de Libros',
       catalog_subtitle:
-        'Explora las obras publicadas, lee muestras gratuitas directamente en el navegador y accede a cada libro en Amazon, Google Play Books o Books2Read.',
+        'Explora las obras publicadas, lee muestras gratuitas directamente en el navegador y accede a cada libro en Smashwords (-25% Holiday), Amazon, Google Play Books o Books2Read.',
       filter_all: 'Todos',
       filter_systems: 'Sistemas',
       filter_mindfulness: 'Mindfulness',
@@ -70,7 +84,7 @@
       stores_kicker: 'Distribución oficial global',
       stores_title: 'Dónde adquirir nuestras obras',
       stores_subtitle:
-        'Las compras se gestionan directamente en las plataformas oficiales de distribución para garantizar entrega instantánea, seguridad de pago y soporte multiplataforma.',
+        'Las compras se gestionan directamente en las plataformas oficiales. Nota: el 25% de descuento Holiday (1–31 dic.) aplica únicamente en Smashwords; las demás tiendas mantienen su precio regular.',
       store_amazon_desc:
         'Ediciones Kindle digitales y versiones impresas en tapa blanda con envío internacional a través de las tiendas regionales de Amazon.',
       store_play_desc:
@@ -81,6 +95,7 @@
       store_cta_play: 'Abrir Google Play Books',
       store_cta_b2r: 'Ir a Books2Read',
       store_choose_book: 'Elige la obra que deseas adquirir:',
+      footer_smashwords: 'Smashwords (-25% Holiday)',
       reader_strip_text:
         '¿Ya tienes acceso a la biblioteca web? Accede directamente a tus lecturas online desde la aplicación ARCUS Reader.',
       reader_strip_cta: 'Abrir ARCUS Reader',
@@ -133,6 +148,7 @@
       btn_tour: 'Guía rápida',
     },
     en: {
+      nav_holiday: 'Holiday -25%',
       nav_catalog: 'Catalog',
       nav_stores: 'Where to buy',
       nav_author: 'Author',
@@ -144,6 +160,19 @@
       theme_label: 'Theme',
       theme_dark: 'Dark mode',
       theme_light: 'Light mode',
+      holiday_banner_text:
+        'Holiday Special (Dec 1–31, 2026) · Exclusive 25% off on Smashwords for our two flagship titles.',
+      holiday_banner_cta: 'View -25% offer',
+      holiday_kicker: 'End of Year Sale · December 1 – 31, 2026',
+      holiday_title: '25% off exclusively on Smashwords',
+      holiday_subtitle:
+        'Official End of Year Sale valid only on Smashwords. Regular prices remain unchanged on Amazon, Google Play Books, and Books2Read.',
+      holiday_all_sale_cta: 'Browse Smashwords sale',
+      holiday_only_badge: 'Smashwords exclusive · Dec 1–31',
+      holiday_regular_price_label: 'Regular price:',
+      holiday_buy_cta: 'Get on Smashwords (-25%)',
+      hero_holiday_tag: 'Holiday Sale · 25% off on Smashwords',
+      hero_holiday_dates: 'Dec 1–31',
       hero_kicker: 'Independent publishing house · Non-fiction & systems thinking',
       hero_headline: 'Ideas that decode what others prefer left unsaid.',
       hero_subtitle:
@@ -158,7 +187,7 @@
       catalog_kicker: 'Complete collection',
       catalog_title: 'Book Catalog',
       catalog_subtitle:
-        'Explore published titles, read free samples directly in your browser, and acquire each book on Amazon, Google Play Books, or Books2Read.',
+        'Explore published titles, read free samples directly in your browser, and acquire each book on Smashwords (-25% Holiday), Amazon, Google Play Books, or Books2Read.',
       filter_all: 'All',
       filter_systems: 'Systems',
       filter_mindfulness: 'Mindfulness',
@@ -186,7 +215,7 @@
       stores_kicker: 'Global official distribution',
       stores_title: 'Where to acquire our books',
       stores_subtitle:
-        'Purchases are fulfilled directly through official distribution platforms to guarantee instant delivery, secure checkout, and cross-device support.',
+        'Purchases are fulfilled directly through official storefronts. Note: the 25% Holiday discount (Dec 1–31) applies exclusively on Smashwords; other stores remain at regular price.',
       store_amazon_desc:
         'Digital Kindle editions and paperback print copies with international shipping across regional Amazon storefronts.',
       store_play_desc:
@@ -197,6 +226,7 @@
       store_cta_play: 'Open Google Play Books',
       store_cta_b2r: 'Go to Books2Read',
       store_choose_book: 'Select the title to purchase:',
+      footer_smashwords: 'Smashwords (-25% Holiday)',
       reader_strip_text:
         'Already have web library access? Open your online reading shelf directly in ARCUS Reader.',
       reader_strip_cta: 'Open ARCUS Reader',
@@ -330,12 +360,80 @@
   window.changeLanguage = function (lang) {
     currentLanguage = lang === 'en' ? 'en' : 'es';
     applyTranslations();
+    renderHolidaySection();
     renderBooks();
     renderStoresGrid();
     if (currentReadingBookId !== null) {
       window.openReadingMode(currentReadingBookId);
     }
   };
+
+  function renderHolidaySection() {
+    const topBanner = document.getElementById('holiday-top-banner');
+    const section = document.getElementById('holiday-smashwords');
+    const grid = document.getElementById('holiday-cards-grid');
+    const isActive = Catalog && Catalog.HOLIDAY_CAMPAIGN && Catalog.HOLIDAY_CAMPAIGN.active;
+
+    if (topBanner) topBanner.classList.toggle('hidden', !isActive);
+    if (section) section.classList.toggle('hidden', !isActive);
+    if (!isActive || !grid || typeof Catalog.getHolidayPromotions !== 'function') return;
+
+    const promos = Catalog.getHolidayPromotions(currentLanguage);
+    grid.replaceChildren();
+
+    promos.forEach((promo) => {
+      const card = document.createElement('article');
+      card.className = 'holiday-card p-5 sm:p-6 grid grid-cols-1 sm:grid-cols-12 gap-6 items-center';
+
+      card.innerHTML = `
+        <div class="sm:col-span-5 rounded-lg p-3 flex items-center justify-center" style="background-color: var(--bg-subtle);">
+          <img src="${promo.poster}"
+               alt="${promo.title} — Smashwords 2026 End of Year Sale (-${promo.discountPercent}%)"
+               loading="lazy"
+               decoding="async"
+               class="w-full max-h-72 object-contain rounded shadow-md">
+        </div>
+        <div class="sm:col-span-7 flex flex-col justify-between gap-4">
+          <div class="space-y-2">
+            <div class="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-[0.12em] font-semibold" style="color: var(--holiday-crimson);">
+              <i class="fas fa-tag text-[10px]" aria-hidden="true"></i>
+              <span>${t('holiday_only_badge')}</span>
+            </div>
+            <h3 class="font-serif-display text-2xl font-semibold leading-snug" style="color: var(--text-main);">
+              ${promo.title}
+            </h3>
+            <p class="text-xs font-medium" style="color: var(--text-subtle);">${promo.series} · ${promo.author}</p>
+          </div>
+
+          <div class="py-3 border-y flex flex-wrap items-center justify-between gap-2" style="border-color: var(--border-hairline);">
+            <div class="flex items-baseline gap-2.5">
+              <span class="font-mono-tabular text-2xl font-bold" style="color: var(--holiday-crimson);">$${promo.holidayPrice.toFixed(2)} USD</span>
+              <span class="font-mono-tabular text-xs line-through" style="color: var(--text-subtle);">$${promo.regularPrice.toFixed(2)}</span>
+            </div>
+            <span class="font-mono-tabular text-xs font-semibold px-2 py-0.5 rounded" style="background-color: var(--holiday-crimson-soft); color: var(--holiday-crimson);">-${promo.discountPercent}%</span>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2.5">
+            <a href="${promo.url}"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="btn-holiday-primary py-2.5 px-4 text-xs"
+               data-holiday-book-id="${promo.id}">
+              <span>${t('holiday_buy_cta')}</span>
+              <i class="fas fa-external-link-alt text-[11px]" aria-hidden="true"></i>
+            </a>
+            <button type="button"
+                    class="btn-editorial-secondary py-2.5 px-3.5 text-xs"
+                    onclick="openReadingMode(${promo.id})">
+              ${t('btn_sample')}
+            </button>
+          </div>
+        </div>
+      `;
+
+      grid.appendChild(card);
+    });
+  }
 
   function renderStoresGrid() {
     const grid = document.getElementById('stores-grid');
@@ -346,9 +444,11 @@
 
     stores.forEach((store) => {
       const card = document.createElement('article');
-      card.className = 'rounded-xl border p-6 sm:p-8 flex flex-col gap-6';
+      card.className = 'rounded-xl border p-6 flex flex-col gap-5';
       card.style.backgroundColor = 'var(--bg-canvas)';
-      card.style.borderColor = 'var(--border-hairline)';
+      card.style.borderColor = store.isHolidayPromo
+        ? 'var(--holiday-crimson-border)'
+        : 'var(--border-hairline)';
 
       const bookChoicesHtml = store.books
         .map(
@@ -356,24 +456,32 @@
           <a href="${book.url}"
              target="_blank"
              rel="noopener noreferrer"
-             class="store-link-btn"
+             class="store-link-btn ${store.isHolidayPromo ? 'is-holiday' : ''}"
              data-store-id="${store.id}"
              data-book-id="${book.id}"
              data-book-slug="${book.slug}">
             <div class="min-w-0">
-              <div class="font-semibold text-sm leading-snug truncate">${book.title}</div>
-              <div class="font-mono-tabular text-xs mt-0.5" style="color: var(--text-muted);">${book.metaLabel || `$${book.price.toFixed(2)} USD`}</div>
+              <div class="font-semibold text-sm leading-snug">${book.title}</div>
+              <div class="font-mono-tabular text-xs mt-0.5" style="color: ${
+                store.isHolidayPromo ? 'var(--holiday-crimson)' : 'var(--text-muted)'
+              };">${book.metaLabel || `$${book.price.toFixed(2)} USD`}</div>
             </div>
-            <i class="fas fa-external-link-alt text-xs shrink-0" style="color: var(--accent-brass);"></i>
+            <i class="fas fa-external-link-alt text-xs shrink-0" style="color: ${
+              store.isHolidayPromo ? 'var(--holiday-crimson)' : 'var(--accent-brass)'
+            };"></i>
           </a>`
         )
         .join('');
 
       card.innerHTML = `
         <div>
-          <div class="flex items-center justify-between mb-5">
-            <span class="font-mono-tabular text-xs uppercase tracking-wider" style="color: var(--text-subtle);">${store.indexLabel}</span>
-            <i class="${store.iconClass} text-xl" style="color: var(--text-main);"></i>
+          <div class="flex items-center justify-between mb-4">
+            <span class="font-mono-tabular text-[11px] uppercase tracking-wider font-semibold" style="color: ${
+              store.isHolidayPromo ? 'var(--holiday-crimson)' : 'var(--text-subtle)'
+            };">${store.indexLabel}</span>
+            <i class="${store.iconClass} text-lg" style="color: ${
+              store.isHolidayPromo ? 'var(--holiday-crimson)' : 'var(--text-main)'
+            };"></i>
           </div>
           <h3 class="font-serif-display text-2xl font-semibold mb-2" style="color: var(--text-main);">${store.name}</h3>
           <p class="text-sm leading-relaxed" style="color: var(--text-muted);">${store.description}</p>
@@ -443,6 +551,22 @@
             .join('<span aria-hidden="true"> · </span>')
         : '';
 
+    const hasHolidayDiscount =
+      Catalog &&
+      Catalog.HOLIDAY_CAMPAIGN &&
+      Catalog.HOLIDAY_CAMPAIGN.active &&
+      book.holidayDiscountPercent &&
+      book.stores &&
+      book.stores.smashwords;
+
+    const holidayLineHtml = hasHolidayDiscount
+      ? `<a href="${book.stores.smashwords}" target="_blank" rel="noopener noreferrer" class="block text-xs font-semibold hover:underline" style="color: var(--holiday-crimson);">
+           Smashwords -${book.holidayDiscountPercent}%: $${book.holidayPrice.toFixed(2)} USD (${
+          currentLanguage === 'en' ? 'Dec 1–31 only' : 'solo 1–31 dic.'
+        })
+         </a>`
+      : '';
+
     card.innerHTML = `
       <div class="cover-stage cursor-pointer" data-open-book="${book.id}">
         <img src="${cover}" alt="${title}" loading="lazy" decoding="async" referrerpolicy="no-referrer">
@@ -468,6 +592,7 @@
             <span class="font-mono-tabular font-semibold text-sm" style="color: var(--text-main);">${priceLabel}</span>
             <span class="font-mono-tabular" style="color: var(--text-muted);">★ ${book.rating.toFixed(1)} (${book.review_count})</span>
           </div>
+          ${holidayLineHtml}
 
           <div class="flex items-center gap-2">
             ${
@@ -565,13 +690,17 @@
         a.href = ch.url;
         a.target = '_blank';
         a.rel = 'noopener noreferrer';
-        a.className = 'store-link-btn';
+        a.className = ch.isHolidayPromo ? 'store-link-btn is-holiday' : 'store-link-btn';
         a.innerHTML = `
           <div>
-            <div class="font-semibold text-sm">${ch.name}</div>
+            <div class="font-semibold text-sm" style="color: ${
+              ch.isHolidayPromo ? 'var(--holiday-crimson)' : 'var(--text-main)'
+            };">${ch.name}</div>
             <div class="text-xs" style="color: var(--text-muted);">${sub}</div>
           </div>
-          <i class="fas fa-external-link-alt text-xs" style="color: var(--accent-brass);"></i>
+          <i class="fas fa-external-link-alt text-xs" style="color: ${
+            ch.isHolidayPromo ? 'var(--holiday-crimson)' : 'var(--accent-brass)'
+          };"></i>
         `;
         storeLinksContainer.appendChild(a);
       });
@@ -866,6 +995,7 @@
   document.addEventListener('DOMContentLoaded', () => {
     applySavedTheme();
     applyTranslations();
+    renderHolidaySection();
     renderBooks();
     renderStoresGrid();
     bindEvents();
